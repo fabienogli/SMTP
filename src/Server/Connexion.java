@@ -12,7 +12,7 @@ import java.net.Socket;
 public class Connexion implements Runnable {
 
     private Socket clientSocket;
-    private StateEnum currentstate = StateEnum.ATTENTE_CONNEXION;
+    private StateEnum currentstate = StateEnum.CLOSED;
     private String USER;
     private MessageBox mailBox;
     private String timestamp;
@@ -39,8 +39,8 @@ public class Connexion implements Runnable {
         System.out.println(this.currentstate);
         boolean resultCommand = true;
         while (resultCommand) {
-            if (this.currentstate.equals(StateEnum.ATTENTE_CONNEXION)) {
-                String result = States.attenteConnexion(this);
+            if (this.currentstate.equals(StateEnum.CLOSED)) {
+                String result = States.closed(this);
                 saveTimestamp(result);
                 write(result);
                 System.out.println(this.currentstate);
@@ -72,14 +72,22 @@ public class Connexion implements Runnable {
         }
 
         switch (getCurrentstate()) {
-            case AUTHENTIFICATION:
-                result = States.authentification(requete, this);
+            case WAIT:
+                result = States.wait(requete, this);
                 break;
-            case AUTHORIZATION:
-                result = States.authorization(requete, this);
+            case CONNECTED:
+                result = States.connected(requete, this);
                 break;
-            case TRANSACTION:
-                result = States.transaction(requete, this);
+            case SENDER_APPROVED:
+                result = States.senderApproved(requete, this);
+                break;
+            case RECIPIENT_APPROVED:
+                result = States.senderApproved(requete, this);
+                break;
+            case WRITING_MAIL:
+                result = States.writingMail(requete, this);
+                break;
+            case READY_TO_DELIVER:
                 break;
             default:
                 result = "-ERR";
