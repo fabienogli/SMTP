@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class States {
 
-    public static String authorization(String requete, Connexion connexion) {
+    public static String connected(String requete, Connexion connexion) {
         String[] arg = requete.split(" ");
         String returnCode = "";
 
@@ -38,7 +38,7 @@ public class States {
         return returnCode;
     }
 
-    public static String transaction(String requete, Connexion connexion) {
+    public static String wait(String requete, Connexion connexion) {
         String[] arg = requete.split(" ");
         String returnCode = "";
 
@@ -92,7 +92,7 @@ public class States {
         return returnCode;
     }
 
-    public static String authentification(String requete, Connexion connexion) {
+    public static String senderApproved(String requete, Connexion connexion) {
         String[] arg = requete.split(" ");
         String returnCode = "";
 
@@ -110,8 +110,23 @@ public class States {
         return returnCode;
     }
 
-    public static String attenteConnexion(Connexion connexion) {
-        connexion.setCurrentstate(StateEnum.AUTHORIZATION);
+    public static String closed(Connexion connexion) {
+        connexion.setCurrentstate(StateEnum.CLOSED);
+        return Commande.ready();
+    }
+
+    public static String recipientApproved(Connexion connexion) {
+        connexion.setCurrentstate(StateEnum.CLOSED);
+        return Commande.ready();
+    }
+
+    public static String writingMail(Connexion connexion) {
+        connexion.setCurrentstate(StateEnum.CLOSED);
+        return Commande.ready();
+    }
+
+    public static String readyToDeliver(Connexion connexion) {
+        connexion.setCurrentstate(StateEnum.CLOSED);
         return Commande.ready();
     }
 }
