@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.welcome.Controller">
+   <children>
+      <Button fx:id="connexionButton" layoutX="206.0" layoutY="137.0" mnemonicParsing="false" text="Connexion" />
+      <Label layoutX="78.0" layoutY="38.0" prefHeight="77.0" prefWidth="344.0" text="Bienvenue sur le Serveur SMTP KPAMY-LOMBARDO-OGLI" textAlignment="CENTER" wrapText="true" />
+   </children>
+</AnchorPane>
