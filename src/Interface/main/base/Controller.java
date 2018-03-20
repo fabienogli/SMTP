@@ -30,11 +30,11 @@ public class Controller {
 
     @FXML
     void newMessage(ActionEvent event) {
-
+        this.app.writeMessage();
     }
 
     @FXML
     void quit(ActionEvent event) {
-
+        this.app.getPrimaryStage().close();
     }
 }

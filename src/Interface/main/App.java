@@ -55,7 +55,7 @@ public class App {
         return rootLayout;
     }
 
-    private void writeMessage() {
+    public void writeMessage() {
         Stage messageStage = new Stage();
         messageStage.setTitle("Nouveau Message");
         try {

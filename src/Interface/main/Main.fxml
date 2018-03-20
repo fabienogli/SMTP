@@ -6,15 +6,14 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.main.Main">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="30.0" layoutY="45.0" prefHeight="355.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="draftButton" layoutX="46.0" layoutY="28.0" mnemonicParsing="false" text="Brouillons" />
-                  <Button fx:id="sentMessagesButton" layoutX="17.0" layoutY="113.0" mnemonicParsing="false" text="Messages Envoyés" />
+                  <Button layoutX="46.0" layoutY="28.0" mnemonicParsing="false" onAction="#drafts" text="Brouillons" />
+                  <Button layoutX="17.0" layoutY="113.0" mnemonicParsing="false" onAction="#sentMessages" text="Messages Envoyés" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -26,8 +25,8 @@
       </SplitPane>
       <ButtonBar prefHeight="40.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
         <buttons>
-          <Button fx:id="newMessageButton" mnemonicParsing="false" text="Nouveau Message" />
-            <Button fx:id="logoutButton" mnemonicParsing="false" text="Déconnexion" />
+          <Button mnemonicParsing="false" onAction="#newMessage" text="Nouveau Message" />
+            <Button mnemonicParsing="false" onAction="#logout" text="Déconnexion" />
         </buttons>
       </ButtonBar>
    </children>
