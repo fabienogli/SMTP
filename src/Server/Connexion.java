@@ -41,7 +41,6 @@ public class Connexion implements Runnable {
         while (resultCommand) {
             if (this.currentstate.equals(StateEnum.CLOSED)) {
                 String result = States.closed(this);
-                saveTimestamp(result);
                 write(result);
                 System.out.println(this.currentstate);
             } else {
@@ -51,11 +50,7 @@ public class Connexion implements Runnable {
         }
     }
 
-    private void saveTimestamp(String result) {
-        String[] tmp = result.split("\n")[0].split(" ");
-        timestamp = tmp[tmp.length -1];
-        System.out.println("timestamp sauvegardé: "+ timestamp);
-    }
+
 
     private boolean traiterCommande() {
 
@@ -90,7 +85,7 @@ public class Connexion implements Runnable {
             case READY_TO_DELIVER:
                 break;
             default:
-                result = "-ERR";
+                result = "502 Command not executed ";
                 break;
         }
         System.out.println(this.currentstate);
