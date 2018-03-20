@@ -17,4 +17,10 @@ public class Main {
     @FXML
     private Button logoutButton;
 
+    private App app;
+
+    public void setApp(App app) {
+        this.app = app;
+    }
+
 }

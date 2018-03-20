@@ -25,5 +25,10 @@ public class Commande {
     }
 
     public static String quit(Connexion connexion) {
+        return "";
+    }
+
+    public static String ready() {
+        return null;
     }
 }
