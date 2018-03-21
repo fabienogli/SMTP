@@ -4,14 +4,8 @@
 
 package Server;
 
-import java.io.*;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import Client.CommandEnum;
+import database.BdConnexion;
 
 public class Commande {
 
@@ -25,7 +19,20 @@ public class Commande {
         return "";
     }
 
+    public static String ready(Connexion connexion) {
+        connexion.write(CommandEnum.READY.toString());
+        String email = connexion.read();
+        String password = connexion.read();
+        Utilisateur utilisateur = new Utilisateur(email, password);
+        Utilisateur client = BdConnexion.getUtilisateur(utilisateur);
+        if (client == null) {
+            return "unknown";
+        }
+        connexion.setCurrentstate(StateEnum.CONNECTED);
+        connexion.setClient(client);
+        return CommandEnum.AUTHENTIFICATED.toString();
+    }
     public static String ready() {
-        return null;
+        return "";
     }
 }

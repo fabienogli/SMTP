@@ -16,6 +16,7 @@ public class Connexion implements Runnable {
     private String USER;
     private MessageBox mailBox;
     private String timestamp;
+    private Utilisateur client;
 
     public StateEnum getCurrentstate() {
         return this.currentstate;
@@ -26,26 +27,23 @@ public class Connexion implements Runnable {
     }
 
     public Connexion() {
-
+        client = new Utilisateur();
     }
 
-    public Connexion(InetAddress clientAdress, Socket clientSocket, int clientPort) {
+    public Connexion(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
     @Override
     public void run() {
         //Dans le run de serveur
-        System.out.println(this.currentstate);
         boolean resultCommand = true;
         while (resultCommand) {
             if (this.currentstate.equals(StateEnum.CLOSED)) {
                 String result = States.closed(this);
                 write(result);
-                System.out.println(this.currentstate);
             } else {
                     resultCommand = this.traiterCommande();
-
             }
         }
     }
@@ -93,15 +91,6 @@ public class Connexion implements Runnable {
         return true;
     }
 
-
-    public String getUSER() {
-        return USER;
-    }
-
-    public void setUSER(String USER) {
-        this.USER = USER;
-    }
-
     public MessageBox getMailBox() {
         return mailBox;
     }
@@ -136,5 +125,13 @@ public class Connexion implements Runnable {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public Utilisateur getClient() {
+        return client;
+    }
+
+    public void setClient(Utilisateur client) {
+        this.client = client;
     }
 }

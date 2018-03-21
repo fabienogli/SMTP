@@ -38,7 +38,7 @@ public class Client {
     }
 
     public Client() throws IOException {
-        this(java.net.InetAddress.getByName("192.168.43.210"), 2026);
+        this(java.net.InetAddress.getByName("localhost"), 2026);
     }
 
     public Client(Utilisateur utilisateur) throws IOException {
@@ -76,17 +76,9 @@ public class Client {
     }
 
     public String start() throws IOException {
-        System.out.println("Démarrage client");
-        //this.clientSocket = new Socket(this.getAdresseIp(), this.getPort());
         this.clientSocket = (SSLSocket)sslsocketfactory.createSocket(this.getAdresseIp(), this.getPort());
         this.clientSocket.setEnabledCipherSuites(new String[] { "TLS_DH_anon_WITH_AES_128_CBC_SHA" });
-        String reponseServer = read();
-        String[] str = reponseServer.split("Ready ");
-        if (str.length == 2) {
-            timestamp = str[1];
-//            this.stateEnum = StateEnum.AUTHORIZATION;
-        }
-        return reponseServer;
+        return read();
     }
 
     public boolean authentification() {

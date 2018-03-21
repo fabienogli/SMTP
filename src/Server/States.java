@@ -58,7 +58,7 @@ public class States {
 
     public static String closed(Connexion connexion) {
         connexion.setCurrentstate(StateEnum.CLOSED);
-        return Commande.ready();
+        return Commande.ready(connexion);
     }
 
     public static String recipientApproved(String requete,Connexion connexion) {

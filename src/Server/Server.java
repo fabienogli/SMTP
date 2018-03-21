@@ -36,7 +36,6 @@ public class Server {
             while (true)
             {
                // Socket clientSocket = serverSocket.accept();
-
                 SSLSocket clientSocket = (SSLSocket)sslServerSocket.accept();
                 clientSocket.setUseClientMode(false);
                 clientSocket.setEnabledProtocols(clientSocket.getSupportedProtocols());
@@ -45,9 +44,8 @@ public class Server {
                 DatagramPacket receivePacket = new DatagramPacket(buffer, buffer.length);
                 int portClient = receivePacket.getPort();
                 InetAddress address = receivePacket.getAddress();
-                Connexion serveurPOP3 = new Connexion(address,clientSocket, portClient);
-                Thread thread = new Thread(serveurPOP3);
-                System.out.println("Lancement du serveur");
+                Connexion serveurSTMP = new Connexion(clientSocket);
+                Thread thread = new Thread(serveurSTMP);
                 thread.start();
             }
         } catch (SocketException e) {

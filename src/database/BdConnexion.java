@@ -50,7 +50,7 @@ public class BdConnexion {
         return utilisateurs;
     }
 
-    public static Utilisateur getUtilisateur(String email) {
+    public static Utilisateur getUtilisateur(Utilisateur user) {
         Utilisateur utilisateur = new Utilisateur();
         try {
             FileReader fileReader = new FileReader(cheminDatabase + "users.csv");
@@ -67,7 +67,7 @@ public class BdConnexion {
                             utilisateur.setMdp(tabChaine[x]);
                         } else {
                             utilisateur.setEmail(tabChaine[x]);
-                            if (utilisateur.getEmail().equals(email)) {
+                            if (utilisateur.equals(user)) {
                                 return utilisateur;
                             }
                         }

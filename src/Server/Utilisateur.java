@@ -57,4 +57,9 @@ public class Utilisateur {
                 .append(this.getEmail());
         return stringBuilder.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.getEmail().equals(((Utilisateur) obj).getEmail()) && this.getMdp().equals(((Utilisateur) obj).getMdp());
+    }
 }
