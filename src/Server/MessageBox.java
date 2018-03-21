@@ -9,40 +9,29 @@ import java.util.List;
 
 public class MessageBox {
 
-    private String name;
-    private String password;
-    private String address;
-
     private List<Message> Messages;
     private boolean blocked = false;
+    private Utilisateur utilisateur;
 
     //Constructeur
-    public MessageBox(String name, String password, String address, ArrayList<Message> Messages) {
-        this.name = name;
-        this.password = password;
+    public MessageBox(Utilisateur utilisateur, ArrayList<Message> Messages) {
+        this.utilisateur = utilisateur;
         this.Messages = Messages;
-        this.address = address;
     }
 
-    public MessageBox(String name, String password, String address) {
-        this.name = name;
-        this.password = password;
-        this.Messages = Messages;
-        this.address = address;
-        this.Messages = new ArrayList<>();
+    public MessageBox(Utilisateur utilisateur) {
+        this();
+        this.utilisateur = utilisateur;
     }
 
     public MessageBox() {
-
+        this.Messages = new ArrayList<>();
     }
 
     //accesseurs
-    public String getName() {
-        return name;
-    }
 
-    public String getPassword() {
-        return password;
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
     public List<Message> getMessages() {
@@ -53,6 +42,10 @@ public class MessageBox {
         return blocked;
     }
 
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
@@ -60,14 +53,6 @@ public class MessageBox {
     //methodes
     public int getNumberMessages() {
         return this.Messages.size();
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String buildList() {

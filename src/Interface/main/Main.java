@@ -13,11 +13,6 @@ public class Main {
     }
 
     @FXML
-    void drafts(ActionEvent event) {
-
-    }
-
-    @FXML
     void logout(ActionEvent event) {
 
     }
@@ -25,11 +20,6 @@ public class Main {
     @FXML
     void newMessage(ActionEvent event) {
         this.app.writeMessage();
-    }
-
-    @FXML
-    void sentMessages(ActionEvent event) {
-
     }
 
 }

@@ -15,10 +15,7 @@ import java.util.*;
 
 public class Commande {
 
-    protected static final int i_USER = 0;
-    private static String cheminDatabase = "src/database/";
     private static String timestamp;
-
     
     public static String ehlo(String requete, Connexion connexion) {
         return requete;

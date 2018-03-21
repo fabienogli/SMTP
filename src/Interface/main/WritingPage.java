@@ -32,11 +32,6 @@ public class WritingPage {
     }
 
     @FXML
-    void save(ActionEvent event) {
-
-    }
-
-    @FXML
     void send(ActionEvent event) {
 
     }

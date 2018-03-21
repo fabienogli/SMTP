@@ -33,7 +33,7 @@ public class Message {
     }
 
     public Message() {
-        Utilisateur johnDoe = new Utilisateur("unknown", "unknown");
+        Utilisateur johnDoe = new Utilisateur("unknown");
         this.id = "unknown";
         this.destinataire = johnDoe;
         this.auteur = johnDoe;

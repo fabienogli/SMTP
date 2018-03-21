@@ -6,26 +6,24 @@ package Server;
 
 public class Utilisateur {
 
-    private String nom="";
-    private String email="";
-    private String mdp="";
+    private String nom;
+    private String email;
+    private String mdp;
 
-    public Utilisateur(String nom) {
-        this.nom = nom;
+    public Utilisateur() {
+        this.nom = "unknown";
+        this.email = "unknown";
+        this.mdp = "unknown";
     }
 
-    public Utilisateur(String nom, String email) {
-        this.nom = nom;
+    public Utilisateur(String email) {
         this.email = email;
     }
 
-    public Utilisateur(String nom, String email, String mdp) {
-        this.nom = nom;
+    public Utilisateur(String email, String mdp) {
         this.email = email;
         this.mdp = mdp;
     }
-
-
 
     public String getNom() {
         return nom;
@@ -56,9 +54,7 @@ public class Utilisateur {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(this.getNom())
                 .append(" ")
-                //.append("<")
                 .append(this.getEmail());
-                //.append(">");
         return stringBuilder.toString();
     }
 }

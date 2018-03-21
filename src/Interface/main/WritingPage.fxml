@@ -8,9 +8,8 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.main.WritingPage">
    <children>
-      <Button layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#send" text="Send" />
-      <Button layoutX="107.0" layoutY="14.0" mnemonicParsing="false" onAction="#attach" text="Attach" />
-      <Button layoutX="203.0" layoutY="14.0" mnemonicParsing="false" onAction="#save" text="Save" />
+      <Button layoutX="94.0" layoutY="14.0" mnemonicParsing="false" onAction="#send" text="Send" />
+      <Button layoutX="172.0" layoutY="14.0" mnemonicParsing="false" onAction="#attach" text="Attach" />
       <TextField fx:id="senderTextField" layoutX="94.0" layoutY="59.0" prefHeight="26.0" prefWidth="413.0" />
       <Label layoutX="40.0" layoutY="64.0" text="From:" />
       <TextField fx:id="recipientTextField" layoutX="94.0" layoutY="93.0" prefHeight="26.0" prefWidth="413.0" />
