@@ -109,22 +109,6 @@ public class Client {
         return true;
     }
 
-
-    public void createMailFile(){
-        Path file = Paths.get("src/Client/Mails/"+this.utilisateur.getNom()) ;
-        try {
-            // Create the empty file with default permissions, etc.
-            Files.createFile(file);
-        } catch (FileAlreadyExistsException x) {
-            System.err.format("file named %s" +
-                    " already exists%n", file);
-        } catch (IOException x) {
-            // Some other sort of failure, such as permissions.
-            System.err.format("createFile error: %s%n", x);
-        }
-    }
-
-
     public void write(String data) {
         data += "\r\n";
         try {

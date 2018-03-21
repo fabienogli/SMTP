@@ -4,10 +4,7 @@ import Server.Message;
 import Server.MessageBox;
 import Server.Utilisateur;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,9 +16,7 @@ public class BdConnexion {
 
     private static String cheminDatabase = "src/database/";
 
-
     public static List<Utilisateur> getUtilisateur() {
-        String toReturn = "";
         List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
         try {
             FileReader fileReader = new FileReader(cheminDatabase + "users.csv");
@@ -35,13 +30,10 @@ public class BdConnexion {
                     for (int x = 0; x < tabChaine.length; x++) {
                         if (x == 0) {
                             utilisateur.setNom(tabChaine[x]);
-                            System.out.println("user = " + tabChaine[x] + "\n");
                         } else if (x == 1) {
                             utilisateur.setMdp(tabChaine[x]);
-                            System.out.println("pass = " + tabChaine[x] + "\n");
                         } else {
                             utilisateur.setEmail(tabChaine[x]);
-                            System.out.println("email = " + tabChaine[x] + "\n");
                         }
                     }
                     utilisateurs.add(utilisateur);
@@ -127,7 +119,6 @@ public class BdConnexion {
 
             if (line.length() == 0) {
                 headersDone = true;
-                System.out.println("HEADERSDONE");
                 continue;
             }
             if (!headersDone) {
@@ -142,9 +133,7 @@ public class BdConnexion {
         return mail;
     }
 
-    private static void parseHeader(Message mail, String line)
-    //throws BadMailFormat
-    {
+    private static void parseHeader(Message mail, String line) {
         boolean delimiteurFound = false;
         String key = "";
         String value = "";
@@ -162,15 +151,11 @@ public class BdConnexion {
                     key += item;
             }
         }
-
-
         if (!delimiteurFound) {
             return;
         }
         key = key.trim();
         value = value.trim();
-        System.out.println(key);
-        System.out.println(value);
         switch (key.toUpperCase()) {
 
             case "TO":
@@ -201,5 +186,32 @@ public class BdConnexion {
         }
     }
 
+    public static void writeToFile(Utilisateur utilisateur, String content) {
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        PrintWriter out = null;
 
+        try {
+            fw = new FileWriter(cheminDatabase + utilisateur.getNom() + "_messages", true);
+            bw = new BufferedWriter(fw);
+            out = new PrintWriter(bw);
+            out.println(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+                if (bw != null) {
+                    bw.close();
+                }
+                if (fw != null) {
+                    fw.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 }
