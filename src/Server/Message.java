@@ -4,14 +4,17 @@
 
 package Server;
 
+import javax.rmi.CORBA.Util;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class Message {
 
     private String id;
 
-    private Utilisateur destinataire;
+    private List<Utilisateur> destinataires;
     private Utilisateur auteur;
     private Date date;
     private String sujet;
@@ -21,33 +24,36 @@ public class Message {
 
     public Message(String id) {
         this.id = id;
+        this.destinataires = new ArrayList<Utilisateur>();
+    }
+
+    public Message(String id, Utilisateur destinataire, Utilisateur auteur, Date date) {
+        this(id);
+        this.destinataires.add(destinataire);
+        this.auteur = auteur;
+        this.date = date;
     }
 
     public Message(String id, Utilisateur destinataire, Utilisateur auteur, Date date, String sujet, String corps) {
-        this.id = id;
-        this.destinataire = destinataire;
-        this.auteur = auteur;
-        this.date = date;
+        this(id, destinataire, auteur, date);
         this.sujet = sujet;
         this.corps = corps;
     }
 
     public Message() {
-        Utilisateur johnDoe = new Utilisateur("unknown");
-        this.id = "unknown";
-        this.destinataire = johnDoe;
-        this.auteur = johnDoe;
-        this.date = new Date();
-        this.sujet = "unknown";
-        this.corps = "unknown";
+        this("unknown", new Utilisateur("unknown"), new Utilisateur("unknown"), new Date(), "unknown", "unknown");
     }
 
-    public Utilisateur getDestinataire() {
-        return destinataire;
+    public List<Utilisateur> getDestinataires() {
+        return destinataires;
     }
 
-    public void setDestinataire(Utilisateur destinataire) {
-        this.destinataire = destinataire;
+    public void setDestinataires(List<Utilisateur> destinataires) {
+        this.destinataires = destinataires;
+    }
+
+    public void addDestinataire(Utilisateur destinataire) {
+        this.destinataires.add(destinataire);
     }
 
     public Utilisateur getAuteur() {
@@ -95,7 +101,7 @@ public class Message {
             generateMessage.append("From: ")
                     .append(this.getAuteur().toString())
                     .append("\r\nTo: ")
-                    .append(this.getDestinataire().toString())
+                    .append(this.getDestinataires().toString())
                     .append("\r\nSubject: ")
                     .append(this.getSujet())
                     .append("\r\nDate : ")

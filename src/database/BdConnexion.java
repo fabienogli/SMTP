@@ -67,7 +67,7 @@ public class BdConnexion {
                             utilisateur.setMdp(tabChaine[x]);
                         } else {
                             utilisateur.setEmail(tabChaine[x]);
-                            if (utilisateur.equals(user)) {
+                            if (utilisateur.getEmail().equals(user.getEmail())) {
                                 return utilisateur;
                             }
                         }
@@ -160,7 +160,7 @@ public class BdConnexion {
 
             case "TO":
                 String valuesTo[] = value.split(" ");
-                mail.setDestinataire(new Utilisateur(valuesTo[0], valuesTo[1]));
+                mail.addDestinataire(new Utilisateur(valuesTo[0], valuesTo[1]));
                 break;
             case "FROM":
                 String valuesFrom[] = value.split(" ");

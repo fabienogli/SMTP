@@ -13,10 +13,9 @@ public class Connexion implements Runnable {
 
     private Socket clientSocket;
     private StateEnum currentstate = StateEnum.CLOSED;
-    private String USER;
     private MessageBox mailBox;
-    private String timestamp;
     private Utilisateur client;
+    private Message mailToSend;
 
     public StateEnum getCurrentstate() {
         return this.currentstate;
@@ -40,15 +39,13 @@ public class Connexion implements Runnable {
         boolean resultCommand = true;
         while (resultCommand) {
             if (this.currentstate.equals(StateEnum.CLOSED)) {
-                String result = States.closed(this);
+                String result = Commande.ready(this);
                 write(result);
             } else {
-                    resultCommand = this.traiterCommande();
+                resultCommand = this.traiterCommande();
             }
         }
     }
-
-
 
     private boolean traiterCommande() {
 
@@ -66,19 +63,19 @@ public class Connexion implements Runnable {
 
         switch (getCurrentstate()) {
             case WAIT:
-                result = States.wait(requete, this);
+                result = Commande.wait(requete, this);
                 break;
             case CONNECTED:
-                result = States.connected(requete, this);
+                result = Commande.connected(requete, this);
                 break;
             case SENDER_APPROVED:
-                result = States.senderApproved(requete, this);
+                result = Commande.senderApproved(requete, this);
                 break;
             case RECIPIENT_APPROVED:
-                result = States.senderApproved(requete, this);
+                result = Commande.recipientApproved(requete, this);
                 break;
             case WRITING_MAIL:
-                result = States.writingMail(requete, this);
+                result = Commande.writingMail(requete, this);
                 break;
             case READY_TO_DELIVER:
                 break;
@@ -97,10 +94,6 @@ public class Connexion implements Runnable {
 
     public void setMailBox(MessageBox mailBox) {
         this.mailBox = mailBox;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
     }
 
     public void write(String message) {
@@ -133,5 +126,17 @@ public class Connexion implements Runnable {
 
     public void setClient(Utilisateur client) {
         this.client = client;
+    }
+
+    public Message getMailToSend() {
+        return this.mailToSend;
+    }
+
+    public void setMailToSend(Message mailToSend) {
+        this.mailToSend = mailToSend;
+    }
+
+    public void addRecipentToMail(Utilisateur utilisateur) {
+        this.mailToSend.addDestinataire(utilisateur);
     }
 }
