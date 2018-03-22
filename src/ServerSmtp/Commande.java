@@ -127,7 +127,11 @@ public class Commande {
     }
 
     public static String deliverMail(String requete, Connexion connexion) {
-        return null;
+        if (requete.equals(SmtpCodes.MAIL_FROM.toString())) {
+            connexion.setCurrentstate(StateEnum.WAIT);
+            wait(requete, connexion);
+        }
+        return SmtpCodes.COMMAND_UNKNOWN.toString();
     }
 
     public static void quit(String requete, Connexion connexion) {

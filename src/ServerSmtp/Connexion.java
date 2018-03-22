@@ -61,6 +61,18 @@ public class Connexion implements Runnable {
         } else {
             requete = read();
         }
+        if (requete.length() == 0 || requete == null) {
+            this.setCurrentstate(StateEnum.WAIT);
+            write(SmtpCodes.COMMAND_UNKNOWN.toString());
+            return true;
+        }
+
+        if (requete.equals(SmtpCodes.RESET.toString()) && !this.currentstate.equals(StateEnum.CLOSED) && !this.currentstate.equals(StateEnum.CONNECTED)) {
+            this.currentstate = StateEnum.WAIT;
+            write(SmtpCodes.OK.toString());
+            return true;
+        }
+
         if (requete.equals(SmtpCodes.QUIT.toString())) {
             try {
                 StreamHandling.write(Commande.quit(this), this.clientSocket.getOutputStream());

@@ -23,6 +23,7 @@ public class testConnexion {
             client.authentification();
             System.out.println("Le client est arrivé à se connecter ! " + client.isAuthentified());
             client.sendMail(testMail(client.getUtilisateur()));
+            client.sendMail(testMail(client.getUtilisateur()));
             client.quit();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package Interface.welcome;
 
+import Client.Client;
 import Interface.main.App;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +14,24 @@ public class LoginApp extends Application {
     private Stage primaryStage;
     private AnchorPane rootLayout;
     private App mainApp;
+    private Client client;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Boite au lettre");
         this.mainApp = new App();
+        initilazeClient();
         showMain();
+    }
+
+    public void initilazeClient() {
+        try {
+            this.client = new Client();
+            client.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Scene getMain() throws IOException {
@@ -39,6 +51,7 @@ public class LoginApp extends Application {
 
     public void accessApp() {
         this.primaryStage.close();
+        this.mainApp.setClient(this.client);
         this.mainApp.showMain();
     }
 
@@ -68,5 +81,19 @@ public class LoginApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    @Override
+    public void stop() throws Exception {
+        this.client.quit();
+        super.stop();
     }
 }

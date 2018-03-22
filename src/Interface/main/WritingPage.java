@@ -1,10 +1,14 @@
 package Interface.main;
 
+import Client.Client;
+import ServerSmtp.Message;
+import ServerSmtp.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class WritingPage {
 
@@ -21,9 +25,12 @@ public class WritingPage {
     private TextArea corpsTextArea;
 
     private App app;
+    private Stage stage;
 
     public void setApp(App app) {
         this.app = app;
+        this.senderTextField.setText(this.app.getClient().getUtilisateur().getEmail());
+        this.senderTextField.setDisable(true);
     }
 
     @FXML
@@ -33,38 +40,19 @@ public class WritingPage {
 
     @FXML
     void send(ActionEvent event) {
-
+        Client client = this.app.getClient();
+        Message message = new Message(client.getUtilisateur());
+        message.setSujet(this.subjectTextField.getText());
+        message.setCorps(this.corpsTextArea.getText());
+        String recipients = this.recipientTextField.getText();
+        for (String recipient: recipients.split(";")) {
+            message.addDestinataire(new Utilisateur(recipient));
+        }
+        client.sendMail(message);
+        this.stage.close();
     }
 
-    public TextField getSenderTextField() {
-        return senderTextField;
-    }
-
-    public void setSenderTextField(TextField senderTextField) {
-        this.senderTextField = senderTextField;
-    }
-
-    public TextField getRecipientTextField() {
-        return recipientTextField;
-    }
-
-    public void setRecipientTextField(TextField recipientTextField) {
-        this.recipientTextField = recipientTextField;
-    }
-
-    public TextField getSubjectTextField() {
-        return subjectTextField;
-    }
-
-    public void setSubjectTextField(TextField subjectTextField) {
-        this.subjectTextField = subjectTextField;
-    }
-
-    public TextArea getCorpsTextArea() {
-        return corpsTextArea;
-    }
-
-    public void setCorpsTextArea(TextArea corpsTextArea) {
-        this.corpsTextArea = corpsTextArea;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

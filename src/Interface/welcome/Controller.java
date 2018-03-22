@@ -1,5 +1,7 @@
 package Interface.welcome;
 
+import Client.Client;
+import ServerSmtp.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,7 +27,7 @@ public class Controller {
 
     public void initialize() {
         if (this.mailTextField != null) {
-            this.connexionButton.setDisable(false);
+            this.connexionButton.setDisable(true);
 
             this.mailTextField.textProperty().addListener(
                     ((observable, oldValue, newValue) ->{
@@ -41,9 +43,7 @@ public class Controller {
     }
 
     private void checkForLoginButton() {
-        System.out.println(this.passwordTextField.getText() + this.mailTextField.getText());
         if (this.passwordTextField.getText().length() > 1 && this.mailTextField.getText().length() > 1) {
-            System.out.println("bouton visible normalement");
             this.connexionButton.setDisable(false);
         }
     }
@@ -55,9 +55,12 @@ public class Controller {
 
     @FXML
     private void login(ActionEvent event) {
-        //@TODO initialisation du client, si le client a les bons identifiants check est vrai
-        boolean check = true;
-        if (check) {
+        Client client = this.loginApp.getClient();
+        Utilisateur utilisateur = new Utilisateur(this.mailTextField.getText(), this.passwordTextField.getText());
+        client.setUtilisateur(utilisateur);
+        client.authentification();
+        this.loginApp.setClient(client);
+        if (client.isAuthentified()) {
             this.loginApp.accessApp();
         }
     }

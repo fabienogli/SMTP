@@ -144,13 +144,19 @@ public class Client {
         if (!response.equals(SmtpCodes.MESSAGE.toString())) {
             System.out.println(response);
         }
-        System.out.println(parseMailForSmtp(message));
         write(parseMailForSmtp(message));
         response = read();
         if (!response.equals(SmtpCodes.OK.toString())) {
             System.out.println(response);
         }
         System.out.println("Message écrit avec succes");
+
+        //On reset le client
+        write(SmtpCodes.RESET.toString());
+        response = read();
+        if (!response.equals(SmtpCodes.OK.toString())) {
+            System.out.println(response);
+        }
     }
 
     private String parseMailForSmtp(Message message) {

@@ -1,5 +1,6 @@
 package Interface.main;
 
+import Client.Client;
 import Interface.main.base.Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +13,7 @@ import java.io.IOException;
 public class App {
 
     private Stage primaryStage;
-    private BorderPane rootLayout;
+    private Client client;
 
     public App() {
         this(new Stage());
@@ -25,7 +26,7 @@ public class App {
 
     public void showMain() {
         try {
-            this.rootLayout = initRootLayout(this.primaryStage);
+            BorderPane rootLayout = initRootLayout(this.primaryStage);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(App.class.getResource(
                     "Main.fxml"
@@ -48,7 +49,7 @@ public class App {
         rootLayout = (BorderPane) loader.load();
         Controller controller = loader.getController();
         controller.setApp(this);
-
+        controller.setStage(primaryStage);
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -67,6 +68,7 @@ public class App {
             AnchorPane main = (AnchorPane) loader.load();
             WritingPage controller = loader.getController();
             controller.setApp(this);
+            controller.setStage(messageStage);
             rootLayout.setCenter(main);
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,5 +77,13 @@ public class App {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

@@ -4,10 +4,12 @@ import Interface.main.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 public class Controller {
 
     private App app;
+    private Stage stage;
 
     public void setApp(App app) {
         this.app = app;
@@ -20,7 +22,7 @@ public class Controller {
 
     @FXML
     void close(ActionEvent event) {
-
+        this.stage.close();
     }
 
     @FXML
@@ -35,6 +37,10 @@ public class Controller {
 
     @FXML
     void quit(ActionEvent event) {
-        this.app.getPrimaryStage().close();
+        this.stage.close();
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
