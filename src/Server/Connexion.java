@@ -4,13 +4,14 @@
 
 package Server;
 
+import codes.SmtpCodes;
+
 import java.io.*;
 import java.net.Socket;
 
 
 public class Connexion implements Runnable {
 
-    private final Server.StreamHandling streamHandling = new Server.StreamHandling();
     private Socket clientSocket;
     private StateEnum currentstate = StateEnum.CLOSED;
     private MessageBox mailBox;
@@ -39,9 +40,9 @@ public class Connexion implements Runnable {
         boolean resultCommand = true;
         while (resultCommand) {
             if (this.currentstate.equals(StateEnum.CLOSED)) {
-                String result = Commande.ready(this);
+                String result = Commande.closed(this);
                 try {
-                    streamHandling.write(result, this.clientSocket.getOutputStream());
+                    StreamHandling.write(result, this.clientSocket.getOutputStream());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -56,13 +57,13 @@ public class Connexion implements Runnable {
         String result = "";
         String requete = null;
         try {
-            requete = streamHandling.read(this.clientSocket.getInputStream());
+            requete = StreamHandling.read(this.clientSocket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (requete.contains("QUIT")) {
+        if (requete.equals(SmtpCodes.QUIT.toString())) {
             try {
-                streamHandling.write(Commande.quit(this), this.clientSocket.getOutputStream());
+                StreamHandling.write(Commande.quit(this), this.clientSocket.getOutputStream());
                 this.clientSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -89,13 +90,16 @@ public class Connexion implements Runnable {
             case READY_TO_DELIVER:
                 result = Commande.deliverMail(requete, this);
                 break;
+            case READY:
+                result = Commande.ready(requete, this);
+                break;
             default:
                 result = "502 Command not executed ";
                 break;
         }
         System.out.println(this.currentstate);
         try {
-            streamHandling.write(result, this.clientSocket.getOutputStream());
+            StreamHandling.write(result, this.clientSocket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -156,5 +160,13 @@ public class Connexion implements Runnable {
 
     public void addRecipentToMail(Utilisateur utilisateur) {
         this.mailToSend.addDestinataire(utilisateur);
+    }
+
+    public void close() {
+        try {
+            this.clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -9,7 +9,7 @@ public class StreamHandling {
     public static void write(String message, OutputStream outputStream) {
         PrintWriter outToClient = new PrintWriter(outputStream);
         outToClient.write(message);
-        System.out.println("le serveur envoie" + message);
+        System.out.println("envoie " + message);
         outToClient.println();
         outToClient.flush();
     }
@@ -38,7 +38,7 @@ public class StreamHandling {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Le client recoit " + data.toString());
+        System.out.println("Plusieurs ligne, reception " + data.toString());
         return data.toString();
     }
 }

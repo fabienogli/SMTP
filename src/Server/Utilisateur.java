@@ -52,9 +52,12 @@ public class Utilisateur {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(this.getNom())
-                .append(" ")
-                .append(this.getEmail());
+        stringBuilder.append("Nom: ")
+                .append(this.getNom())
+                .append(" Email : ")
+                .append(this.getEmail())
+                .append(" Mot de Passe: ")
+                .append(this.getMdp());
         return stringBuilder.toString();
     }
 

@@ -1,37 +1,35 @@
 package codes;
 
-public enum SmptCodes {
-
+public enum SmtpCodes {
+    //Server
     READY("ready"),
     AUTHENTIFICATED("220 Bienvenue sur le Serveur STMP de Mark-Florian-Fabien"),
     OK("250 OK"),
     USER_UNKNOWN("550 Cet utilisateur n'existe pas"),
     MESSAGE("354 Start mail input; end with <CRLF>.<CRLF>"),
-    MAIL_FROM("MAIL FROM:"),
-    RCPT_TO("RCPT TO:"),
-    RESET("RSET"),
     LOGOUT("221 Deconnexion"),
     COMMAND_UNKNOWN("500 Syntax error, command unrecognized"),
     COMMAND_NOTIMPLEMENTED("502 Command not implemented"),
     WRONG_COMMAND("503 Bad sequence of commands"),
+    //Client
+    MAIL_FROM("MAIL FROM:"),
+    RCPT_TO("RCPT TO:"),
+    RESET("RSET"),
     EHLO("EHLO "),
+    DATA("DATA"),
+    QUIT("QUIT"),
     //Not from Stmp but for checking for password
-    WRONG_PASSWORD("500 mauvais mot de passe"),
-    DATA("DATA");
+    WRONG_PASSWORD("500 mauvais mot de passe");
 
     private String message;
 
-    SmptCodes(String message) {
+    SmtpCodes(String message) {
         this.message = message;
-    }
-
-    public String getMessage() {
-        return this.message;
     }
 
     @Override
     public String toString() {
-        return this.getMessage();
+        return this.message;
     }
 
     /**

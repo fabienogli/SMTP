@@ -1,24 +1,14 @@
 package Client;
 
-import Server.Commande;
 import Server.StateEnum;
 import Server.StreamHandling;
 import Server.Utilisateur;
+import codes.SmtpCodes;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.InetAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
-import java.net.SocketOption;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Set;
 
 public class Client {
 
@@ -83,8 +73,13 @@ public class Client {
     }
 
     public boolean authentification() {
-
-        return true;
+        write(this.getUtilisateur().getEmail());
+        write(this.getUtilisateur().getMdp());
+        String response = read();
+        if (response.equals(SmtpCodes.AUTHENTIFICATED.toString())) {
+            return true;
+        }
+        return false;
     }
 
     public void write(String message) {
@@ -113,5 +108,15 @@ public class Client {
             e.printStackTrace();
         }
         return data;
+    }
+
+    public void quit() {
+        write(SmtpCodes.QUIT.toString());
+        read();
+        try {
+            this.clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
