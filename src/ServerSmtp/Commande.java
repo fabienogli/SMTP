@@ -2,7 +2,7 @@
  * Copyright (c) 2018. Mark KPAMY -Fabien OGLI - Florian LOMBARDO
  */
 
-package Server;
+package ServerSmtp;
 
 import codes.SmtpCodes;
 import database.BdConnexion;

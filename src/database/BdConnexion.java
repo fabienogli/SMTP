@@ -1,8 +1,8 @@
 package database;
 
-import Server.Message;
-import Server.MessageBox;
-import Server.Utilisateur;
+import ServerSmtp.Message;
+import ServerSmtp.MessageBox;
+import ServerSmtp.Utilisateur;
 
 import java.io.*;
 import java.text.DateFormat;

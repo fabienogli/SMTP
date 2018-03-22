@@ -2,7 +2,7 @@
  * Copyright (c) 2018. Mark KPAMY -Fabien OGLI - Florian LOMBARDO
  */
 
-package Server;
+package ServerSmtp;
 
 public class Utilisateur {
 

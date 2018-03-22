@@ -1,10 +1,8 @@
-package Server;
+package ServerSmtp;
 
 import java.io.*;
 
 public class StreamHandling {
-    public StreamHandling() {
-    }
 
     public static void write(String message, OutputStream outputStream) {
         PrintWriter outToClient = new PrintWriter(outputStream);

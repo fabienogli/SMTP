@@ -2,7 +2,7 @@
  * Copyright (c) 2018. Mark KPAMY -Fabien OGLI - Florian LOMBARDO
  */
 
-package Server;
+package ServerSmtp;
 
 import codes.SmtpCodes;
 
@@ -36,7 +36,6 @@ public class Connexion implements Runnable {
 
     @Override
     public void run() {
-        //Dans le run de serveur
         boolean resultCommand = true;
         while (resultCommand) {
             if (this.currentstate.equals(StateEnum.CLOSED)) {

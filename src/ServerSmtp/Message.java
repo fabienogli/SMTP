@@ -2,9 +2,8 @@
  * Copyright (c) 2018. Mark KPAMY -Fabien OGLI - Florian LOMBARDO
  */
 
-package Server;
+package ServerSmtp;
 
-import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

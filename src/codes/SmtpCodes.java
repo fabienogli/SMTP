@@ -1,7 +1,7 @@
 package codes;
 
 public enum SmtpCodes {
-    //Server
+    //ServerSmtp
     READY("ready"),
     AUTHENTIFICATED("220 Bienvenue sur le Serveur STMP de Mark-Florian-Fabien"),
     OK("250 OK"),

@@ -1,5 +1,5 @@
 import Client.Client;
-import Server.Utilisateur;
+import ServerSmtp.Utilisateur;
 import codes.SmtpCodes;
 
 import java.io.IOException;

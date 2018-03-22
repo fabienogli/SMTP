@@ -1,8 +1,8 @@
 package Client;
 
-import Server.StateEnum;
-import Server.StreamHandling;
-import Server.Utilisateur;
+import ServerSmtp.StateEnum;
+import ServerSmtp.StreamHandling;
+import ServerSmtp.Utilisateur;
 import codes.SmtpCodes;
 
 import javax.net.ssl.SSLSocket;
