@@ -42,8 +42,8 @@ public class Commande {
     public static String senderApproved(String requete, Connexion connexion) {
         quit(requete, connexion);
         if (requete.contains(SmtpCodes.RCPT_TO.toString()) && getMailAddress(requete) != null) {
-            Utilisateur destinataire = new Utilisateur(getMailAddress(requete));
-            if (BdConnexion.getUtilisateur(destinataire) == null) {
+            Utilisateur destinataire = BdConnexion.getUtilisateur(new Utilisateur(getMailAddress(requete)));
+            if (destinataire == null) {
                 return SmtpCodes.USER_UNKNOWN.toString();
             }
             Message message = new Message(connexion.getClient());
@@ -61,21 +61,9 @@ public class Commande {
 
     public static String writingMail(String rawMail, Connexion connexion) {
         quit(rawMail, connexion);
-//        String date = connexion.read();             //On peut l'ignorer
-//        String auteur = connexion.read();           //On peut l'ignorer
-//        String sujet = connexion.read();
-//        String destinataire = connexion.read();     //On peut l'ignorer
-//        connexion.read();                           //ligne vide entre header et corps
-//        System.out.println("Avant le readMultipleLInes");
-//        String rawMail = connexion.readMultipleLines();
         Message message = parseRawMail(rawMail, connexion.getMailToSend());
-//        Message message = connexion.getMailToSend();
-//        message.setSujet(sujet);
-//        message.setCorps(corps);
-        System.out.println(message);
-//        connexion.setMailToSend(mail);
-        //TODO envoyer le mail
-//        System.out.println(message);
+
+        BdConnexion.registerMail(message);
         connexion.setCurrentstate(StateEnum.READY_TO_DELIVER);
         return SmtpCodes.OK.toString();
     }
@@ -121,8 +109,8 @@ public class Commande {
             return SmtpCodes.OK.toString();
         }
         if (requete.contains(SmtpCodes.RCPT_TO.toString()) && getMailAddress(requete) != null) {
-            Utilisateur destinataire = new Utilisateur(getMailAddress(requete));
-            if (BdConnexion.getUtilisateur(destinataire) == null) {
+            Utilisateur destinataire = BdConnexion.getUtilisateur(new Utilisateur(getMailAddress(requete)));
+            if (destinataire == null) {
                 return SmtpCodes.USER_UNKNOWN.toString();
             }
             connexion.addRecipentToMail(destinataire);

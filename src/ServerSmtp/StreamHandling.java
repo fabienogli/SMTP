@@ -32,7 +32,11 @@ public class StreamHandling {
             do {
                 data.append(tmp).append("\n");
                 tmp = fromServer.readLine();
-            } while (tmp.length() > 0 && tmp.charAt(0) != '.');
+                if (tmp.length() == 0) {
+                    data.append(tmp).append("\n");
+                    tmp = fromServer.readLine();
+                }
+            } while (tmp.charAt(0) != '.');
         } catch (IOException e) {
             e.printStackTrace();
         }

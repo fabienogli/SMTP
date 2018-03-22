@@ -16,7 +16,7 @@ public class BdConnexion {
 
     private static String cheminDatabase = "src/database/";
 
-    public static List<Utilisateur> getUtilisateur() {
+    public static List<Utilisateur> getUtilisateurs() {
         List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
         try {
             FileReader fileReader = new FileReader(cheminDatabase + "users.csv");
@@ -85,12 +85,12 @@ public class BdConnexion {
         return null;
     }
 
-    public static MessageBox getMessages(Utilisateur utilisateur) {
+    public static MessageBox getSentMessages(Utilisateur utilisateur) {
         MessageBox mailBox = new MessageBox();
         List<Message> mails = new ArrayList<Message>();
         StringBuilder rawMessages = new StringBuilder();
         try {
-            FileReader fileReader = new FileReader(cheminDatabase + utilisateur.getNom() + "_messages");
+            FileReader fileReader = new FileReader(cheminDatabase + "sent/" + utilisateur.getNom() + "_messages");
             BufferedReader db = new BufferedReader(fileReader);
             String line;
             while ((line = db.readLine()) != null) {
@@ -186,13 +186,21 @@ public class BdConnexion {
         }
     }
 
-    public static void writeToFile(Utilisateur utilisateur, String content) {
+    public static void registerMail(Message message) {
+        writeToFile(message.getAuteur(), message.toString(), "sent");
+
+        for (Utilisateur utilisateur: message.getDestinataires()) {
+            writeToFile(utilisateur, message.toString(), "received");
+        }
+    }
+
+    private static void writeToFile(Utilisateur utilisateur, String content, String typeBoite) {
         BufferedWriter bw = null;
         FileWriter fw = null;
         PrintWriter out = null;
 
         try {
-            fw = new FileWriter(cheminDatabase + utilisateur.getNom() + "_messages", true);
+            fw = new FileWriter(cheminDatabase + typeBoite + "/" + utilisateur.getNom() + "_messages", true);
             bw = new BufferedWriter(fw);
             out = new PrintWriter(bw);
             out.println(content);
