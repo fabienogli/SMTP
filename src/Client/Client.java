@@ -2,6 +2,7 @@ package Client;
 
 import Server.Commande;
 import Server.StateEnum;
+import Server.StreamHandling;
 import Server.Utilisateur;
 
 import javax.net.ssl.SSLSocket;
@@ -82,63 +83,35 @@ public class Client {
     }
 
     public boolean authentification() {
-//        if (!this.stateEnum.equals(StateEnum.AUTHORIZATION)) {
-//            return false;
-//        }
-//        if (this.getUtilisateur() == null) {
-//            return false;
-//        }
-//        write("USER " + this.getUtilisateur().getNom());
-//        String reponseServer = read();
-//        if (reponseServer.contains("-ERR")) {
-//            return false;
-//        }
-//        write("PASS " + this.getUtilisateur().getMdp());
-//        reponseServer = read();
-//        if (reponseServer.contains("+OK")) {
-//            this.stateEnum = StateEnum.TRANSACTION;
-//        }
+
         return true;
     }
 
-    public void write(String data) {
-        data += "\r\n";
+    public void write(String message) {
         try {
-            OutputStream outputStream = this.clientSocket.getOutputStream();
-            outputStream.write(data.getBytes());
-            outputStream.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Le client envoie " + data);
-    }
-
-    public String read() {
-        StringBuilder data = new StringBuilder();
-        try {
-            BufferedReader fromServer  = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
-            data.append(fromServer.readLine());
-            //while (fromServer.ready() || (stopOnlyWhenDot && data.indexOf(".") == -1));
+            StreamHandling.write(message, this.clientSocket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Le client recoit " + data.toString());
-        return data.toString();
+    }
+
+    public String read() {
+        String data = "";
+        try {
+            data = StreamHandling.read(this.clientSocket.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 
     public String readMultipleLines() {
-        StringBuilder data = new StringBuilder();
+        String data="";
         try {
-            BufferedReader fromServer = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
-            String tmp = fromServer.readLine();
-            do {
-                data.append(tmp).append("\n");
-                tmp = fromServer.readLine();
-            } while (tmp.length() > 0 && tmp.charAt(0) != '.');
-        }catch (IOException e) {
+            data = StreamHandling.readMultipleLines(this.clientSocket.getInputStream());
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Le client recoit " + data.toString());
-        return data.toString();
+        return data;
     }
 }

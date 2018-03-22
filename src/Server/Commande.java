@@ -14,7 +14,7 @@ public class Commande {
     private static String timestamp;
     
     public static String ehlo(String requete, Connexion connexion) {
-        if (requete.contains(SmptCodes.HELLO.toString())) {
+        if (requete.contains(SmptCodes.EHLO.toString())) {
             connexion.setCurrentstate(StateEnum.WAIT);
             return SmptCodes.OK.toString();
         }
@@ -42,7 +42,7 @@ public class Commande {
     }
 
     public static String connected(String requete, Connexion connexion) {
-        if (requete.contains(SmptCodes.HELLO.toString())) {
+        if (requete.contains(SmptCodes.EHLO.toString())) {
             connexion.setCurrentstate(StateEnum.WAIT);
             return SmptCodes.OK.toString();
         }
@@ -113,5 +113,9 @@ public class Commande {
             return SmptCodes.MESSAGE.toString();
         }
         return SmptCodes.COMMAND_UNKNOWN.toString();
+    }
+
+    public static String deliverMail(String requete, Connexion connexion) {
+        return null;
     }
 }

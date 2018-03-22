@@ -5,12 +5,12 @@
 package Server;
 
 import java.io.*;
-import java.net.InetAddress;
 import java.net.Socket;
 
 
 public class Connexion implements Runnable {
 
+    private final Server.StreamHandling streamHandling = new Server.StreamHandling();
     private Socket clientSocket;
     private StateEnum currentstate = StateEnum.CLOSED;
     private MessageBox mailBox;
@@ -40,7 +40,11 @@ public class Connexion implements Runnable {
         while (resultCommand) {
             if (this.currentstate.equals(StateEnum.CLOSED)) {
                 String result = Commande.ready(this);
-                write(result);
+                try {
+                    streamHandling.write(result, this.clientSocket.getOutputStream());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else {
                 resultCommand = this.traiterCommande();
             }
@@ -50,10 +54,15 @@ public class Connexion implements Runnable {
     private boolean traiterCommande() {
 
         String result = "";
-        String requete = read();
+        String requete = null;
+        try {
+            requete = streamHandling.read(this.clientSocket.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if (requete.contains("QUIT")) {
             try {
-                write(Commande.quit(this));
+                streamHandling.write(Commande.quit(this), this.clientSocket.getOutputStream());
                 this.clientSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -78,13 +87,18 @@ public class Connexion implements Runnable {
                 result = Commande.writingMail(requete, this);
                 break;
             case READY_TO_DELIVER:
+                result = Commande.deliverMail(requete, this);
                 break;
             default:
                 result = "502 Command not executed ";
                 break;
         }
         System.out.println(this.currentstate);
-        write(result);
+        try {
+            streamHandling.write(result, this.clientSocket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 
@@ -98,26 +112,30 @@ public class Connexion implements Runnable {
 
     public void write(String message) {
         try {
-            PrintWriter outToClient = new PrintWriter(this.clientSocket.getOutputStream());
-            outToClient.write(message);
-            System.out.println("le serveur envoie" + message);
-            outToClient.println();
-            outToClient.flush();
+            StreamHandling.write(message, this.clientSocket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public String read() {
-        String result = "";
+        String data = "";
         try {
-            BufferedReader fromClient = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
-            result = fromClient.readLine();
-            System.out.println("le serveur reçoit " + result);
+            data = StreamHandling.read(this.clientSocket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+        return data;
+    }
+
+    public String readMultipleLines() {
+        String data="";
+        try {
+            data = StreamHandling.readMultipleLines(this.clientSocket.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 
     public Utilisateur getClient() {

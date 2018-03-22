@@ -108,9 +108,9 @@ public class Message {
                     .append(this.getDate().toString())
                     .append("\r\nMessage-ID <")
                     .append(this.getId())
-                    .append("@local.machine.example>\r\n")
+                    .append("@local.machine.example>\r\n\n")
                     .append(this.getCorps())
-                    .append("\r\n.");
+                    .append("\r\n.\n");
 
             return generateMessage.toString();
     }
