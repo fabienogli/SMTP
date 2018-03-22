@@ -33,6 +33,8 @@ public class testConnexion {
         Utilisateur john = new Utilisateur("john@mail.com");
         Utilisateur root = new Utilisateur("root@mail.com");
         Message message = new Message(auteur);
+        message.setSujet("Malcolm X");
+        message.setCorps("A man who stands for nothing...\n\nwill fall for everything");
         message.addDestinataire(john);
         message.addDestinataire(root);
         return message;

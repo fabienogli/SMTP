@@ -203,6 +203,8 @@ public class BdConnexion {
             fw = new FileWriter(cheminDatabase + typeBoite + "/" + utilisateur.getNom() + "_messages", true);
             bw = new BufferedWriter(fw);
             out = new PrintWriter(bw);
+            out.println(); //On saute deux lignes
+            out.println();
             out.println(content);
         } catch (IOException e) {
             e.printStackTrace();
