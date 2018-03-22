@@ -5,7 +5,7 @@ public enum HeadersEnum {
     DATE("Date: "),
     SUJET("Sujet: "),
     TO("To: "),
-    CRLF("\n.");
+    CRLF("\n.\n");
 
     private String string;
 

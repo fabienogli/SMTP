@@ -59,19 +59,41 @@ public class Commande {
         return SmtpCodes.COMMAND_UNKNOWN.toString();
     }
 
-    public static String writingMail(String requete, Connexion connexion) {
-        quit(requete, connexion);
-        String subject_corp = connexion.readMultipleLines();
-        //TODO logique pour récupérer sujet et corps d'email
-        String subject = "";
-        String corps = "";
-        Message mail = connexion.getMailToSend();
-        mail.setCorps(corps);
-        mail.setCorps(subject);
-        connexion.setMailToSend(mail);
+    public static String writingMail(String rawMail, Connexion connexion) {
+        quit(rawMail, connexion);
+//        String date = connexion.read();             //On peut l'ignorer
+//        String auteur = connexion.read();           //On peut l'ignorer
+//        String sujet = connexion.read();
+//        String destinataire = connexion.read();     //On peut l'ignorer
+//        connexion.read();                           //ligne vide entre header et corps
+//        System.out.println("Avant le readMultipleLInes");
+//        String rawMail = connexion.readMultipleLines();
+        Message message = parseRawMail(rawMail, connexion.getMailToSend());
+//        Message message = connexion.getMailToSend();
+//        message.setSujet(sujet);
+//        message.setCorps(corps);
+        System.out.println(message);
+//        connexion.setMailToSend(mail);
         //TODO envoyer le mail
+//        System.out.println(message);
         connexion.setCurrentstate(StateEnum.READY_TO_DELIVER);
         return SmtpCodes.OK.toString();
+    }
+
+    private static Message parseRawMail(String rawMail, Message message) {
+        String[] tab = rawMail.split("\n\n");
+        String headers = tab[0];
+        StringBuilder _corps = new StringBuilder();
+        for (int i = 1 ; i < tab.length; i++) {
+            _corps.append(tab[i]);
+            if (i < tab.length - 1) {
+                _corps.append("\n\n");
+            }
+        }
+        String sujet = headers.split(HeadersEnum.SUJET.toString())[1].split(HeadersEnum.TO.toString())[0];
+        message.setCorps(_corps.toString());
+        message.setSujet(sujet);
+        return message;
     }
 
     public static String wait(String requete, Connexion connexion) {

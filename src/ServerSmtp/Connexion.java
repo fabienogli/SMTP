@@ -54,11 +54,12 @@ public class Connexion implements Runnable {
     private boolean traiterCommande() {
 
         String result = "";
-        String requete = null;
-        try {
-            requete = StreamHandling.read(this.clientSocket.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
+        String requete;
+
+        if (this.getCurrentstate() == StateEnum.WRITING_MAIL) {
+            requete = readMultipleLines();
+        } else {
+            requete = read();
         }
         if (requete.equals(SmtpCodes.QUIT.toString())) {
             try {

@@ -144,6 +144,7 @@ public class Client {
         if (!response.equals(SmtpCodes.MESSAGE.toString())) {
             System.out.println(response);
         }
+        System.out.println(parseMailForSmtp(message));
         write(parseMailForSmtp(message));
         response = read();
         if (!response.equals(SmtpCodes.OK.toString())) {
@@ -159,9 +160,9 @@ public class Client {
                 .append(message.getDate())
                 .append("\n")
                 .append(HeadersEnum.FROM.toString())
-                .append(getUtilisateur().getNom())
+                .append(message.getAuteur().getNom())
                 .append(" <")
-                .append(getUtilisateur().getEmail())
+                .append(message.getAuteur().getEmail())
                 .append(">\n")
                 .append(HeadersEnum.SUJET.toString())
                 .append(message.getSujet())
