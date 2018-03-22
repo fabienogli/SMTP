@@ -11,28 +11,15 @@ import java.util.Date;
 
 public class Commande {
 
-    private static String timestamp;
-
-    public static String ehlo(String requete, Connexion connexion) {
-        if (requete.contains(SmtpCodes.EHLO.toString())) {
-            connexion.setCurrentstate(StateEnum.WAIT);
-            return SmtpCodes.OK.toString();
-        }
-        return SmtpCodes.COMMAND_UNKNOWN.toString();
-    }
-
     public static String quit(Connexion connexion) {
         return SmtpCodes.LOGOUT.toString();
     }
 
-    public static String ready(String requete, Connexion connexion) {
-        String email = requete;
+    public static String ready(String email, Connexion connexion) {
         quit(email, connexion);
         String password = connexion.read();
         Utilisateur utilisateur = new Utilisateur(email, password);
         Utilisateur client = BdConnexion.getUtilisateur(utilisateur);
-        System.out.println(client);
-        System.out.println(utilisateur);
         if (client == null) {
             return SmtpCodes.USER_UNKNOWN.toString();
         } else if (!client.equals(utilisateur)) {
@@ -59,7 +46,8 @@ public class Commande {
             if (BdConnexion.getUtilisateur(destinataire) == null) {
                 return SmtpCodes.USER_UNKNOWN.toString();
             }
-            Message message = new Message("id", destinataire, connexion.getClient(), new Date());
+            Message message = new Message(connexion.getClient());
+            message.addDestinataire(destinataire);
             connexion.setMailToSend(message);
             connexion.setCurrentstate(StateEnum.RECIPIENT_APPROVED);
             return SmtpCodes.OK.toString();
@@ -73,6 +61,7 @@ public class Commande {
 
     public static String writingMail(String requete, Connexion connexion) {
         quit(requete, connexion);
+        String subject_corp = connexion.readMultipleLines();
         //TODO logique pour récupérer sujet et corps d'email
         String subject = "";
         String corps = "";
@@ -91,8 +80,9 @@ public class Commande {
         if (t_mail.length < 1) {
             return SmtpCodes.COMMAND_UNKNOWN.toString();
         }
-        String email = t_mail[1].split(">")[1];
+        String email = t_mail[1].split(">")[0];
         if (email.equals(connexion.getClient().getEmail())) {
+            connexion.setCurrentstate(StateEnum.SENDER_APPROVED);
             return SmtpCodes.OK.toString();
         }
         return SmtpCodes.COMMAND_UNKNOWN.toString();
@@ -114,11 +104,15 @@ public class Commande {
                 return SmtpCodes.USER_UNKNOWN.toString();
             }
             connexion.addRecipentToMail(destinataire);
+            return SmtpCodes.OK.toString();
         }
         if (requete.contains(SmtpCodes.DATA.toString())) {
             connexion.setCurrentstate(StateEnum.WRITING_MAIL);
             return SmtpCodes.MESSAGE.toString();
         }
+        System.out.println("requete =" + requete);
+        System.out.println(connexion.getMailToSend());
+        System.out.println("retourne commande inconnue");
         return SmtpCodes.COMMAND_UNKNOWN.toString();
     }
 

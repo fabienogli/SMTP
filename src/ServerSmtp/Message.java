@@ -4,10 +4,10 @@
 
 package ServerSmtp;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
 public class Message {
 
@@ -18,12 +18,15 @@ public class Message {
     private Date date;
     private String sujet;
     private String corps;
-    private Map<String,String> optionalHeaders;
+    private Map<String, String> optionalHeaders;
     private boolean deleteMark = false;
 
     public Message(String id) {
         this.id = id;
         this.destinataires = new ArrayList<Utilisateur>();
+        this.date = new Date();
+        this.sujet = "";
+        this.corps = "";
     }
 
     public Message(String id, Utilisateur destinataire, Utilisateur auteur, Date date) {
@@ -40,7 +43,12 @@ public class Message {
     }
 
     public Message() {
-        this("unknown", new Utilisateur("unknown"), new Utilisateur("unknown"), new Date(), "unknown", "unknown");
+        this(generateDateStamp(), new Utilisateur("unknown"), new Utilisateur("unknown"), new Date(), "unknown", "unknown");
+    }
+
+    public Message(Utilisateur auteur) {
+        this(generateDateStamp());
+        this.auteur = auteur;
     }
 
     public List<Utilisateur> getDestinataires() {
@@ -96,22 +104,34 @@ public class Message {
     }
 
     public String toString() {
-            StringBuilder generateMessage = new StringBuilder();
-            generateMessage.append("From: <")
-                    .append(this.getAuteur().toString())
-                    .append(">\r\nTo: <")
-                    .append(this.getDestinataires().toString())
-                    .append(">\r\nSubject: ")
-                    .append(this.getSujet())
-                    .append("\r\nDate : ")
-                    .append(this.getDate().toString())
-                    .append("\r\nMessage-ID <")
-                    .append(this.getId())
-                    .append("@local.machine.example>\r\n\n")
-                    .append(this.getCorps())
-                    .append("\r\n.\n");
+        StringBuilder generateMessage = new StringBuilder();
 
-            return generateMessage.toString();
+        generateMessage
+                .append("From: ")
+                .append("<")
+                .append(this.getAuteur().getEmail())
+                .append(">\r\nTo: ");
+        for (int i = 0; i < this.getDestinataires().size(); i++) {
+            generateMessage
+                    .append("<")
+                    .append(this.destinataires.get(i).getEmail())
+                    .append(">");
+            if (i != this.destinataires.size() - 1) {
+                generateMessage.append(";");
+            }
+        }
+        generateMessage
+                .append("\r\nSubject: ")
+                .append(this.getSujet())
+                .append("\r\nDate: ")
+                .append(this.getDate().toString())
+                .append("\r\nMessage-ID: <")
+                .append(this.getId())
+                .append("@local.machine.example>\r\n\n")
+                .append(this.getCorps())
+                .append("\r\n.\n");
+
+        return generateMessage.toString();
     }
 
     public boolean isDeleteMark() {
@@ -128,5 +148,23 @@ public class Message {
 
     public void addOptionalHeader(String key, String value) {
         this.optionalHeaders.put(key, value);
+    }
+
+    private static String generateDateStamp() {
+        StringBuilder dateStamp = new StringBuilder();
+        String stamp = "";
+        Date date = new Date();
+        String uniqueID = UUID.randomUUID().toString();
+        dateStamp.append(uniqueID).append(date);
+        MessageDigest m;
+        try {
+            m = MessageDigest.getInstance("MD5");
+            m.update(dateStamp.toString().getBytes(), 0, dateStamp.toString().length());
+            stamp = new BigInteger(1, m.digest()).toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "<" + stamp + "@smtp.fabienMarkFlorian.fr" + ">";
+
     }
 }

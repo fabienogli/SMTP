@@ -97,11 +97,7 @@ public class Connexion implements Runnable {
                 break;
         }
         System.out.println(this.currentstate);
-        try {
-            StreamHandling.write(result, this.clientSocket.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        write(result);
         return true;
     }
 

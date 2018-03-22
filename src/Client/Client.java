@@ -1,6 +1,7 @@
 package Client;
 
-import ServerSmtp.StateEnum;
+import ServerSmtp.HeadersEnum;
+import ServerSmtp.Message;
 import ServerSmtp.StreamHandling;
 import ServerSmtp.Utilisateur;
 import codes.SmtpCodes;
@@ -18,18 +19,18 @@ public class Client {
     private Utilisateur utilisateur;
     private SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
     private SSLSocket clientSocket ;
-
-    private StateEnum stateEnum= null;
-    private String timestamp;
+    private boolean isAuthentified;
 
     public Client(InetAddress adresseIp, int port) throws IOException {
         this.adresseIp = adresseIp;
         this.port = port;
+        this.isAuthentified = false;
 
     }
 
     public Client() throws IOException {
         this(java.net.InetAddress.getByName("localhost"), 2026);
+        this.isAuthentified = false;
     }
 
     public Client(Utilisateur utilisateur) throws IOException {
@@ -37,7 +38,7 @@ public class Client {
         this.utilisateur = utilisateur;
     }
 
-    public Client(InetAddress adresseIp, Utilisateur utilisateur, int port) throws IOException {
+    public Client(InetAddress adresseIp, int port, Utilisateur utilisateur) throws IOException {
         this(adresseIp, port);
         this.utilisateur = utilisateur;
     }
@@ -72,17 +73,22 @@ public class Client {
         return read();
     }
 
-    public boolean authentification() {
+    public void authentification() {
         write(this.getUtilisateur().getEmail());
         write(this.getUtilisateur().getMdp());
         String response = read();
         if (response.equals(SmtpCodes.AUTHENTIFICATED.toString())) {
-            return true;
+            this.isAuthentified = true;
+            write(SmtpCodes.EHLO.toString());
+            String ok =  read();
+            if (!ok.equals(SmtpCodes.OK.toString())) {
+                System.out.println(ok);
+                this.isAuthentified = false;
+            }
         }
-        return false;
     }
 
-    public void write(String message) {
+    private void write(String message) {
         try {
             StreamHandling.write(message, this.clientSocket.getOutputStream());
         } catch (IOException e) {
@@ -90,7 +96,7 @@ public class Client {
         }
     }
 
-    public String read() {
+    private String read() {
         String data = "";
         try {
             data = StreamHandling.read(this.clientSocket.getInputStream());
@@ -100,7 +106,7 @@ public class Client {
         return data;
     }
 
-    public String readMultipleLines() {
+    private String readMultipleLines() {
         String data="";
         try {
             data = StreamHandling.readMultipleLines(this.clientSocket.getInputStream());
@@ -118,5 +124,66 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendMail(Message message) {
+        write(SmtpCodes.MAIL_FROM.toString() + "<" + message.getAuteur().getEmail() + ">");
+        String response = read();
+        if (!response.equals(SmtpCodes.OK.toString())) {
+            System.out.println(response);
+        }
+        for (Utilisateur destinataire: message.getDestinataires()) {
+            write(SmtpCodes.RCPT_TO.toString() + "<" + destinataire.getEmail() + ">");
+            response = read();
+            if (!response.equals(SmtpCodes.OK.toString())) {
+                System.out.println(response);
+            }
+        }
+        write(SmtpCodes.DATA.toString());
+        response = read();
+        if (!response.equals(SmtpCodes.MESSAGE.toString())) {
+            System.out.println(response);
+        }
+        write(parseMailForSmtp(message));
+        response = read();
+        if (!response.equals(SmtpCodes.OK.toString())) {
+            System.out.println(response);
+        }
+        System.out.println("Message écrit avec succes");
+    }
+
+    private String parseMailForSmtp(Message message) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder
+                .append(HeadersEnum.DATE.toString())
+                .append(message.getDate())
+                .append("\n")
+                .append(HeadersEnum.FROM.toString())
+                .append(getUtilisateur().getNom())
+                .append(" <")
+                .append(getUtilisateur().getEmail())
+                .append(">\n")
+                .append(HeadersEnum.SUJET.toString())
+                .append(message.getSujet())
+                .append("\n")
+                .append(HeadersEnum.TO.toString());
+        for (int i = 0; i < message.getDestinataires().size(); i++) {
+            stringBuilder
+                    .append("<")
+                    .append(message.getDestinataires().get(i).getEmail())
+                    .append(">");
+            if (i != message.getDestinataires().size() - 1) {
+                stringBuilder.append(";");
+            }
+        }
+        stringBuilder
+                .append("\n\n")
+                .append(message.getCorps())
+                .append(HeadersEnum.CRLF.toString());
+        return stringBuilder.toString();
+    }
+
+    public boolean isAuthentified() {
+        return isAuthentified;
     }
 }
