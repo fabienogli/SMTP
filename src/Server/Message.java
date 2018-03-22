@@ -98,11 +98,11 @@ public class Message {
 
     public String toString() {
             StringBuilder generateMessage = new StringBuilder();
-            generateMessage.append("From: ")
+            generateMessage.append("From: <")
                     .append(this.getAuteur().toString())
-                    .append("\r\nTo: ")
+                    .append(">\r\nTo: <")
                     .append(this.getDestinataires().toString())
-                    .append("\r\nSubject: ")
+                    .append(">\r\nSubject: ")
                     .append(this.getSujet())
                     .append("\r\nDate : ")
                     .append(this.getDate().toString())

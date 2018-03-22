@@ -1,6 +1,6 @@
 package codes;
 
-public enum STMPCodes {
+public enum SmptCodes {
 
     READY("ready"),
     AUTHENTIFICATED("220 Bienvenue sur le Serveur STMP de Mark-Florian-Fabien"),
@@ -19,7 +19,7 @@ public enum STMPCodes {
 
     private String message;
 
-    STMPCodes(String message) {
+    SmptCodes(String message) {
         this.message = message;
     }
 
