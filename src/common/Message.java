@@ -107,10 +107,11 @@ public class Message {
         StringBuilder generateMessage = new StringBuilder();
 
         generateMessage
-                .append("From: ")
+                .append(HeadersEnum.FROM.toString())
                 .append("<")
                 .append(this.getAuteur().getEmail())
-                .append(">\r\nTo: ");
+                .append(">\r\n")
+                .append(HeadersEnum.TO.toString());
         for (int i = 0; i < this.getDestinataires().size(); i++) {
             generateMessage
                     .append("<")
@@ -121,11 +122,15 @@ public class Message {
             }
         }
         generateMessage
-                .append("\r\nSubject: ")
+                .append("\r\n")
+                .append(HeadersEnum.SUJET.toString())
                 .append(this.getSujet())
-                .append("\r\nDate: ")
+                .append("\r\n")
+                .append(HeadersEnum.DATE.toString())
                 .append(this.getDate().toString())
-                .append("\r\nMessage-ID: <")
+                .append("\r\n")
+                .append(HeadersEnum.ID.toString())
+                .append("<")
                 .append(this.getId())
                 .append("@local.machine.example>\r\n\n")
                 .append(this.getCorps())

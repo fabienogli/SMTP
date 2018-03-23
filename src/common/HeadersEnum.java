@@ -1,10 +1,11 @@
-package smtp;
+package common;
 
 public enum HeadersEnum {
     FROM("From: "),
     DATE("Date: "),
     SUJET("Sujet: "),
     TO("To: "),
+    ID("Message-ID: "),
     CRLF("\n.\n");
 
     private String string;

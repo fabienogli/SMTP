@@ -1,5 +1,6 @@
 package smtp;
 
+import common.HeadersEnum;
 import common.Message;
 import common.StreamHandling;
 import codes.SmtpCodes;

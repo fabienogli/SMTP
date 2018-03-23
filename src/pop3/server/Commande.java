@@ -3,6 +3,7 @@ package pop3.server;
 import codes.Pop3Codes;
 import common.Message;
 import common.MessageBox;
+import common.Utilisateur;
 import database.BdConnexion;
 
 import java.io.*;
@@ -64,7 +65,7 @@ public class Commande {
         String USER = tab[1];
         String APOP = tab[2];
 
-        if (Commande.isApopValid(USER, APOP, connexion)) {
+        if (Commande.isApopValid(USER, APOP, connexion.getTimestamp())) {
             connexion.setUSER(USER);
             connexion.setCurrentstate(StateEnum.TRANSACTION);
             connexion.setMailBox(addMail(connexion.getUSER()));
@@ -106,8 +107,6 @@ public class Commande {
     }
 
     public static String stat(Connexion connexion) {
-/*" +OK " suivi par un simple espace, le nombre de message dans le dépôt de courrier,
- un simple espace et la taille du dépôt de courrier en octets*/
         StringBuilder statSb = new StringBuilder();
         statSb.append("+OK ").append(connexion.getMailBox().getNumberMessages()).append(" ").append(connexion.getMailBox().getBytes());
 
@@ -172,24 +171,17 @@ public class Commande {
         return encryptMd5.toString();
     }
 
-    public static boolean isApopValid(String USER, String APOP, Connexion connexion) {
-
+    public static boolean isApopValid(String USER, String APOP, String timestamp) {
         try {
             FileReader fileReader = new FileReader(cheminDatabase + "users.csv");
             BufferedReader db = new BufferedReader(fileReader);
             String chaine;
             int i = 1;
             while ((chaine = db.readLine()) != null) {
-                System.out.println("dans le while");
                 if (i > 1) {
                     String[] tabChaine = chaine.split(",");
                     for (int x = 0; x < tabChaine.length - 1; x++) {
-                        if (x == i_USER && USER.equals(tabChaine[x])) {
-
-                            System.out.println("APOP normal " + connexion.getTimestamp().concat(tabChaine[x + 1]));
-                            System.out.println("entree ? " + connexion.getTimestamp().contains("\n"));
-                        }
-                        if (x == i_USER && USER.equals(tabChaine[x]) && encryptApop(connexion.getTimestamp() + tabChaine[x + 1]).equals(APOP)) {
+                        if (x == i_USER && USER.equals(tabChaine[x]) && encryptApop(timestamp + tabChaine[x + 1]).equals(APOP)) {
                             return true;
                         } else if (x == i_USER && USER.equals(tabChaine[x])) { //Le user est bien là mais le mot de passe ne correspond pas
                             return false;

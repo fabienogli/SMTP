@@ -5,7 +5,7 @@
 package smtp.server;
 
 import common.Utilisateur;
-import smtp.HeadersEnum;
+import common.HeadersEnum;
 import common.Message;
 import codes.SmtpCodes;
 import database.BdConnexion;
