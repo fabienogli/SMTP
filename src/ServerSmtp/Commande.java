@@ -61,6 +61,10 @@ public class Commande {
 
     public static String writingMail(String rawMail, Connexion connexion) {
         quit(rawMail, connexion);
+        if (rawMail.equals(SmtpCodes.RESET.toString())) {
+            connexion.setCurrentstate(StateEnum.WAIT);
+            return SmtpCodes.OK.toString();
+        }
         Message message = parseRawMail(rawMail, connexion.getMailToSend());
 
         BdConnexion.registerMail(message);
@@ -130,6 +134,10 @@ public class Commande {
         if (requete.equals(SmtpCodes.MAIL_FROM.toString())) {
             connexion.setCurrentstate(StateEnum.WAIT);
             wait(requete, connexion);
+        }
+        if (requete.equals(SmtpCodes.RESET.toString())) {
+            connexion.setCurrentstate(StateEnum.WAIT);
+            return SmtpCodes.OK.toString();
         }
         return SmtpCodes.COMMAND_UNKNOWN.toString();
     }

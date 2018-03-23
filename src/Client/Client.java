@@ -126,19 +126,25 @@ public class Client {
         }
     }
 
-    public void sendMail(Message message) {
+    public String sendMail(Message message) {
         write(SmtpCodes.MAIL_FROM.toString() + "<" + message.getAuteur().getEmail() + ">");
         String response = read();
         if (!response.equals(SmtpCodes.OK.toString())) {
             System.out.println(response);
         }
+        StringBuilder sb = new StringBuilder();
+        boolean receiverErrors = false;
+
         for (Utilisateur destinataire: message.getDestinataires()) {
             write(SmtpCodes.RCPT_TO.toString() + "<" + destinataire.getEmail() + ">");
             response = read();
             if (!response.equals(SmtpCodes.OK.toString())) {
+                receiverErrors = true;
                 System.out.println(response);
+                sb.append(destinataire.getEmail()).append(";");
             }
         }
+        if(receiverErrors) return "1;"+sb.toString();
         write(SmtpCodes.DATA.toString());
         response = read();
         if (!response.equals(SmtpCodes.MESSAGE.toString())) {
@@ -157,6 +163,7 @@ public class Client {
         if (!response.equals(SmtpCodes.OK.toString())) {
             System.out.println(response);
         }
+        return "2";
     }
 
     private String parseMailForSmtp(Message message) {

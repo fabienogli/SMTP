@@ -5,6 +5,7 @@ import ServerSmtp.Message;
 import ServerSmtp.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -48,8 +49,26 @@ public class WritingPage {
         for (String recipient: recipients.split(";")) {
             message.addDestinataire(new Utilisateur(recipient));
         }
-        client.sendMail(message);
-        this.stage.close();
+        if (client.sendMail(message).contains("1")){
+            String[] reponse = client.sendMail(message).split(";");
+            StringBuilder sb = new StringBuilder();
+            for(int i = 1;i<=reponse.length-1;i++){
+                sb.append(reponse[i]).append("\n");
+            }
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Adresse erronée");
+            alert.setHeaderText("Voir ci-dessous la liste :");
+            alert.setContentText(sb.toString());
+            alert.showAndWait();
+
+        }else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Message envoyé");
+            alert.setContentText("Le message a été envoyé avec succès !");
+            alert.showAndWait();
+            this.stage.close();
+        }
+
     }
 
     public void setStage(Stage stage) {
