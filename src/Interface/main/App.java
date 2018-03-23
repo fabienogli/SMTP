@@ -1,5 +1,7 @@
 package Interface.main;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import smtp.ClientSmtp;
 import Interface.main.base.Controller;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ public class App {
 
     private Stage primaryStage;
     private ClientSmtp clientSmtp;
+    private final ObservableList<ModelMail> mails = FXCollections.observableArrayList();
 
     public App() {
         this(new Stage());
@@ -22,6 +25,7 @@ public class App {
     private App(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Boite au lettre");
+        sampleMails();
     }
 
     public void showMain() {
@@ -34,6 +38,7 @@ public class App {
             AnchorPane main = (AnchorPane) loader.load();
             Main controller = loader.getController();
             controller.setApp(this);
+            controller.fulfillColumn();
             rootLayout.setCenter(main);
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,5 +90,25 @@ public class App {
 
     public void setClientSmtp(ClientSmtp clientSmtp) {
         this.clientSmtp = clientSmtp;
+    }
+
+    /**
+     * Test affichage mails
+     */
+    public void sampleMails() {
+        System.out.println("dans sampleMails");
+        mails.add(new ModelMail("email test", "sujet test"));
+        mails.add(new ModelMail("email test", "sujet test"));
+        mails.add(new ModelMail("email test", "sujet test"));
+        mails.add(new ModelMail("email test", "sujet test"));
+        mails.add(new ModelMail("email test", "sujet test"));
+        mails.add(new ModelMail("email test", "sujet test"));
+        mails.add(new ModelMail("email test", "sujet test"));
+        mails.add(new ModelMail("email test", "sujet test"));
+        mails.add(new ModelMail("email test", "sujet test"));
+    }
+
+    public ObservableList<ModelMail> getMails() {
+        return mails;
     }
 }

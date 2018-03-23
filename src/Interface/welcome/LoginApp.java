@@ -21,8 +21,12 @@ public class LoginApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Boite au lettre");
         this.mainApp = new App();
+        /**test
         initilazeClient();
+
         showMain();
+         **/
+        accessApp();
     }
 
     public void initilazeClient() {
