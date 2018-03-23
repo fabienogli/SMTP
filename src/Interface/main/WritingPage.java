@@ -46,12 +46,7 @@ public class WritingPage {
         message.setSujet(this.subjectTextField.getText());
         message.setCorps(this.corpsTextArea.getText());
         String recipients = this.recipientTextField.getText();
-        if(recipients.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Aucun destinataire");
-            alert.setContentText("Veuillez saisir au moins un destinataire !");
-            alert.showAndWait();
-        }
+
         for (String recipient: recipients.split(";")) {
             message.addDestinataire(new Utilisateur(recipient));
         }
@@ -67,6 +62,11 @@ public class WritingPage {
             alert.setContentText(sb.toString());
             alert.showAndWait();
 
+        }else if(recipients.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Aucun destinataire");
+            alert.setContentText("Veuillez saisir au moins un destinataire !");
+            alert.showAndWait();
         }else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Message envoyé");
