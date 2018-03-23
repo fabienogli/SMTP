@@ -140,7 +140,14 @@ public class Commande {
                 return "-ERR message " + num + " is deleted"+"\n.";
             }
             System.out.print("RETR succes");
-            mailSb.append("+OK " + mail.size() + " octets").append("\n").append(mail.toString());
+            System.out.println(mail.toString());
+
+            mailSb.
+                    append("+OK ")
+                    .append(mail.size())
+                    .append(" octets")
+                    .append("\n")
+                    .append(mail.toString());
         }
         System.out.println(mailSb.toString());
         return mailSb.toString();

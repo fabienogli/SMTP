@@ -8,9 +8,9 @@ import java.io.IOException;
 
 public class testConnexion {
     public static void main(String[] args) {
-//        initializeClient();
+        initializeClient();
 //        testMail();
-        testPop3();
+//        testPop3();
 //        testSmtp();
     }
 
