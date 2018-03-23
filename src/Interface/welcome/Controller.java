@@ -4,6 +4,7 @@ import Client.Client;
 import ServerSmtp.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -62,6 +63,11 @@ public class Controller {
         this.loginApp.setClient(client);
         if (client.isAuthentified()) {
             this.loginApp.accessApp();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Identifiants erronés");
+            alert.setContentText("Veuillez resaisir vos identifiants !");
+            alert.showAndWait();
         }
     }
 
