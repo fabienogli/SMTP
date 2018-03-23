@@ -1,8 +1,8 @@
 package database;
 
-import ServerSmtp.Message;
-import ServerSmtp.MessageBox;
-import ServerSmtp.Utilisateur;
+import common.Message;
+import common.MessageBox;
+import common.Utilisateur;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -109,7 +109,7 @@ public class BdConnexion {
         return mailBox;
     }
 
-    private static Message parseMail(String rawMail) {
+    public static Message parseMail(String rawMail) {
         Message mail = new Message();
         //Parse header
         StringBuilder content = new StringBuilder();
@@ -133,7 +133,7 @@ public class BdConnexion {
         return mail;
     }
 
-    private static void parseHeader(Message mail, String line) {
+    public static void parseHeader(Message mail, String line) {
         boolean delimiteurFound = false;
         String key = "";
         String value = "";
@@ -224,4 +224,37 @@ public class BdConnexion {
             }
         }
     }
+
+    public static boolean isPassValid(String PASS, String USER) {
+        if (USER == null || PASS == null) {
+            return false;
+        }
+        try {
+            FileReader fileReader = new FileReader(cheminDatabase + "users.csv");
+            BufferedReader db = new BufferedReader(fileReader);
+            String chaine;
+            int i = 1;
+            while ((chaine = db.readLine()) != null) {
+                if (i > 1) {
+                    String[] tabChaine = chaine.split(",");
+                    for (int x = 0; x < tabChaine.length; x++) {
+                        if (x == 0 && USER.equals(tabChaine[x]) && tabChaine[x + 1].equals(PASS)) {
+                            return true;
+                        } else if (x == 0 && USER.equals(tabChaine[x])) { //Le user est bien là mais le mot de passe ne correspond pas
+                            return false;
+                        }
+                    }
+                }
+                i++;
+            }
+            db.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier est introuvable !");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 }

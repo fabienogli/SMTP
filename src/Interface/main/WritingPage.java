@@ -1,11 +1,10 @@
 package Interface.main;
 
-import Client.Client;
-import ServerSmtp.Message;
-import ServerSmtp.Utilisateur;
+import smtp.ClientSmtp;
+import common.Message;
+import common.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -29,7 +28,7 @@ public class WritingPage {
 
     public void setApp(App app) {
         this.app = app;
-        this.senderTextField.setText(this.app.getClient().getUtilisateur().getEmail());
+        this.senderTextField.setText(this.app.getClientSmtp().getUtilisateur().getEmail());
         this.senderTextField.setDisable(true);
     }
 
@@ -40,15 +39,15 @@ public class WritingPage {
 
     @FXML
     void send(ActionEvent event) {
-        Client client = this.app.getClient();
-        Message message = new Message(client.getUtilisateur());
+        ClientSmtp clientSmtp = this.app.getClientSmtp();
+        Message message = new Message(clientSmtp.getUtilisateur());
         message.setSujet(this.subjectTextField.getText());
         message.setCorps(this.corpsTextArea.getText());
         String recipients = this.recipientTextField.getText();
         for (String recipient: recipients.split(";")) {
             message.addDestinataire(new Utilisateur(recipient));
         }
-        client.sendMail(message);
+        clientSmtp.sendMail(message);
         this.stage.close();
     }
 

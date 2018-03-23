@@ -59,15 +59,15 @@ Avant de développer, nous avons pris le temps d'élaborer des automates pour le
 *Automate serveur*
 ![automate](doc/automate_client.png)
 Ces automates définissent la futur implémentation du code.  
-Pour ne pas laisser place à d'éventuels bugs, nous avons réalisé pour le client ainsi que pour le serveur des tables de transitions qui anticipent les différentes requêtes.  
+Pour ne pas laisser place à d'éventuels bugs, nous avons réalisé pour le clientSmtp ainsi que pour le serveur des tables de transitions qui anticipent les différentes requêtes.  
 Ces documents sont disponibles dans le dossier doc.
-##Implémentation Smtp Côté Serveur
+##Implémentation smtp Côté Serveur
 
-Comme pour l'implémentation du protocole POP3, nous avons une classe Enum qui répertorie les différents états de la connexion Smtp :
+Comme pour l'implémentation du protocole POP3, nous avons une classe Enum qui répertorie les différents états de la connexion smtp :
 ```java
 public  enum StateEnum {CLOSED, CONNECTED, WAIT, SENDER_APPROVED,RECIPIENT_APPROVED,WRITING_MAIL,READY_TO_DELIVER, READY}
 ```
-Nous avons créé une classe Enum permettant de répertorier les messages côté ServerSmtp et Client envoyé
+Nous avons créé une classe Enum permettant de répertorier les messages côté smtp et Client envoyé
 ```java
 public enum SmtpCodes {
     SeServerSmtptp
@@ -79,7 +79,7 @@ public enum SmtpCodes {
     COMMAND_UNKNOWN("500 Syntax error, command unrecognized"),
     COMMAND_NOTIMPLEMENTED("502 Command not implemented"),
     WRONG_COMMAND("503 Bad sequence of commands"),
-    //Client
+    clientSmtp
     MAIL_FROM("MAIL FROM:"),
     RCPT_TO("RCPT TO:"),
     RESET("RSET"),
@@ -104,7 +104,7 @@ public enum SmtpCodes {
 ```
 
 **Gestion authentification**
-Comme le protocole Smtp nous laisse libre quant à l'identification de l'utilisateur,
+Comme le protocole smtp nous laisse libre quant à l'identification de l'utilisateur,
 Nous avons décidé, de envoyer un à un le mail ainsi que le mot de passe au server.
 ```java
 public boolean authentification() {
@@ -117,4 +117,4 @@ public boolean authentification() {
         return false;
     }
 ```
-Une fois le client identifié, il enverra alors la commande EHLO où nous rentrons dans le protocole.
+Une fois le clientSmtp identifié, il enverra alors la commande EHLO où nous rentrons dans le protocole.

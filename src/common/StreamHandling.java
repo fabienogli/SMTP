@@ -1,4 +1,4 @@
-package ServerSmtp;
+package common;
 
 import java.io.*;
 
@@ -34,7 +34,6 @@ public class StreamHandling {
                 tmp = fromServer.readLine();
                 if (tmp.length() == 0) {
                     data.append(tmp).append("\n");
-                    tmp = fromServer.readLine();
                 }
             } while (tmp.charAt(0) != '.');
         } catch (IOException e) {

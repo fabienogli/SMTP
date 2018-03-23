@@ -2,7 +2,7 @@
  * Copyright (c) 2018. Mark KPAMY -Fabien OGLI - Florian LOMBARDO
  */
 
-package ServerSmtp;
+package common;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

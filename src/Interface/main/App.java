@@ -1,6 +1,6 @@
 package Interface.main;
 
-import Client.Client;
+import smtp.ClientSmtp;
 import Interface.main.base.Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +13,7 @@ import java.io.IOException;
 public class App {
 
     private Stage primaryStage;
-    private Client client;
+    private ClientSmtp clientSmtp;
 
     public App() {
         this(new Stage());
@@ -79,11 +79,11 @@ public class App {
         return primaryStage;
     }
 
-    public Client getClient() {
-        return client;
+    public ClientSmtp getClientSmtp() {
+        return clientSmtp;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientSmtp(ClientSmtp clientSmtp) {
+        this.clientSmtp = clientSmtp;
     }
 }

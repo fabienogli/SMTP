@@ -1,4 +1,4 @@
-package ServerSmtp;
+package smtp;
 
 public enum HeadersEnum {
     FROM("From: "),

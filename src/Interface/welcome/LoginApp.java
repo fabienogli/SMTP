@@ -1,6 +1,6 @@
 package Interface.welcome;
 
-import Client.Client;
+import smtp.ClientSmtp;
 import Interface.main.App;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +14,7 @@ public class LoginApp extends Application {
     private Stage primaryStage;
     private AnchorPane rootLayout;
     private App mainApp;
-    private Client client;
+    private ClientSmtp clientSmtp;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -27,8 +27,8 @@ public class LoginApp extends Application {
 
     public void initilazeClient() {
         try {
-            this.client = new Client();
-            client.start();
+            this.clientSmtp = new ClientSmtp();
+            clientSmtp.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,7 +51,7 @@ public class LoginApp extends Application {
 
     public void accessApp() {
         this.primaryStage.close();
-        this.mainApp.setClient(this.client);
+        this.mainApp.setClientSmtp(this.clientSmtp);
         this.mainApp.showMain();
     }
 
@@ -83,17 +83,17 @@ public class LoginApp extends Application {
         launch(args);
     }
 
-    public Client getClient() {
-        return client;
+    public ClientSmtp getClientSmtp() {
+        return clientSmtp;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientSmtp(ClientSmtp clientSmtp) {
+        this.clientSmtp = clientSmtp;
     }
 
     @Override
     public void stop() throws Exception {
-        this.client.quit();
+        this.clientSmtp.quit();
         super.stop();
     }
 }

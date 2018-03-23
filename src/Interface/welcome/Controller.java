@@ -1,7 +1,7 @@
 package Interface.welcome;
 
-import Client.Client;
-import ServerSmtp.Utilisateur;
+import smtp.ClientSmtp;
+import common.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -55,12 +55,12 @@ public class Controller {
 
     @FXML
     private void login(ActionEvent event) {
-        Client client = this.loginApp.getClient();
+        ClientSmtp clientSmtp = this.loginApp.getClientSmtp();
         Utilisateur utilisateur = new Utilisateur(this.mailTextField.getText(), this.passwordTextField.getText());
-        client.setUtilisateur(utilisateur);
-        client.authentification();
-        this.loginApp.setClient(client);
-        if (client.isAuthentified()) {
+        clientSmtp.setUtilisateur(utilisateur);
+        clientSmtp.authentification();
+        this.loginApp.setClientSmtp(clientSmtp);
+        if (clientSmtp.isAuthentified()) {
             this.loginApp.accessApp();
         }
     }

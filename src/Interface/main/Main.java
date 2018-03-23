@@ -1,9 +1,8 @@
 package Interface.main;
 
-import Client.Client;
+import smtp.ClientSmtp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 public class Main {
 
@@ -15,8 +14,8 @@ public class Main {
 
     @FXML
     void logout(ActionEvent event) {
-        Client client = app.getClient();
-        client.quit();
+        ClientSmtp clientSmtp = app.getClientSmtp();
+        clientSmtp.quit();
     }
 
     @FXML
