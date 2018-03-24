@@ -9,9 +9,12 @@ import common.Message;
 import common.MessageBox;
 import common.StreamHandling;
 import codes.SmtpCodes;
+import database.Dns;
+import database.NoNameDnsException;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 
 public class Connexion implements Runnable {
@@ -118,14 +121,6 @@ public class Connexion implements Runnable {
         return true;
     }
 
-    public MessageBox getMailBox() {
-        return mailBox;
-    }
-
-    public void setMailBox(MessageBox mailBox) {
-        this.mailBox = mailBox;
-    }
-
     public void write(String message) {
         try {
             StreamHandling.write(message, this.clientSocket.getOutputStream());
@@ -154,6 +149,14 @@ public class Connexion implements Runnable {
         return data;
     }
 
+    public void close() {
+        try {
+            this.clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Utilisateur getClient() {
         return client;
     }
@@ -174,11 +177,11 @@ public class Connexion implements Runnable {
         this.mailToSend.addDestinataire(utilisateur);
     }
 
-    public void close() {
-        try {
-            this.clientSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public MessageBox getMailBox() {
+        return mailBox;
+    }
+
+    public void setMailBox(MessageBox mailBox) {
+        this.mailBox = mailBox;
     }
 }
