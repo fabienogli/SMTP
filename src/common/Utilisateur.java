@@ -2,7 +2,9 @@
  * Copyright (c) 2018. Mark KPAMY -Fabien OGLI - Florian LOMBARDO
  */
 
-package ServerSmtp;
+package common;
+
+import database.BdConnexion;
 
 public class Utilisateur {
 
@@ -64,5 +66,12 @@ public class Utilisateur {
     @Override
     public boolean equals(Object obj) {
         return this.getEmail().equals(((Utilisateur) obj).getEmail()) && this.getMdp().equals(((Utilisateur) obj).getMdp());
+    }
+
+    public void setName() {
+        Utilisateur user = BdConnexion.getUtilisateur(this);
+        if (user.equals(this)) {
+            this.setNom(user.getNom());
+        }
     }
 }

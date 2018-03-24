@@ -1,0 +1,4 @@
+package pop3.server;
+
+public  enum StateEnum {ATTENTE_CONNEXION, AUTHORIZATION, AUTHENTIFICATION, TRANSACTION}
+

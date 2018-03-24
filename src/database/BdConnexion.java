@@ -1,14 +1,16 @@
 package database;
 
-import ServerSmtp.Message;
-import ServerSmtp.MessageBox;
-import ServerSmtp.Utilisateur;
+import common.HeadersEnum;
+import common.Message;
+import common.MessageBox;
+import common.Utilisateur;
 
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -109,7 +111,7 @@ public class BdConnexion {
         return mailBox;
     }
 
-    private static Message parseMail(String rawMail) {
+    public static Message parseMail(String rawMail) {
         Message mail = new Message();
         //Parse header
         StringBuilder content = new StringBuilder();
@@ -133,56 +135,38 @@ public class BdConnexion {
         return mail;
     }
 
-    private static void parseHeader(Message mail, String line) {
-        boolean delimiteurFound = false;
-        String key = "";
-        String value = "";
-        char item;
-        String test = "";
-        for (int i = 0; i < line.length(); i++) {
-            item = line.charAt(i);
-            test += item;
-            if (!delimiteurFound && item == ':')
-                delimiteurFound = true;
-            else {
-                if (delimiteurFound)
-                    value += item;
-                else
-                    key += item;
-            }
-        }
-        if (!delimiteurFound) {
-            return;
-        }
-        key = key.trim();
-        value = value.trim();
-        switch (key.toUpperCase()) {
+    public static Utilisateur parseUser(String rawUser) {
+        System.out.println("dans parseUser");
+        System.out.println(rawUser);
+        String[] tab = rawUser.split(" <");
+        Utilisateur auteur = new Utilisateur(tab[1].split(">")[0]);
+        auteur.setNom(tab[0]);
+        return auteur;
+    }
 
-            case "TO":
-                String valuesTo[] = value.split(" ");
-                mail.addDestinataire(new Utilisateur(valuesTo[0], valuesTo[1]));
-                break;
-            case "FROM":
-                String valuesFrom[] = value.split(" ");
-                mail.setAuteur(new Utilisateur(valuesFrom[0], valuesFrom[1]));
-                break;
-            case "SUBJECT":
-                mail.setSujet(value);
-                break;
-            case "DATE":
-                DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
+    private static void parseHeader(Message mail, String line) {
+        String header = line.split(": ")[0];
+        String value = line.split(": ")[1];
+        if (header.equals(HeadersEnum.FROM.getString())) {
+            mail.setAuteur(parseUser(value));
+        } else if (header.equals(HeadersEnum.TO.getString())) {
+            for (String user : header.split(";")) {
+                mail.addDestinataire(parseUser(value));
+            }
+        } else if (header.equals(HeadersEnum.DATE.getString())) {
+            System.out.println(value);
+            DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
                 try {
                     mail.setDate(format.parse(value));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                break;
-            case "MESSAGE-ID":
-                mail.setId(value);
-                break;
-            default:
-                mail.addOptionalHeader(key, value);
-                break;
+        } else if (header.equals(HeadersEnum.SUJET.getString())) {
+            mail.setSujet(value);
+        } else if (header.equals(HeadersEnum.ID.getString())) {
+            mail.setId(value.split("<")[0].split("@")[0]);
+        } else {
+            mail.addOptionalHeader(header, value);
         }
     }
 
@@ -224,4 +208,37 @@ public class BdConnexion {
             }
         }
     }
+
+    public static boolean isPassValid(String PASS, String USER) {
+        if (USER == null || PASS == null) {
+            return false;
+        }
+        try {
+            FileReader fileReader = new FileReader(cheminDatabase + "users.csv");
+            BufferedReader db = new BufferedReader(fileReader);
+            String chaine;
+            int i = 1;
+            while ((chaine = db.readLine()) != null) {
+                if (i > 1) {
+                    String[] tabChaine = chaine.split(",");
+                    for (int x = 0; x < tabChaine.length; x++) {
+                        if (x == 0 && USER.equals(tabChaine[x]) && tabChaine[x + 1].equals(PASS)) {
+                            return true;
+                        } else if (x == 0 && USER.equals(tabChaine[x])) { //Le user est bien là mais le mot de passe ne correspond pas
+                            return false;
+                        }
+                    }
+                }
+                i++;
+            }
+            db.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier est introuvable !");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 }

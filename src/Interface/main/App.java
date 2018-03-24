@@ -1,6 +1,8 @@
 package Interface.main;
 
-import Client.Client;
+import Interface.Client;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import Interface.main.base.Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +16,7 @@ public class App {
 
     private Stage primaryStage;
     private Client client;
+    private final ObservableList<ModelMail> mails = FXCollections.observableArrayList();
 
     public App() {
         this(new Stage());
@@ -34,6 +37,7 @@ public class App {
             AnchorPane main = (AnchorPane) loader.load();
             Main controller = loader.getController();
             controller.setApp(this);
+            controller.fulfillColumn();
             rootLayout.setCenter(main);
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,6 +88,13 @@ public class App {
     }
 
     public void setClient(Client client) {
+        System.out.println(client);
         this.client = client;
+        this.mails.addAll(this.client.getModelMails());
+    }
+
+
+    public ObservableList<ModelMail> getMails() {
+        return mails;
     }
 }

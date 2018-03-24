@@ -1,7 +1,8 @@
 package Interface.welcome;
 
-import Client.Client;
-import ServerSmtp.Utilisateur;
+import Interface.Client;
+import smtp.ClientSmtp;
+import common.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

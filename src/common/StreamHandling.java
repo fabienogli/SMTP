@@ -1,4 +1,4 @@
-package ServerSmtp;
+package common;
 
 import java.io.*;
 

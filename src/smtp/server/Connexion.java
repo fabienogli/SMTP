@@ -2,8 +2,12 @@
  * Copyright (c) 2018. Mark KPAMY -Fabien OGLI - Florian LOMBARDO
  */
 
-package ServerSmtp;
+package smtp.server;
 
+import common.Utilisateur;
+import common.Message;
+import common.MessageBox;
+import common.StreamHandling;
 import codes.SmtpCodes;
 
 import java.io.*;

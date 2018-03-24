@@ -1,17 +1,17 @@
-package Client;
+package smtp;
 
-import ServerSmtp.HeadersEnum;
-import ServerSmtp.Message;
-import ServerSmtp.StreamHandling;
-import ServerSmtp.Utilisateur;
+import common.HeadersEnum;
+import common.Message;
+import common.StreamHandling;
 import codes.SmtpCodes;
+import common.Utilisateur;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.InetAddress;
 
-public class Client {
+public class ClientSmtp {
 
     //private Socket clientSocket;
     private int port;
@@ -21,24 +21,24 @@ public class Client {
     private SSLSocket clientSocket ;
     private boolean isAuthentified;
 
-    public Client(InetAddress adresseIp, int port) throws IOException {
+    public ClientSmtp(InetAddress adresseIp, int port) throws IOException {
         this.adresseIp = adresseIp;
         this.port = port;
         this.isAuthentified = false;
 
     }
 
-    public Client() throws IOException {
+    public ClientSmtp() throws IOException {
         this(java.net.InetAddress.getByName("localhost"), 2026);
         this.isAuthentified = false;
     }
 
-    public Client(Utilisateur utilisateur) throws IOException {
+    public ClientSmtp(Utilisateur utilisateur) throws IOException {
         this();
         this.utilisateur = utilisateur;
     }
 
-    public Client(InetAddress adresseIp, int port, Utilisateur utilisateur) throws IOException {
+    public ClientSmtp(InetAddress adresseIp, int port, Utilisateur utilisateur) throws IOException {
         this(adresseIp, port);
         this.utilisateur = utilisateur;
     }

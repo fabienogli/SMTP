@@ -2,7 +2,7 @@
  * Copyright (c) 2018. Mark KPAMY -Fabien OGLI - Florian LOMBARDO
  */
 
-package ServerSmtp;
+package common;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -43,7 +43,7 @@ public class Message {
     }
 
     public Message() {
-        this(generateDateStamp(), new Utilisateur("unknown"), new Utilisateur("unknown"), new Date(), "unknown", "unknown");
+        this(generateDateStamp());
     }
 
     public Message(Utilisateur auteur) {
@@ -107,13 +107,16 @@ public class Message {
         StringBuilder generateMessage = new StringBuilder();
 
         generateMessage
-                .append("From: ")
-                .append("<")
+                .append(HeadersEnum.FROM.toString())
+                .append(this.getAuteur().getNom())
+                .append(" <")
                 .append(this.getAuteur().getEmail())
-                .append(">\r\nTo: ");
+                .append(">\r\n")
+                .append(HeadersEnum.TO.toString());
         for (int i = 0; i < this.getDestinataires().size(); i++) {
             generateMessage
-                    .append("<")
+                    .append(this.destinataires.get(i).getNom())
+                    .append(" <")
                     .append(this.destinataires.get(i).getEmail())
                     .append(">");
             if (i != this.destinataires.size() - 1) {
@@ -121,11 +124,15 @@ public class Message {
             }
         }
         generateMessage
-                .append("\r\nSubject: ")
+                .append("\r\n")
+                .append(HeadersEnum.SUJET.toString())
                 .append(this.getSujet())
-                .append("\r\nDate: ")
+                .append("\r\n")
+                .append(HeadersEnum.DATE.toString())
                 .append(this.getDate().toString())
-                .append("\r\nMessage-ID: <")
+                .append("\r\n")
+                .append(HeadersEnum.ID.toString())
+                .append("<")
                 .append(this.getId())
                 .append("@local.machine.example>\r\n\n")
                 .append(this.getCorps())

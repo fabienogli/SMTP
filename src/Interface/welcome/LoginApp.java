@@ -1,6 +1,7 @@
 package Interface.welcome;
 
-import Client.Client;
+import Interface.Client;
+import smtp.ClientSmtp;
 import Interface.main.App;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

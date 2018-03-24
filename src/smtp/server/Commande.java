@@ -2,12 +2,13 @@
  * Copyright (c) 2018. Mark KPAMY -Fabien OGLI - Florian LOMBARDO
  */
 
-package ServerSmtp;
+package smtp.server;
 
+import common.Utilisateur;
+import common.HeadersEnum;
+import common.Message;
 import codes.SmtpCodes;
 import database.BdConnexion;
-
-import java.util.Date;
 
 public class Commande {
 

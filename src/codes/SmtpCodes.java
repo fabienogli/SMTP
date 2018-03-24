@@ -1,7 +1,7 @@
 package codes;
 
 public enum SmtpCodes {
-    //ServerSmtp
+    //smtp
     READY("ready"),
     AUTHENTIFICATED("220 Bienvenue sur le Serveur STMP de Mark-Florian-Fabien"),
     OK("250 OK"),
@@ -11,7 +11,7 @@ public enum SmtpCodes {
     COMMAND_UNKNOWN("500 Syntax error, command unrecognized"),
     COMMAND_NOTIMPLEMENTED("502 Command not implemented"),
     WRONG_COMMAND("503 Bad sequence of commands"),
-    //Client
+    //client
     MAIL_FROM("MAIL FROM:"),
     RCPT_TO("RCPT TO:"),
     RESET("RST"),
