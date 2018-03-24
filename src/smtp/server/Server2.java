@@ -12,15 +12,14 @@ import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.time.Year;
 import java.util.Scanner;
 
-public class Server {
+public class Server2 {
     private SSLServerSocket sslServerSocket ;
     private Dns dns;
 
-    private Server(){
-        int portEcoute = 2026;
+    private Server2(){
+        int portEcoute = 2025;
         try {
             SSLServerSocketFactory sslServerSocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
             sslServerSocket = (SSLServerSocket) sslServerSocketfactory.createServerSocket(portEcoute);
@@ -49,8 +48,8 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        Server server = new Server();
-        //registerDns(server.getDns());
+        Server2 server = new Server2();
+       // registerDns(server.getDns());
         server.lancer();
     }
 

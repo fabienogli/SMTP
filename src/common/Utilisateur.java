@@ -74,4 +74,8 @@ public class Utilisateur {
             this.setNom(user.getNom());
         }
     }
+
+    public String domainName(){
+        return email.split("@")[1];
+    }
 }

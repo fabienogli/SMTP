@@ -89,8 +89,10 @@ public class Connexion implements Runnable {
             }
             return false;
         }
+        System.out.println(getCurrentstate());
 
         switch (getCurrentstate()) {
+
             case WAIT:
                 result = Commande.wait(requete, this);
                 break;
@@ -109,9 +111,9 @@ public class Connexion implements Runnable {
             case READY_TO_DELIVER:
                 result = Commande.deliverMail(requete, this);
                 break;
-            case READY:
+            /*case READY:
                 result = Commande.ready(requete, this);
-                break;
+                break;*/
             default:
                 result = "502 Command not executed ";
                 break;

@@ -110,11 +110,12 @@ public class Client {
         this.pop3.setUtilisateur(utilisateur);
     }
 
-    public void authentification() {
+    public boolean authentification() {
         boolean authApop = this.pop3.authentificationApop();
-        this.smtp.authentification();
+        //this.smtp.authentification();
         this.getReceivedMessages();
         //@Todo controle authentification
+        return authApop;
     }
 
     public boolean isAuthentified() {

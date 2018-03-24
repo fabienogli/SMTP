@@ -46,13 +46,18 @@ public class WritingPage {
         message.setCorps(this.corpsTextArea.getText());
         String recipients = this.recipientTextField.getText();
 
-        for (String recipient: recipients.split(";")) {
+        for (String recipient : recipients.split(";")) {
             message.addDestinataire(new Utilisateur(recipient));
         }
-        if (client.sendMail(message).contains("1")){
+        if (recipients.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Aucun destinataire");
+            alert.setContentText("Veuillez saisir au moins un destinataire !");
+            alert.showAndWait();
+        } else if (client.sendMail(message).contains("1")) {
             String[] reponse = client.sendMail(message).split(";");
             StringBuilder sb = new StringBuilder();
-            for(int i = 1;i<=reponse.length-1;i++){
+            for (int i = 1; i <= reponse.length - 1; i++) {
                 sb.append(reponse[i]).append("\n");
             }
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -60,13 +65,7 @@ public class WritingPage {
             alert.setHeaderText("Voir ci-dessous la liste :");
             alert.setContentText(sb.toString());
             alert.showAndWait();
-
-        }else if(recipients.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Aucun destinataire");
-            alert.setContentText("Veuillez saisir au moins un destinataire !");
-            alert.showAndWait();
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Message envoyé");
             alert.setContentText("Le message a été envoyé avec succès !");
