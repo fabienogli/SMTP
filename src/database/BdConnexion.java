@@ -176,7 +176,7 @@ public class BdConnexion {
 
         for (Utilisateur utilisateur: message.getDestinataires()) {
             // la deuxieme condition sera a modifer sur chacun de nos serveur
-            if(utilisateur.domainName().equals("mail.com") || utilisateur.domainName().equals("mark.fr")){
+            if(utilisateur.domainName().equals("mail.com") || utilisateur.domainName().equals("smtp.fr")){
                 writeToFile(utilisateur, message.toString(), "received");
             }
         }
