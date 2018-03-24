@@ -11,7 +11,8 @@ public class startAllServers {
         ServerSMTP serverSMTP = new ServerSMTP();
         ServerPop3 serverPop3 = new ServerPop3();
         //registerDns(serverSMTP.getDns());
-        serverSMTP.lancer();
         serverPop3.lancer();
+        serverSMTP.lancer();
+
     }
 }
