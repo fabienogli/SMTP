@@ -145,6 +145,7 @@ public class BdConnexion {
     }
 
     private static void parseHeader(Message mail, String line) {
+        System.out.println(line);
         String header = line.split(": ")[0];
         String value = line.split(": ")[1];
         if (header.equals(HeadersEnum.FROM.getString())) {

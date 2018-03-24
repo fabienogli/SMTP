@@ -34,8 +34,7 @@ public class Main {
 
     @FXML
     void logout(ActionEvent event) {
-        Client cl = app.getClient();
-        cl.quit();
+        this.app.logout();
     }
 
     @FXML

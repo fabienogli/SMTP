@@ -1,6 +1,7 @@
 package Interface.main;
 
 import Interface.Client;
+import Interface.welcome.LoginApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Interface.main.base.Controller;
@@ -17,6 +18,7 @@ public class App {
     private Stage primaryStage;
     private Client client;
     private final ObservableList<ModelMail> mails = FXCollections.observableArrayList();
+    private LoginApp loginApp;
 
     public App() {
         this(new Stage());
@@ -96,5 +98,22 @@ public class App {
 
     public ObservableList<ModelMail> getMails() {
         return mails;
+    }
+
+    public void logout() {
+        this.client.quit();
+        this.primaryStage.close();
+        this.loginApp.initilazeClient();
+        try {
+            this.loginApp.showMain();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.mails.clear();
+        this.loginApp.getPrimaryStage().show();
+    }
+
+    public void setLoginApp(LoginApp loginApp) {
+        this.loginApp = loginApp;
     }
 }
