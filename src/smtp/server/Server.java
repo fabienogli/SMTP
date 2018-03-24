@@ -50,15 +50,30 @@ public class Server {
 
     public static void main(String[] args) {
         Server server = new Server();
-        registerDns();
+        registerDns(server.getDns());
         server.lancer();
     }
 
-    private static void registerDns() {
+    private static void registerDns(Dns dns) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Voulez vous ajouter des noms de domaines ? (Y/N)");
-        if (sc.next().equals("Y")) {
-
+        String again = "Voulez vous ajouter des ip à un nom de domaine ? (Y/N)";
+        System.out.println(again);
+        boolean dansLeScript = sc.next().equals("Y");
+        while (dansLeScript) {
+            System.out.println(dns);
+            System.out.println("Entrez le numéro de channel à affecter");
+            int i_name = Integer.parseInt(sc.next());
+            System.out.println("Entrez l'ip que vous voulez associé");
+            String ip = sc.nextLine();
+            try {
+                dns.associateNameIp(dns.getDomain().get(i_name), ip);
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            } catch (NoNameDnsException e) {
+                e.printStackTrace();
+            }
+            System.out.println(again);
+            dansLeScript = sc.next().equals("Y");
         }
     }
 

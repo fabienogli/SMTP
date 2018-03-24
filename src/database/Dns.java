@@ -42,6 +42,20 @@ public class Dns {
         }
     }
 
+    public void associateNameIp(String name, String string_ip) throws UnknownHostException, NoNameDnsException {
+        InetAddress ip = InetAddress.getByName(string_ip);
+        if (!this.getDomain().contains(name)) {
+            throw new NoNameDnsException("Pas de nom associé à " + name);
+        }
+        for (String tmp : this.getDomain()) {
+            if (tmp.equals(name)) {
+                this.dns.put(name, ip);
+                return;
+            }
+        }
+    }
+
+
     public static Dns get() {
         Dns dns = new Dns();
         dns.getDnsFromDb();
@@ -63,5 +77,24 @@ public class Dns {
 
     public void setDns(HashMap<String, InetAddress> dns) {
         this.dns = dns;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder toString = new StringBuilder();
+        int i = 0;
+        for (String name : domain) {
+            toString.append(name)
+                    .append(" : ");
+            if (dns.containsKey(name)) {
+                toString.append(dns.get(name));
+            } else {
+                toString.append("libre, channel ")
+                        .append(i);
+                i++;
+            }
+            toString.append("\n");
+        }
+        return toString.toString();
     }
 }
