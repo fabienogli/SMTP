@@ -1,8 +1,8 @@
 package Interface.main;
 
+import Interface.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import smtp.ClientSmtp;
 import Interface.main.base.Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class App {
 
     private Stage primaryStage;
-    private ClientSmtp clientSmtp;
+    private Client client;
     private final ObservableList<ModelMail> mails = FXCollections.observableArrayList();
 
     public App() {
@@ -25,7 +25,6 @@ public class App {
     private App(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Boite au lettre");
-        sampleMails();
     }
 
     public void showMain() {
@@ -84,29 +83,16 @@ public class App {
         return primaryStage;
     }
 
-    public ClientSmtp getClientSmtp() {
-        return clientSmtp;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientSmtp(ClientSmtp clientSmtp) {
-        this.clientSmtp = clientSmtp;
+    public void setClient(Client client) {
+        System.out.println(client);
+        this.client = client;
+        this.mails.addAll(this.client.getModelMails());
     }
 
-    /**
-     * Test affichage mails
-     */
-    public void sampleMails() {
-        System.out.println("dans sampleMails");
-        mails.add(new ModelMail("email test", "sujet test"));
-        mails.add(new ModelMail("email test", "sujet test"));
-        mails.add(new ModelMail("email test", "sujet test"));
-        mails.add(new ModelMail("email test", "sujet test"));
-        mails.add(new ModelMail("email test", "sujet test"));
-        mails.add(new ModelMail("email test", "sujet test"));
-        mails.add(new ModelMail("email test", "sujet test"));
-        mails.add(new ModelMail("email test", "sujet test"));
-        mails.add(new ModelMail("email test", "sujet test"));
-    }
 
     public ObservableList<ModelMail> getMails() {
         return mails;

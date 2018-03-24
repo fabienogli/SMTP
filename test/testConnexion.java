@@ -99,13 +99,18 @@ public class testConnexion {
 
     public static void testSuperClient() {
         Utilisateur utilisateur = new Utilisateur("foo@mail.com", "bar");
+        Client superClient = null;
         try {
-            Client superClient = new Client(utilisateur);
-            System.out.println(superClient.getModelMails());
-            System.out.println(superClient.getMails());
+            superClient = new Client();
+            superClient.start();
+            superClient.setUtilisateur(utilisateur);
+            superClient.authentification();
             superClient.quit();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            superClient.quit();
         }
     }
 

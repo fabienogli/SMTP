@@ -1,5 +1,6 @@
 package Interface.main;
 
+import Interface.Client;
 import smtp.ClientSmtp;
 import common.Message;
 import common.Utilisateur;
@@ -28,7 +29,7 @@ public class WritingPage {
 
     public void setApp(App app) {
         this.app = app;
-        this.senderTextField.setText(this.app.getClientSmtp().getUtilisateur().getEmail());
+        this.senderTextField.setText(this.app.getClient().getUtilisateur().getEmail());
         this.senderTextField.setDisable(true);
     }
 
@@ -39,15 +40,15 @@ public class WritingPage {
 
     @FXML
     void send(ActionEvent event) {
-        ClientSmtp clientSmtp = this.app.getClientSmtp();
-        Message message = new Message(clientSmtp.getUtilisateur());
+        Client client = this.app.getClient();
+        Message message = new Message(client.getUtilisateur());
         message.setSujet(this.subjectTextField.getText());
         message.setCorps(this.corpsTextArea.getText());
         String recipients = this.recipientTextField.getText();
         for (String recipient: recipients.split(";")) {
             message.addDestinataire(new Utilisateur(recipient));
         }
-        clientSmtp.sendMail(message);
+        client.sendMail(message);
         this.stage.close();
     }
 

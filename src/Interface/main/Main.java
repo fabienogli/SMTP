@@ -1,5 +1,6 @@
 package Interface.main;
 
+import Interface.Client;
 import javafx.scene.control.TableColumn;
 import smtp.ClientSmtp;
 import javafx.event.ActionEvent;
@@ -33,8 +34,8 @@ public class Main {
 
     @FXML
     void logout(ActionEvent event) {
-        ClientSmtp clientSmtp = app.getClientSmtp();
-        clientSmtp.quit();
+        Client cl = app.getClient();
+        cl.quit();
     }
 
     @FXML

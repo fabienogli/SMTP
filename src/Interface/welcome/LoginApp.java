@@ -1,5 +1,6 @@
 package Interface.welcome;
 
+import Interface.Client;
 import smtp.ClientSmtp;
 import Interface.main.App;
 import javafx.application.Application;
@@ -14,25 +15,21 @@ public class LoginApp extends Application {
     private Stage primaryStage;
     private AnchorPane rootLayout;
     private App mainApp;
-    private ClientSmtp clientSmtp;
+    private Client client;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Boite au lettre");
         this.mainApp = new App();
-        /**test
         initilazeClient();
-
         showMain();
-         **/
-        accessApp();
     }
 
     public void initilazeClient() {
         try {
-            this.clientSmtp = new ClientSmtp();
-            clientSmtp.start();
+            this.client = new Client();
+            client.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,7 +52,7 @@ public class LoginApp extends Application {
 
     public void accessApp() {
         this.primaryStage.close();
-        this.mainApp.setClientSmtp(this.clientSmtp);
+        this.mainApp.setClient(this.client);
         this.mainApp.showMain();
     }
 
@@ -87,17 +84,17 @@ public class LoginApp extends Application {
         launch(args);
     }
 
-    public ClientSmtp getClientSmtp() {
-        return clientSmtp;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientSmtp(ClientSmtp clientSmtp) {
-        this.clientSmtp = clientSmtp;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override
     public void stop() throws Exception {
-        this.clientSmtp.quit();
+        this.client.quit();
         super.stop();
     }
 }

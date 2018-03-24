@@ -40,10 +40,6 @@ public class Client {
         this.smtp.setUtilisateur(utilisateur);
 
         this.start();
-
-        boolean authApop = this.pop3.authentificationApop();
-        this.smtp.authentification();
-        this.getReceivedMessages();
     }
 
     public void start() {
@@ -105,5 +101,23 @@ public class Client {
 
     public List<ModelMail> getModelMails() {
         return this.modelMails;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+        utilisateur.setName();
+        this.smtp.setUtilisateur(utilisateur);
+        this.pop3.setUtilisateur(utilisateur);
+    }
+
+    public void authentification() {
+        boolean authApop = this.pop3.authentificationApop();
+        this.smtp.authentification();
+        this.getReceivedMessages();
+        //@Todo controle authentification
+    }
+
+    public boolean isAuthentified() {
+        return this.smtp.isAuthentified();
     }
 }
