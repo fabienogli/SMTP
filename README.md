@@ -105,7 +105,7 @@ public enum SmtpCodes {
 
 **Gestion authentification**
 Comme le protocole smtp nous laisse libre quant à l'identification de l'utilisateur,
-Nous avons décidé, de envoyer un à un le mail ainsi que le mot de passe au server.
+Nous avons décidé, de envoyer un à un le mail ainsi que le mot de passe au serverPop3.
 ```java
 public boolean authentification() {
         write(this.getUtilisateur().getEmail());

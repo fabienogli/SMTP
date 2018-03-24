@@ -6,6 +6,7 @@ package smtp.server;
 
 import database.Dns;
 import database.NoNameDnsException;
+import pop3.server.ServerPop3;
 
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
@@ -15,11 +16,11 @@ import java.net.UnknownHostException;
 import java.time.Year;
 import java.util.Scanner;
 
-public class Server {
+public class ServerSMTP {
     private SSLServerSocket sslServerSocket ;
     private Dns dns;
 
-    private Server(){
+    public ServerSMTP(){
         int portEcoute = 2026;
         try {
             SSLServerSocketFactory sslServerSocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
@@ -31,7 +32,7 @@ public class Server {
         dns.getDnsFromDb();
     }
 
-    private void lancer(){
+    public void lancer(){
         try {
             while (true)
             {
@@ -47,14 +48,16 @@ public class Server {
             e.printStackTrace();
         }
     }
-
+    /*
     public static void main(String[] args) {
-        Server server = new Server();
-        //registerDns(server.getDns());
-        server.lancer();
-    }
+        ServerSMTP serverSMTP = new ServerSMTP();
+        //registerDns(serverSMTP.getDns());
+        serverSMTP.lancer();
+    }*/
 
-    private static void registerDns(Dns dns) {
+
+
+    public static void registerDns(Dns dns) {
         Scanner sc = new Scanner(System.in);
         String again = "Voulez vous ajouter des ip à un nom de domaine ? (Y/N)";
         System.out.println(again);

@@ -6,16 +6,16 @@ import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.net.*;
 
-public class Server {
+public class ServerPop3 {
     final static int BUF_SIZE = 1024;
     public  int portEcoute;
     //private ServerSocket serverSocket;
-    // Initialize the Server Socket
+    // Initialize the ServerPop3 Socket
     private SSLServerSocketFactory sslServerSocketfactory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
     private SSLServerSocket sslServerSocket ;
 
 
-    public Server(){
+    public ServerPop3(){
         portEcoute = 2027;
         try {
             //serverSocket = new ServerSocket(portEcoute);
@@ -50,9 +50,10 @@ public class Server {
         }
 
     }
-
+/*
     public static void main(String[] args) {
-        Server server = new Server();
-        server.lancer();
+        ServerPop3 serverPop3 = new ServerPop3();
+        serverPop3.lancer();
     }
+    */
 }
