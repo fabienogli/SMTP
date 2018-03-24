@@ -6,7 +6,7 @@ import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.net.*;
 
-public class ServerPop3 {
+public class ServerPop3 implements Runnable{
     final static int BUF_SIZE = 1024;
     public  int portEcoute;
     //private ServerSocket serverSocket;
@@ -49,6 +49,11 @@ public class ServerPop3 {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void run() {
+        this.lancer();
     }
 /*
     public static void main(String[] args) {

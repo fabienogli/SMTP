@@ -16,7 +16,7 @@ import java.net.UnknownHostException;
 import java.time.Year;
 import java.util.Scanner;
 
-public class ServerSMTP {
+public class ServerSMTP implements Runnable{
     private SSLServerSocket sslServerSocket ;
     private Dns dns;
 
@@ -96,5 +96,10 @@ public class ServerSMTP {
 
     public void setDns(Dns dns) {
         this.dns = dns;
+    }
+
+    @Override
+    public void run() {
+        this.lancer();
     }
 }

@@ -112,8 +112,11 @@ public class Client {
 
     public boolean authentification() {
         boolean authApop = this.pop3.authentificationApop();
-        //this.smtp.authentification();
-        this.getReceivedMessages();
+        if(authApop)
+        {
+            this.smtp.authentification();
+            this.getReceivedMessages();
+        }
         //@Todo controle authentification
         return authApop;
     }

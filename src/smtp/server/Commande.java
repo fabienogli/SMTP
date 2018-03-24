@@ -107,12 +107,16 @@ public class Commande {
     }
 
     public static String wait(String requete, Connexion connexion) {
+
         quit(requete, connexion);
         String[] t_mail = requete.split(SmtpCodes.MAIL_FROM.toString() + "<");
         if (t_mail.length < 1) {
             return SmtpCodes.COMMAND_UNKNOWN.toString();
         }
         String email = t_mail[1].split(">")[0];
+        Utilisateur utilisateur = new Utilisateur(email);
+        Utilisateur client = BdConnexion.getUtilisateur(utilisateur);
+        connexion.setClient(client);
         if (email.equals(connexion.getClient().getEmail())) {
             connexion.setCurrentstate(StateEnum.SENDER_APPROVED);
             return SmtpCodes.OK.toString();
