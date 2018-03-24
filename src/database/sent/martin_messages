@@ -1,6 +1,6 @@
 From: martin <martin@mail.com>
 To: root <root@mail.com>
-Subject: Message 1
+Sujet: Message 1
 Date: Wed Feb 28 19:19:08 CET 2018
 Message-ID: <3@local.machine.example>
 Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus,
@@ -11,7 +11,7 @@ Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenat
 
 From: martin <martin@mail.com>
 To: john <john@mail.com>
-Subject: Message 2
+Sujet: Message 2
 Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <3@local.machine.example>
 
@@ -22,7 +22,7 @@ Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenat
 
 From: martin <martin@mail.com>
 To: foo <foo@mail.com>
-Subject: Message 3
+Sujet: Message 3
 Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <3@local.machine.example>
 

@@ -169,7 +169,20 @@ public class ClientPop3 {
         String reponseServer = "";
         write(Pop3Codes.RETR.toString() + numMessage);
         reponseServer = readMultipleLines();
-        return reponseServer;
+        String[] arrayResponse = reponseServer.split("\n");
+        if (! arrayResponse[0].contains(Pop3Codes.SUCCESS.toString())) {
+            //@TODO controle de l'erreur
+            System.out.println(arrayResponse[0]);
+            return "Erreur";
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 1; i < arrayResponse.length; i++) {
+            stringBuilder.append(arrayResponse[i]);
+            if (i != arrayResponse.length - 1) {
+                stringBuilder.append("\n");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     public String list() {

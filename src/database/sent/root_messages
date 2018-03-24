@@ -1,8 +1,8 @@
 
 From: root <root@mail.com>
 To: foo <foo@mail.com>
-Subject: Message 1
-Date : Fri, 21 Nov 1997 09:55:06 -0600
+Sujet: Message 1
+Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <1@local.machine.example>
 
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
@@ -13,8 +13,8 @@ aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venen
 
 From: root <root@mail.com>
 To: john <john@mail.com>
-Subject: Message 2
-Date : Fri, 21 Nov 1997 09:55:06 -0600
+Sujet: Message 2
+Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <2@local.machine.example>
 
 Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
@@ -25,8 +25,8 @@ Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ulla
 
 From: root <root@mail.com>
 To: john <john@mail.com>
-Subject: Message 3
-Date : Fri, 21 Nov 1997 09:55:06 -0600
+Sujet: Message 3
+Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <2@local.machine.example>
 
 Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.

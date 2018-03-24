@@ -43,7 +43,7 @@ public class Message {
     }
 
     public Message() {
-        this(generateDateStamp(), new Utilisateur("unknown"), new Utilisateur("unknown"), new Date(), "unknown", "unknown");
+        this(generateDateStamp());
     }
 
     public Message(Utilisateur auteur) {
@@ -108,13 +108,15 @@ public class Message {
 
         generateMessage
                 .append(HeadersEnum.FROM.toString())
-                .append("<")
+                .append(this.getAuteur().getNom())
+                .append(" <")
                 .append(this.getAuteur().getEmail())
                 .append(">\r\n")
                 .append(HeadersEnum.TO.toString());
         for (int i = 0; i < this.getDestinataires().size(); i++) {
             generateMessage
-                    .append("<")
+                    .append(this.destinataires.get(i).getNom())
+                    .append(" <")
                     .append(this.destinataires.get(i).getEmail())
                     .append(">");
             if (i != this.destinataires.size() - 1) {

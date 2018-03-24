@@ -1,11 +1,11 @@
 package common;
 
 public enum HeadersEnum {
-    FROM("From: "),
-    DATE("Date: "),
-    SUJET("Sujet: "),
-    TO("To: "),
-    ID("Message-ID: "),
+    FROM("From"),
+    DATE("Date"),
+    SUJET("Sujet"),
+    TO("To"),
+    ID("Message-ID"),
     CRLF("\n.\n");
 
     private String string;
@@ -16,6 +16,10 @@ public enum HeadersEnum {
 
     @Override
     public String toString() {
-        return this.string;
+        return this.string + ": ";
+    }
+
+    public String getString() {
+        return string;
     }
 }

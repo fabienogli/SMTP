@@ -244,6 +244,8 @@ public class Commande {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("dans addMail");
+        System.out.println(rawMessages);
         String[] rawMessagesInArray = rawMessages.toString().split("\n.\n\n");
         for (String rawMessage : rawMessagesInArray) {
             mails.add(BdConnexion.parseMail(rawMessage));

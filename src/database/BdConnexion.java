@@ -1,5 +1,6 @@
 package database;
 
+import common.HeadersEnum;
 import common.Message;
 import common.MessageBox;
 import common.Utilisateur;
@@ -9,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -133,56 +135,38 @@ public class BdConnexion {
         return mail;
     }
 
-    public static void parseHeader(Message mail, String line) {
-        boolean delimiteurFound = false;
-        String key = "";
-        String value = "";
-        char item;
-        String test = "";
-        for (int i = 0; i < line.length(); i++) {
-            item = line.charAt(i);
-            test += item;
-            if (!delimiteurFound && item == ':')
-                delimiteurFound = true;
-            else {
-                if (delimiteurFound)
-                    value += item;
-                else
-                    key += item;
-            }
-        }
-        if (!delimiteurFound) {
-            return;
-        }
-        key = key.trim();
-        value = value.trim();
-        switch (key.toUpperCase()) {
+    public static Utilisateur parseUser(String rawUser) {
+        System.out.println("dans parseUser");
+        System.out.println(rawUser);
+        String[] tab = rawUser.split(" <");
+        Utilisateur auteur = new Utilisateur(tab[1].split(">")[0]);
+        auteur.setNom(tab[0]);
+        return auteur;
+    }
 
-            case "TO":
-                String valuesTo[] = value.split(" ");
-                mail.addDestinataire(new Utilisateur(valuesTo[0], valuesTo[1]));
-                break;
-            case "FROM":
-                String valuesFrom[] = value.split(" ");
-                mail.setAuteur(new Utilisateur(valuesFrom[0], valuesFrom[1]));
-                break;
-            case "SUBJECT":
-                mail.setSujet(value);
-                break;
-            case "DATE":
-                DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
+    private static void parseHeader(Message mail, String line) {
+        String header = line.split(": ")[0];
+        String value = line.split(": ")[1];
+        if (header.equals(HeadersEnum.FROM.getString())) {
+            mail.setAuteur(parseUser(value));
+        } else if (header.equals(HeadersEnum.TO.getString())) {
+            for (String user : header.split(";")) {
+                mail.addDestinataire(parseUser(value));
+            }
+        } else if (header.equals(HeadersEnum.DATE.getString())) {
+            System.out.println(value);
+            DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
                 try {
                     mail.setDate(format.parse(value));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                break;
-            case "MESSAGE-ID":
-                mail.setId(value);
-                break;
-            default:
-                mail.addOptionalHeader(key, value);
-                break;
+        } else if (header.equals(HeadersEnum.SUJET.getString())) {
+            mail.setSujet(value);
+        } else if (header.equals(HeadersEnum.ID.getString())) {
+            mail.setId(value.split("<")[0].split("@")[0]);
+        } else {
+            mail.addOptionalHeader(header, value);
         }
     }
 

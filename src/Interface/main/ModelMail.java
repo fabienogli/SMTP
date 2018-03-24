@@ -44,4 +44,12 @@ public class ModelMail {
     public void setSubject(String subject) {
         this.subject.set(subject);
     }
+
+    @Override
+    public String toString() {
+        return "\n{ModelMail:" +
+                " mail = " + this.getEmail() +
+                " subject = " +this.getSubject() +
+                "}\n";
+    }
 }
