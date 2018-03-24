@@ -77,6 +77,7 @@ public class Commande {
                     //ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())),2025);
                     ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
                     smtp.start();
+                    smtp.authentification();
                     smtp.sendMail(message);
                     smtp.quit();
                 } catch (IOException e) {

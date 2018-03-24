@@ -218,3 +218,29 @@ test2
 
 .
 
+
+
+From: foo <foo@mail.com>
+To: mark <mark@smtp.fr>
+Sujet: 
+
+Date: Sun Dec 31 00:07:34 CET 2017
+Message-ID: <<82593512226579261952437610266145378264@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+test1
+
+.
+
+
+
+From: foo <foo@mail.com>
+To: mark <mark@smtp.fr>
+Sujet: test
+
+Date: Sun Dec 31 00:10:34 CET 2017
+Message-ID: <<111610901043327423418455349211083885095@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+test2
+
+.
+
