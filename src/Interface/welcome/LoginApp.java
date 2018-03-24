@@ -22,6 +22,7 @@ public class LoginApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Boite au lettre");
         this.mainApp = new App();
+        this.mainApp.setLoginApp(this);
         initilazeClient();
         showMain();
     }
@@ -46,7 +47,7 @@ public class LoginApp extends Application {
         return new Scene(main);
     }
 
-    private void showMain() throws IOException {
+    public void showMain() throws IOException {
         showScene(getMain());
     }
 
@@ -90,6 +91,10 @@ public class LoginApp extends Application {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     @Override

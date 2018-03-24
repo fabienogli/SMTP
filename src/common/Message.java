@@ -7,6 +7,10 @@ package common;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Message {
@@ -24,7 +28,12 @@ public class Message {
     public Message(String id) {
         this.id = id;
         this.destinataires = new ArrayList<Utilisateur>();
-        this.date = new Date();
+        DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
+        try {
+            this.date = format.parse(format.format(new Date()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         this.sujet = "";
         this.corps = "";
     }
