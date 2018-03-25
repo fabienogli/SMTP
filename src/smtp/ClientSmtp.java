@@ -77,8 +77,8 @@ public class ClientSmtp {
         /*write(this.getUtilisateur().getEmail());
         write(this.getUtilisateur().getMdp());
         String response = read();
-        if (response.equals(SmtpCodes.AUTHENTIFICATED.toString())) {
-            this.isAuthentified = true;*/
+        if (response.equals(SmtpCodes.AUTHENTIFICATED.toString())) {*/
+            this.isAuthentified = true;
             write(SmtpCodes.EHLO.toString());
             String ok =  read();
         if (!ok.equals(SmtpCodes.OK.toString())) {
