@@ -25,6 +25,9 @@ public class Main {
     private TableColumn<ModelMail, String> subjectColumn;
 
     @FXML
+    private TableColumn<ModelMail, String> dateColumn;
+
+    @FXML
     private Button sentModeButton;
 
     @FXML
@@ -34,6 +37,7 @@ public class Main {
     public void initialize() {
         emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         subjectColumn.setCellValueFactory(cellData -> cellData.getValue().subjectProperty());
+        dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         mails.setRowFactory( tv -> {
             TableRow<ModelMail> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
