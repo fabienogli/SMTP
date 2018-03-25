@@ -112,8 +112,9 @@ public class Client {
 
     public void authentification() throws WrongLoginException {
         boolean authApop = this.pop3.authentificationApop();
-        this.smtp.authentification();
-        if (authApop && this.smtp.isAuthentified()) {
+        if (authApop) {
+            this.smtp.authentification();
+        } else {
             throw new WrongLoginException("Authentification échoué");
         }
     }

@@ -20,7 +20,7 @@ public class LoginApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Boite au lettre");
+        this.primaryStage.setTitle("Boîtes aux lettres");
         this.mainApp = new App();
         this.mainApp.setLoginApp(this);
         initilazeClient();

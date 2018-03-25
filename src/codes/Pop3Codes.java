@@ -9,7 +9,7 @@ public enum Pop3Codes {
     LOGOUT("QUIT"),
     USER("USER "),
     PASS("PASS "),
-    //Command Server
+    //Command ServerPop3
     READY("Serveur POP3 de Mark-Fabien-Florian Ready "),
     QUIT("+OK Serveur POP3 de Mark-Florian-Fabien signing off"),
     MAILBOX_INVALID("-ERR Boite aux lettres invalide"),

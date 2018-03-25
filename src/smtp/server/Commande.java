@@ -9,6 +9,10 @@ import common.HeadersEnum;
 import common.Message;
 import codes.SmtpCodes;
 import database.BdConnexion;
+import database.Dns;
+import smtp.ClientSmtp;
+
+import java.io.IOException;
 
 public class Commande {
 
@@ -67,6 +71,20 @@ public class Commande {
             return SmtpCodes.OK.toString();
         }
         Message message = parseRawMail(rawMail, connexion.getMailToSend());
+        for(Utilisateur utilisateur: message.getDestinataires()){
+            if(!utilisateur.domainName().equals("mail.com") || !utilisateur.domainName().equals("mark.fr")){
+                try {
+                    //ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())),2025);
+                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
+                    smtp.start();
+                    smtp.authentification();
+                    smtp.sendMail(message);
+                    smtp.quit();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         BdConnexion.registerMail(message);
         connexion.setCurrentstate(StateEnum.READY_TO_DELIVER);
@@ -90,12 +108,16 @@ public class Commande {
     }
 
     public static String wait(String requete, Connexion connexion) {
+
         quit(requete, connexion);
         String[] t_mail = requete.split(SmtpCodes.MAIL_FROM.toString() + "<");
         if (t_mail.length < 1) {
             return SmtpCodes.COMMAND_UNKNOWN.toString();
         }
         String email = t_mail[1].split(">")[0];
+        Utilisateur utilisateur = new Utilisateur(email);
+        Utilisateur client = BdConnexion.getUtilisateur(utilisateur);
+        connexion.setClient(client);
         if (email.equals(connexion.getClient().getEmail())) {
             connexion.setCurrentstate(StateEnum.SENDER_APPROVED);
             return SmtpCodes.OK.toString();
@@ -144,13 +166,13 @@ public class Commande {
     }
 
     public static void quit(String requete, Connexion connexion) {
-        if (requete.equals(SmtpCodes.QUIT.toString())) {
+          if (requete.equals(SmtpCodes.QUIT.toString())) {
             connexion.close();
         }
     }
 
     public static String closed(Connexion connexion) {
-        connexion.setCurrentstate(StateEnum.READY);
-        return SmtpCodes.READY.toString();
+        connexion.setCurrentstate(StateEnum.CONNECTED);
+        return SmtpCodes.AUTHENTIFICATED.toString();
     }
 }

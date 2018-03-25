@@ -3,7 +3,7 @@ package Interface.welcome;
 import Interface.Client;
 import Interface.WrongLoginException;
 import javafx.scene.control.*;
-import smtp.ClientSmtp;
+import javafx.scene.image.ImageView;
 import common.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +12,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Controller {
+
+    @FXML
+    private ImageView imageView;
 
     @FXML
     private Button connexionButton;
@@ -73,18 +76,13 @@ public class Controller {
             client.authentification();
             client.getReceivedMessages();
         } catch (WrongLoginException e) {
-            new Alert(Alert.AlertType.ERROR, "Mauvais identifiants", ButtonType.FINISH);
-            e.printStackTrace();
-        }
-        this.loginApp.setClient(client);
-        if (client.isAuthentified()) {
-            this.loginApp.accessApp();
-        }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Identifiants erronés");
             alert.setContentText("Veuillez resaisir vos identifiants !");
             alert.showAndWait();
+            e.printStackTrace();
         }
+        this.loginApp.setClient(client);
     }
 
     public boolean validate(String emailStr) {

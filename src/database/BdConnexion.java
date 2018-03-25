@@ -175,7 +175,10 @@ public class BdConnexion {
         writeToFile(message.getAuteur(), message.toString(), "sent");
 
         for (Utilisateur utilisateur: message.getDestinataires()) {
-            writeToFile(utilisateur, message.toString(), "received");
+            // la deuxieme condition sera a modifer sur chacun de nos serveur
+            if(utilisateur.domainName().equals("mail.com") || utilisateur.domainName().equals("smtp.fr")){
+                writeToFile(utilisateur, message.toString(), "received");
+            }
         }
     }
 

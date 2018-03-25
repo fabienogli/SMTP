@@ -14,6 +14,7 @@ public class Dns {
 
     private List<String> domain;
     private String dns_sites = "src/database/dns_sites.txt";
+    private static String dnsFile = "src/database/dns.txt";
     private HashMap<String, InetAddress> dns;
 
     public Dns() {
@@ -96,5 +97,25 @@ public class Dns {
             toString.append("\n");
         }
         return toString.toString();
+    }
+    public  static  String getHost(String address){
+        try {
+            FileReader fileReader = new FileReader(dnsFile);
+            BufferedReader db = new BufferedReader(fileReader);
+            String chaine;
+            while ((chaine = db.readLine()) != null) {
+              if(chaine.split(";")[0] == address){
+                  db.close();
+                  return chaine.split(";")[1];
+              }
+            }
+            db.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Le fichier est introuvable !");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  "";
     }
 }

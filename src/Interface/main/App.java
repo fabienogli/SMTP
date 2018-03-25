@@ -26,7 +26,7 @@ public class App {
 
     private App(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Boite au lettre");
+        this.primaryStage.setTitle("Boîtes au lettres");
     }
 
     public void showMain() {
