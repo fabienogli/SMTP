@@ -117,6 +117,9 @@ public class Client {
         } else {
             throw new WrongLoginException("Authentification échoué");
         }
+        if (!this.smtp.isAuthentified()) {
+            throw new WrongLoginException("Authentification échoué");
+        }
     }
 
     public boolean isAuthentified() {
