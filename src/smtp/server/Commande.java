@@ -102,7 +102,7 @@ public class Commande {
             }
         }*/
         String sujet = headers[0].split(":")[1];
-        String date = headers[1].split(":")[1];
+        String date = headers[1].split(":")[1]+":"+headers[1].split(":")[2]+":"+headers[1].split(":")[3];
 
         message.setSujet(sujet);
         message.setDate(date);
