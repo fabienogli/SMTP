@@ -36,6 +36,7 @@ public class Message {
         } catch (ParseException e) {
             e.printStackTrace();
         }*/
+        this.date = getDate();
         this.sujet = "";
         this.corps = "";
     }
