@@ -83,6 +83,26 @@ public class App {
         }
     }
 
+    public void showMessage(Message message) {
+        Stage messageStage = new Stage();
+        messageStage.setTitle(message.getSujet());
+        try {
+            BorderPane rootLayout = initRootLayout(messageStage);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource(
+                    "WritingPage.fxml"
+            ));
+            AnchorPane main = (AnchorPane) loader.load();
+            WritingPage controller = loader.getController();
+            controller.setApp(this);
+            controller.setMail(message);
+            controller.setStage(messageStage);
+            rootLayout.setCenter(main);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -122,6 +142,6 @@ public class App {
     public void showMail(ModelMail rowData) {
         HashMap<ModelMail, Message> link = this.client.getLinkMails();
         Message mail = link.get(rowData);
-
+        showMessage(mail);
     }
 }

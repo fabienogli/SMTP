@@ -84,9 +84,16 @@ public class WritingPage {
     public void setMail(Message message) {
         this.senderTextField.setText(message.getAuteur().getNom() + " <" + message.getAuteur().getEmail() + ">");
         List<Utilisateur> destinataires = message.getDestinataires();
+        String tmp = "";
         for (int i = 0; i < destinataires.size(); i ++ ) {
-            this.recipientTextField.setText(destinataires.get(i).getNom() + " <" + destinataires.get(i).getEmail() + ">");
+            tmp += destinataires.get(i).getNom() + " <" + destinataires.get(i).getEmail() + ">";
+            if (i != destinataires.size() - 1) {
+                tmp += ";";
+            }
         }
+        this.recipientTextField.setText(tmp);
+        this.subjectTextField.setText(message.getSujet());
+        this.corpsTextArea.setText(message.getCorps());
     }
 
     public void setSenderText(String senderText) {
