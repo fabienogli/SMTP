@@ -127,16 +127,17 @@ public class Client {
         utilisateur.setName();
     }
 
-    public void authentification() throws WrongLoginException {
+    public boolean authentification()  {
         boolean authApop = this.pop3.authentificationApop();
         if (authApop) {
             this.smtp.authentification();
-        } else {
+        } /*else {
             throw new WrongLoginException("Authentification échoué");
         }
         if (!this.smtp.isAuthentified()) {
             throw new WrongLoginException("Authentification échoué");
-        }
+        }*/
+        return authApop;
     }
 
     public boolean isAuthentified() {

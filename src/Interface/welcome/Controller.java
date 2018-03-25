@@ -72,7 +72,16 @@ public class Controller {
         Client client = this.loginApp.getClient();
         Utilisateur utilisateur = new Utilisateur(this.mailTextField.getText(), this.passwordTextField.getText());
         client.setUtilisateur(utilisateur);
-        try {
+        if(client.authentification()){
+            this.loginApp.setClient(client);
+            this.loginApp.accessApp();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Identifiants erronés");
+            alert.setContentText("Veuillez resaisir vos identifiants !");
+            alert.showAndWait();
+        }
+        /*try {
             client.authentification();
         } catch (WrongLoginException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -82,7 +91,7 @@ public class Controller {
             e.printStackTrace();
         }
         this.loginApp.setClient(client);
-        this.loginApp.accessApp();
+        this.loginApp.accessApp();*/
     }
 
     public boolean validate(String emailStr) {

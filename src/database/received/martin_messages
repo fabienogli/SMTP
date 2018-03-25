@@ -10,41 +10,11 @@ hello
 
 From: foo <foo@mail.com>
 To: martin <martin@mail.com>
-Subject: hi
-Date: Fri, 21 Nov 1997 09:55:06 -0600
-Message-ID: <<126380472389979668366962247999446403621@smtp.fabienMarkFlorian.fr>@local.machine.example>
+Subject:  
+Date:  Mon, 26 Mar 2018 01
+Message-ID: <<60136724628830490760002681956661812995@smtp.fabienMarkFlorian.fr>@local.machine.example>
 
-hi
-
-.
-
-From: foo <foo@mail.com>
-To: martin <martin@mail.com>
-Subject: new
-Date: Fri, 21 Nov 1997 09:55:06 -0600
-Message-ID: <<167948433545702580991759202898328657462@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-test2
+ty
 
 .
 
-From: foo <foo@mail.com>
-To: martin <martin@mail.com>
-Subject: test
-Date: null
-Message-ID: <<312516529239432240058175748305262341953@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-test
-
-.
-
-From: foo <foo@mail.com>
-To: martin <martin@mail.com>
-Subject: test
-Date: Sun, 25 Mar 2018 23:29:22 +0200
-Date: null
-Message-ID: <<282024242701604874783051674705702754735@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-test3
-
-.
