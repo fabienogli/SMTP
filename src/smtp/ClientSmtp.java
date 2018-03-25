@@ -170,7 +170,7 @@ public class ClientSmtp {
     private String parseMailForSmtp(Message message) {
         StringBuilder stringBuilder = new StringBuilder();
         message.setDate(generateDate());
-        stringBuilder
+        /*stringBuilder
                 .append(HeadersEnum.FROM.toString())
                 .append(message.getAuteur().getNom())
                 .append(" <")
@@ -185,8 +185,8 @@ public class ClientSmtp {
             if (i != message.getDestinataires().size() - 1) {
                 stringBuilder.append(";");
             }
-        }
-        stringBuilder.append("\n")
+        }*/
+        stringBuilder
                 .append(HeadersEnum.SUJET.toString())
                 .append(message.getSujet())
                 .append("\n")

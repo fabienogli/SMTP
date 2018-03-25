@@ -72,7 +72,7 @@ public class Commande {
         }
         Message message = parseRawMail(rawMail, connexion.getMailToSend());
         for(Utilisateur utilisateur: message.getDestinataires()){
-            if(!utilisateur.domainName().equals("mail.com") || !utilisateur.domainName().equals("mark.fr")){
+            if(!utilisateur.domainName().equals("mail.com")){
                 try {
                     //ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())),2025);
                     ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
@@ -93,17 +93,22 @@ public class Commande {
 
     private static Message parseRawMail(String rawMail, Message message) {
         String[] tab = rawMail.split("\n\n");
-        String headers = tab[0];
+        String[] headers = tab[0].split("\n");
         StringBuilder _corps = new StringBuilder();
-        for (int i = 1 ; i < tab.length; i++) {
+        /*for (int i = 1 ; i < tab.length; i++) {
             _corps.append(tab[i]);
             if (i < tab.length - 1) {
                 _corps.append("\n\n");
             }
-        }
-        String sujet = headers.split(HeadersEnum.SUJET.toString())[1].split(HeadersEnum.TO.toString())[0];
-        message.setCorps(_corps.toString());
+        }*/
+        String sujet = headers[0].split(":")[1];
+        String date = headers[1].split(":")[1];
+
         message.setSujet(sujet);
+        message.setDate(date);
+        message.setCorps(tab[1]);
+        System.out.println("sujet "+ sujet);
+        System.out.println("corps "+ tab[1]);
         return message;
     }
 

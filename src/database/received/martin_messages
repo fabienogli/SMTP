@@ -28,20 +28,15 @@ test2
 
 .
 
-
-
 From: foo <foo@mail.com>
 To: martin <martin@mail.com>
 Subject: test
-
 Date: null
 Message-ID: <<312516529239432240058175748305262341953@smtp.fabienMarkFlorian.fr>@local.machine.example>
 
 test
 
 .
-
-
 
 From: foo <foo@mail.com>
 To: martin <martin@mail.com>

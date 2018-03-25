@@ -1,9 +1,6 @@
-
-
 From: foo <foo@mail.com>
 To: martin <martin@mail.com>
 Subject: test
-
 Date: null
 Message-ID: <<312516529239432240058175748305262341953@smtp.fabienMarkFlorian.fr>@local.machine.example>
 
@@ -17,7 +14,6 @@ From: foo <foo@mail.com>
 To: martin <martin@mail.com>
 Subject: test
 Date: Sun, 25 Mar 2018 23:29:22 +0200
-Date: null
 Message-ID: <<282024242701604874783051674705702754735@smtp.fabienMarkFlorian.fr>@local.machine.example>
 
 test3
