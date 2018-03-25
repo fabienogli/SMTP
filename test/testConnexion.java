@@ -130,4 +130,13 @@ public class testConnexion {
         System.out.println(BdConnexion.parseMail(rawMail));
     }
 
+    public static void testParseraw() {
+        String rawMail = "From: john <john@mail.com>\n" +
+                "To: <foo@mail.com>\n" +
+                "Subject: test ecriture\n" +
+                "Date: Sun, 25 Mar 2018 23:36:16 +0200\n" +
+                "\n" +
+                "teste 123 ";
+    }
+
 }
