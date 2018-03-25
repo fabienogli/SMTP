@@ -7,38 +7,3 @@ Message-ID: <<28847103563267341845757647918444312721@smtp.fabienMarkFlorian.fr>@
 hello
 
 .
-
-From: foo <foo@mail.com>
-To: martin <martin@mail.com>
-Subject:  
-Date:  Mon, 26 Mar 2018 01
-Message-ID: <<60136724628830490760002681956661812995@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-ty
-
-.
-
-
-
-From: foo <foo@mail.com>
-To: martin <martin@mail.com>
-Subject:  te
-Date:  Mon, 26 Mar 2018 014456 +0200
-Message-ID: <<49258971439047979662846896236353966611@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-te
-
-.
-
-
-
-From: foo <foo@mail.com>
-To: martin <martin@mail.com>
-Subject:  hey
-Date:  Mon, 26 Mar 2018 01:47:45 +0200
-Message-ID: <<228817922704220983485101009979872269620@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-hey
-
-.
-
