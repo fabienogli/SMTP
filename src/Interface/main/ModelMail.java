@@ -7,18 +7,34 @@ public class ModelMail {
     private final SimpleStringProperty email = new SimpleStringProperty("");
     private final SimpleStringProperty subject = new SimpleStringProperty("");
 
-    public ModelMail() {
-        this("", "");
+    public String getDate() {
+        return date.get();
     }
 
-    public ModelMail(String email, String subject) {
+    public SimpleStringProperty dateProperty() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date.set(date);
+    }
+
+    private final SimpleStringProperty date = new SimpleStringProperty("");
+
+    public ModelMail() {
+        this("", "","");
+    }
+
+    public ModelMail(String email, String subject,String date) {
         setEmail(email);
         setSubject(subject);
+        setDate(date);
     }
 
     public ModelMail(Message message) {
         setEmail(message.getAuteur().getEmail());
         setSubject(message.getSujet());
+        setDate(message.getDate());
     }
 
     public String getEmail() {
