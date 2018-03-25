@@ -1,6 +1,7 @@
 package Interface.main;
 
 import Interface.Client;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import smtp.ClientSmtp;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableView;
 public class Main {
 
     private App app;
+    private boolean received = true;
 
     @FXML
     TableView<ModelMail> mails;
@@ -21,6 +23,12 @@ public class Main {
 
     @FXML
     private TableColumn<ModelMail, String> subjectColumn;
+
+    @FXML
+    private Button sentModeButton;
+
+    @FXML
+    private Button receivedModeButton;
 
     @FXML
     public void initialize() {
@@ -56,6 +64,31 @@ public class Main {
 
     public void fulfillColumn() {
 
+    }
+
+    @FXML
+    void getReceivedMessages(ActionEvent event) {
+        this.receivedModeButton.setDisable(true);
+        this.sentModeButton.setDisable(false);
+        this.app.setReceivedMode();
+        received = true;
+    }
+
+    @FXML
+    void getSentMessages(ActionEvent event) {
+        this.receivedModeButton.setDisable(true);
+        this.sentModeButton.setDisable(false);
+        this.app.setSentMode();
+        received = false;
+    }
+
+    @FXML
+    void refresh(ActionEvent event) {
+        if (received) {
+            this.app.setReceivedMode();
+        } else {
+            this.app.setSentMode();
+        }
     }
 
 }

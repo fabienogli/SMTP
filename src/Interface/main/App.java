@@ -112,9 +112,8 @@ public class App {
     }
 
     public void setClient(Client client) {
-        System.out.println(client);
         this.client = client;
-        this.mails.addAll(this.client.getModelMails());
+        setReceivedMode();
     }
 
 
@@ -140,8 +139,28 @@ public class App {
     }
 
     public void showMail(ModelMail rowData) {
-        HashMap<ModelMail, Message> link = this.client.getLinkMails();
-        Message mail = link.get(rowData);
+        HashMap<ModelMail, Message> received_link = this.client.getReceivedLinkMails();
+        HashMap<ModelMail, Message> sent_link = this.client.getSentLinkMails();
+        Message mail = received_link.get(rowData);
+        if (mail == null) {
+            mail = sent_link.get(rowData);
+        }
+        if (mail == null) {
+            System.out.println("dans App::showMail\n" + rowData + "\nn'est ni un message envoyé, ni un message reçu");
+            return;
+        }
         showMessage(mail);
+    }
+
+    public void setReceivedMode() {
+        this.mails.clear();
+        this.client.getReceivedMessages();
+        this.mails.addAll(this.client.getReceivedModelMails());
+    }
+
+    public void setSentMode() {
+        this.mails.clear();
+        this.client.getSentMessages();
+        this.mails.addAll(this.client.getSentModelMails());
     }
 }

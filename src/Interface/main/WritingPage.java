@@ -6,6 +6,7 @@ import common.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -25,6 +26,9 @@ public class WritingPage {
 
     @FXML
     private TextArea corpsTextArea;
+
+    @FXML
+    private Button sendButton;
 
     private App app;
     private Stage stage;
@@ -82,7 +86,9 @@ public class WritingPage {
     }
 
     public void setMail(Message message) {
+        this.sendButton.setVisible(false);
         this.senderTextField.setText(message.getAuteur().getNom() + " <" + message.getAuteur().getEmail() + ">");
+        this.senderTextField.setEditable(false);
         List<Utilisateur> destinataires = message.getDestinataires();
         String tmp = "";
         for (int i = 0; i < destinataires.size(); i ++ ) {
@@ -92,23 +98,10 @@ public class WritingPage {
             }
         }
         this.recipientTextField.setText(tmp);
+        this.recipientTextField.setEditable(false);
         this.subjectTextField.setText(message.getSujet());
+        this.subjectTextField.setEditable(false);
         this.corpsTextArea.setText(message.getCorps());
-    }
-
-    public void setSenderText(String senderText) {
-        this.senderTextField.setText(senderText);
-    }
-
-    public void setRecipientText(String recipientText) {
-        this.recipientTextField.setText(recipientText);
-    }
-
-    public void setSubjectTextField(TextField subjectTextField) {
-        this.subjectTextField = subjectTextField;
-    }
-
-    public void setCorpsTextArea(TextArea corpsTextArea) {
-        this.corpsTextArea = corpsTextArea;
+        this.corpsTextArea.setEditable(false);
     }
 }

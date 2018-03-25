@@ -74,7 +74,6 @@ public class Controller {
         client.setUtilisateur(utilisateur);
         try {
             client.authentification();
-            client.getReceivedMessages();
         } catch (WrongLoginException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Identifiants erronés");

@@ -87,8 +87,7 @@ public class BdConnexion {
         return null;
     }
 
-    public static MessageBox getSentMessages(Utilisateur utilisateur) {
-        MessageBox mailBox = new MessageBox();
+    public static List<Message> getSentMessages(Utilisateur utilisateur) {
         List<Message> mails = new ArrayList<Message>();
         StringBuilder rawMessages = new StringBuilder();
         try {
@@ -106,9 +105,7 @@ public class BdConnexion {
         for (String rawMessage : rawMessagesInArray) {
             mails.add(parseMail(rawMessage));
         }
-        mailBox.setMessages(mails);
-        mailBox.setUtilisateur(utilisateur);
-        return mailBox;
+        return mails;
     }
 
     public static Message parseMail(String rawMail) {
