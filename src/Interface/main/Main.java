@@ -2,6 +2,7 @@ package Interface.main;
 
 import Interface.Client;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import smtp.ClientSmtp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,17 @@ public class Main {
     public void initialize() {
         emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         subjectColumn.setCellValueFactory(cellData -> cellData.getValue().subjectProperty());
+        mails.setRowFactory( tv -> {
+            TableRow<ModelMail> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    ModelMail rowData = row.getItem();
+                    this.app.showMail(rowData);
+                    System.out.println(rowData);
+                }
+            });
+            return row ;
+        });
     }
 
     public void setApp(App app) {

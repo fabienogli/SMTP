@@ -145,14 +145,15 @@ public class BdConnexion {
     }
 
     private static void parseHeader(Message mail, String line) {
+        System.out.println("dans parse header");
         System.out.println(line);
         String header = line.split(": ")[0];
         String value = line.split(": ")[1];
         if (header.equals(HeadersEnum.FROM.getString())) {
             mail.setAuteur(parseUser(value));
         } else if (header.equals(HeadersEnum.TO.getString())) {
-            for (String user : header.split(";")) {
-                mail.addDestinataire(parseUser(value));
+            for (String user : value.split(";")) {
+                mail.addDestinataire(parseUser(user));
             }
         } else if (header.equals(HeadersEnum.DATE.getString())) {
             System.out.println(value);
@@ -160,15 +161,19 @@ public class BdConnexion {
                 try {
                     mail.setDate(format.parse(value));
                 } catch (ParseException e) {
+                    try {
+                        mail.setDate(format.parse(format.format(new Date())));
+                    } catch (ParseException e1) {
+                        e1.printStackTrace();
+                    }
                     e.printStackTrace();
                 }
         } else if (header.equals(HeadersEnum.SUJET.getString())) {
             mail.setSujet(value);
         } else if (header.equals(HeadersEnum.ID.getString())) {
             mail.setId(value.split("<")[0].split("@")[0]);
-        } else {
-            mail.addOptionalHeader(header, value);
         }
+        System.out.println("sortie de parse Header");
     }
 
     public static void registerMail(Message message) {

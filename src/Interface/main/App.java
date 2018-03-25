@@ -2,6 +2,7 @@ package Interface.main;
 
 import Interface.Client;
 import Interface.welcome.LoginApp;
+import common.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Interface.main.base.Controller;
@@ -12,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class App {
 
@@ -115,5 +117,11 @@ public class App {
 
     public void setLoginApp(LoginApp loginApp) {
         this.loginApp = loginApp;
+    }
+
+    public void showMail(ModelMail rowData) {
+        HashMap<ModelMail, Message> link = this.client.getLinkMails();
+        Message mail = link.get(rowData);
+
     }
 }

@@ -65,12 +65,18 @@ public class Client {
     public void getReceivedMessages() {
         String[] list = this.pop3.list().split("\n");
         for(int i = 1; i < list.length; i++) {
+            System.out.println(i);
             Message message = BdConnexion.parseMail(this.pop3.retr(Character.getNumericValue(list[i].charAt(0))));
+            System.out.println("fin retrair");
+            if (message == null) {
+                continue;
+            }
             ModelMail modelMail = new ModelMail(message);
             this.mails.add(message);
             this.modelMails.add(modelMail);
             this.linkMails.put(modelMail, message);
         }
+        System.out.println("fin receivedMessages");
     }
 
     public List<Utilisateur> getWrongUtilisateur() {
@@ -124,5 +130,13 @@ public class Client {
 
     public boolean isAuthentified() {
         return this.smtp.isAuthentified();
+    }
+
+    public HashMap<ModelMail, Message> getLinkMails() {
+        return linkMails;
+    }
+
+    public void setLinkMails(HashMap<ModelMail, Message> linkMails) {
+        this.linkMails = linkMails;
     }
 }

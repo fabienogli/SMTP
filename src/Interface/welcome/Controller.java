@@ -83,6 +83,7 @@ public class Controller {
             e.printStackTrace();
         }
         this.loginApp.setClient(client);
+        this.loginApp.accessApp();
     }
 
     public boolean validate(String emailStr) {

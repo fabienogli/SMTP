@@ -81,10 +81,12 @@ public class ClientSmtp {
             this.isAuthentified = true;*/
             write(SmtpCodes.EHLO.toString());
             String ok =  read();
-            if (!ok.equals(SmtpCodes.OK.toString())) {
-                System.out.println(ok);
-                this.isAuthentified = false;
-            }
+        if (!ok.equals(SmtpCodes.OK.toString())) {
+            System.out.println(ok);
+            this.isAuthentified = false;
+        } else {
+            this.isAuthentified = true;
+        }
     }
 
     private void write(String message) {

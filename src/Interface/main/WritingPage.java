@@ -10,6 +10,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class WritingPage {
 
     @FXML
@@ -77,5 +79,29 @@ public class WritingPage {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setMail(Message message) {
+        this.senderTextField.setText(message.getAuteur().getNom() + " <" + message.getAuteur().getEmail() + ">");
+        List<Utilisateur> destinataires = message.getDestinataires();
+        for (int i = 0; i < destinataires.size(); i ++ ) {
+            this.recipientTextField.setText(destinataires.get(i).getNom() + " <" + destinataires.get(i).getEmail() + ">");
+        }
+    }
+
+    public void setSenderText(String senderText) {
+        this.senderTextField.setText(senderText);
+    }
+
+    public void setRecipientText(String recipientText) {
+        this.recipientTextField.setText(recipientText);
+    }
+
+    public void setSubjectTextField(TextField subjectTextField) {
+        this.subjectTextField = subjectTextField;
+    }
+
+    public void setCorpsTextArea(TextArea corpsTextArea) {
+        this.corpsTextArea = corpsTextArea;
     }
 }
