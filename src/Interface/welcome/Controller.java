@@ -1,6 +1,7 @@
 package Interface.welcome;
 
 import Interface.Client;
+import javafx.scene.image.ImageView;
 import smtp.ClientSmtp;
 import common.Utilisateur;
 import javafx.event.ActionEvent;
@@ -11,6 +12,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class Controller {
+
+    @FXML
+    private ImageView imageView;
 
     @FXML
     private Button connexionButton;
