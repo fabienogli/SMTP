@@ -1,5 +1,5 @@
 From: foo <foo@mail.com>
-To: Martin <martin@mail.com>
+To: martin <martin@mail.com>
 Subject: hello
 Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <<28847103563267341845757647918444312721@smtp.fabienMarkFlorian.fr>@local.machine.example>
@@ -8,8 +8,8 @@ hello
 
 .
 
-From: <foo@mail.com>
-To: <martin@mail.com>
+From: foo <foo@mail.com>
+To: martin <martin@mail.com>
 Subject: hi
 Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <<126380472389979668366962247999446403621@smtp.fabienMarkFlorian.fr>@local.machine.example>
@@ -20,8 +20,7 @@ hi
 
 From: foo <foo@mail.com>
 To: martin <martin@mail.com>
-Subject:
-
+Subject: new
 Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <<167948433545702580991759202898328657462@smtp.fabienMarkFlorian.fr>@local.machine.example>
 
@@ -54,4 +53,3 @@ Message-ID: <<282024242701604874783051674705702754735@smtp.fabienMarkFlorian.fr>
 test3
 
 .
-
