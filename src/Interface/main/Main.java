@@ -16,7 +16,7 @@ public class Main {
     private boolean received = true;
 
     @FXML
-    TableView<ModelMail> mails;
+    private TableView<ModelMail> mails;
 
     @FXML
     private TableColumn<ModelMail, String> emailColumn;
@@ -76,8 +76,8 @@ public class Main {
 
     @FXML
     void getSentMessages(ActionEvent event) {
-        this.receivedModeButton.setDisable(true);
-        this.sentModeButton.setDisable(false);
+        this.receivedModeButton.setDisable(false);
+        this.sentModeButton.setDisable(true);
         this.app.setSentMode();
         received = false;
     }
