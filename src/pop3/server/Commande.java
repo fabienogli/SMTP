@@ -138,7 +138,7 @@ public class Commande {
                 System.out.print("RETR echec mail supprime");
                 return "-ERR message " + num + " is deleted"+"\n.";
             }
-            System.out.print("RETR succes");
+            System.out.println("RETR succes");
             System.out.println(mail.toString());
 
             mailSb.

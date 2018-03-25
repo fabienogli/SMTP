@@ -10,6 +10,10 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.InetAddress;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class ClientSmtp {
 
@@ -18,7 +22,7 @@ public class ClientSmtp {
     private InetAddress adresseIp;
     private Utilisateur utilisateur;
     private SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-    private SSLSocket clientSocket ;
+    private SSLSocket clientSocket;
     private boolean isAuthentified;
 
     public ClientSmtp(InetAddress adresseIp, int port) throws IOException {
@@ -68,15 +72,15 @@ public class ClientSmtp {
     }
 
     public String start() throws IOException {
-        this.clientSocket = (SSLSocket)sslsocketfactory.createSocket(this.getAdresseIp(), this.getPort());
-        this.clientSocket.setEnabledCipherSuites(new String[] { "TLS_DH_anon_WITH_AES_128_CBC_SHA" });
+        this.clientSocket = (SSLSocket) sslsocketfactory.createSocket(this.getAdresseIp(), this.getPort());
+        this.clientSocket.setEnabledCipherSuites(new String[]{"TLS_DH_anon_WITH_AES_128_CBC_SHA"});
         return read();
     }
 
     public void authentification() {
-            this.isAuthentified = true;
-            write(SmtpCodes.EHLO.toString());
-            String ok =  read();
+        this.isAuthentified = true;
+        write(SmtpCodes.EHLO.toString());
+        String ok = read();
         if (!ok.equals(SmtpCodes.OK.toString())) {
             System.out.println(ok);
             this.isAuthentified = false;
@@ -104,7 +108,7 @@ public class ClientSmtp {
     }
 
     private String readMultipleLines() {
-        String data="";
+        String data = "";
         try {
             data = StreamHandling.readMultipleLines(this.clientSocket.getInputStream());
         } catch (IOException e) {
@@ -132,7 +136,7 @@ public class ClientSmtp {
         StringBuilder sb = new StringBuilder();
         boolean receiverErrors = false;
 
-        for (Utilisateur destinataire: message.getDestinataires()) {
+        for (Utilisateur destinataire : message.getDestinataires()) {
             write(SmtpCodes.RCPT_TO.toString() + "<" + destinataire.getEmail() + ">");
             response = read();
             if (!response.equals(SmtpCodes.OK.toString())) {
@@ -141,7 +145,7 @@ public class ClientSmtp {
                 sb.append(destinataire.getEmail()).append(";");
             }
         }
-        if(receiverErrors) return "1;"+sb.toString();
+        if (receiverErrors) return "1;" + sb.toString();
         write(SmtpCodes.DATA.toString());
         response = read();
         if (!response.equals(SmtpCodes.MESSAGE.toString())) {
@@ -165,18 +169,13 @@ public class ClientSmtp {
 
     private String parseMailForSmtp(Message message) {
         StringBuilder stringBuilder = new StringBuilder();
+        message.setDate(generateDate());
         stringBuilder
-                .append(HeadersEnum.DATE.toString())
-                .append(message.getDate())
-                .append("\n")
                 .append(HeadersEnum.FROM.toString())
                 .append(message.getAuteur().getNom())
                 .append(" <")
                 .append(message.getAuteur().getEmail())
                 .append(">\n")
-                .append(HeadersEnum.SUJET.toString())
-                .append(message.getSujet())
-                .append("\n")
                 .append(HeadersEnum.TO.toString());
         for (int i = 0; i < message.getDestinataires().size(); i++) {
             stringBuilder
@@ -187,11 +186,29 @@ public class ClientSmtp {
                 stringBuilder.append(";");
             }
         }
+        stringBuilder.append("\n")
+                .append(HeadersEnum.SUJET.toString())
+                .append(message.getSujet())
+                .append("\n")
+                .append(HeadersEnum.DATE.toString())
+                .append(message.getDate());
+
         stringBuilder
                 .append("\n\n")
                 .append(message.getCorps())
                 .append(HeadersEnum.CRLF.toString());
         return stringBuilder.toString();
+    }
+
+    public String generateDate() {
+        // (1) get today's date
+        Date today = Calendar.getInstance().getTime();
+
+        // (2) create a date "formatter" (the date format we want)
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
+
+        // (3) create a new String using the date format we want
+        return formatter.format(today);
     }
 
     public boolean isAuthentified() {

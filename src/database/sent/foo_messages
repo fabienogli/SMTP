@@ -1,207 +1,13 @@
-From: foo <foo@mail.com>
-To: john <john@mail.com>
-Sujet: Message 1
-Date: Fri, 21 Nov 1997 09:55:06 -0600
-Message-ID: <1@local.machine.example>
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-.
 
 From: foo <foo@mail.com>
-To: root <root@mail.com>
-Sujet: Message 2
-Date: Wed Feb 28 19:19:08 CET 2018
-Message-ID: <1@local.machine.example>
+To: martin <martin@mail.com>
+Subject: test
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-.
+Date: null
+Message-ID: <<312516529239432240058175748305262341953@smtp.fabienMarkFlorian.fr>@local.machine.example>
 
-From: martin <martin@mail.com>
-To: root <root@mail.com>
-Sujet: Message 3
-Date: Wed Feb 28 19:19:08 CET 2018
-Message-ID: <1@local.machine.example>
-
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-.
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Fri Mar 23 02:08:51 CET 2018
-Message-ID: <<131602622855972792300305672563184192907@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Fri Mar 23 02:08:51 CET 2018
-Message-ID: <<330581720448267813438142670158184953960@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Fri Mar 23 02:09:20 CET 2018
-Message-ID: <<184903325987857889655928083068148430410@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Fri Mar 23 02:09:20 CET 2018
-Message-ID: <<107935744241620042396056217946607995004@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Fri Mar 23 20:51:41 CET 2018
-Message-ID: <<311827441941199780999883090851890895227@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Fri Mar 23 20:51:41 CET 2018
-Message-ID: <<78212801013889348579998262056295835630@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Sat Mar 24 13:35:46 CET 2018
-Message-ID: <<228440671106271197014119178218004488152@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Sat Mar 24 13:35:46 CET 2018
-Message-ID: <<152204339785546369054905951769684132678@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Sat Mar 24 13:37:50 CET 2018
-Message-ID: <<290561633804899840751898999960843130680@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <john@mail.com>;<root@mail.com>
-Sujet: Malcolm X
-
-Date: Sat Mar 24 13:37:50 CET 2018
-Message-ID: <<160215231781217422839363094710975537318@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-A man who stands for nothing...
-
-will fall for everything
-
-.
-
-
-
-From: <foo@mail.com>
-To: <martin@mail.com>
-Subject: hello
-
-Date: Fri Mar 23 22:38:18 CET 2018
-Message-ID: <<28847103563267341845757647918444312721@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-hello
-
-.
-
-
-
-From: <foo@mail.com>
-To: <martin@mail.com>
-Subject: hi
-
-Date: Sat Mar 24 00:32:08 CET 2018
-Message-ID: <<126380472389979668366962247999446403621@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-hi
+test
 
 .
 
@@ -209,51 +15,12 @@ hi
 
 From: foo <foo@mail.com>
 To: martin <martin@mail.com>
-Sujet: 
+Subject: test
+Date: Sun, 25 Mar 2018 23:29:22 +0200
+Date: null
+Message-ID: <<282024242701604874783051674705702754735@smtp.fabienMarkFlorian.fr>@local.machine.example>
 
-Date: Sat Jan 06 23:47:14 CET 2018
-Message-ID: <<167948433545702580991759202898328657462@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-test2
-
-.
-
-
-
-From: foo <foo@mail.com>
-To: mark <mark@smtp.fr>
-Sujet: 
-
-Date: Sun Dec 31 00:07:34 CET 2017
-Message-ID: <<82593512226579261952437610266145378264@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-test1
-
-.
-
-
-
-From: foo <foo@mail.com>
-To: mark <mark@smtp.fr>
-Sujet: test
-
-Date: Sun Dec 31 00:10:34 CET 2017
-Message-ID: <<111610901043327423418455349211083885095@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-test2
-
-.
-
-
-
-From: foo <foo@mail.com>
-To: mark <mark@smtp.fr>
-Sujet: test
-
-Date: Sun Dec 31 00:46:08 CET 2017
-Message-ID: <<205563835843630568297257828637469624922@smtp.fabienMarkFlorian.fr>@local.machine.example>
-
-test
+test3
 
 .
 

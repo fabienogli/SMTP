@@ -19,7 +19,7 @@ public class Message {
 
     private List<Utilisateur> destinataires;
     private Utilisateur auteur;
-    private Date date;
+    private String date;
     private String sujet;
     private String corps;
     private Map<String, String> optionalHeaders;
@@ -28,24 +28,26 @@ public class Message {
     public Message(String id) {
         this.id = id;
         this.destinataires = new ArrayList<Utilisateur>();
-        DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
+        /*DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
         try {
-            this.date = format.parse(format.format(new Date()));
+            Date today = Calendar.getInstance().getTime();
+           // this.date = format.parse(format.format(new Date()));
+            this.date = format.parse(today.toString());
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
         this.sujet = "";
         this.corps = "";
     }
 
-    public Message(String id, Utilisateur destinataire, Utilisateur auteur, Date date) {
+    public Message(String id, Utilisateur destinataire, Utilisateur auteur, String date) {
         this(id);
         this.destinataires.add(destinataire);
         this.auteur = auteur;
         this.date = date;
     }
 
-    public Message(String id, Utilisateur destinataire, Utilisateur auteur, Date date, String sujet, String corps) {
+    public Message(String id, Utilisateur destinataire, Utilisateur auteur, String date, String sujet, String corps) {
         this(id, destinataire, auteur, date);
         this.sujet = sujet;
         this.corps = corps;
@@ -80,11 +82,11 @@ public class Message {
         this.auteur = auteur;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -138,7 +140,7 @@ public class Message {
                 .append(this.getSujet())
                 .append("\r\n")
                 .append(HeadersEnum.DATE.toString())
-                .append(this.getDate().toString())
+                .append(this.getDate())
                 .append("\r\n")
                 .append(HeadersEnum.ID.toString())
                 .append("<")

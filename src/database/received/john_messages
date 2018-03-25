@@ -1,6 +1,6 @@
 From: foo <foo@mail.com>
 To: john <john@mail.com>
-Sujet: Message 1
+Subject: Message 1
 Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <1@local.machine.example>
 
@@ -11,7 +11,7 @@ aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venen
 
 From: root <root@mail.com>
 To: john <john@mail.com>
-Sujet: Message 2
+Subject: Message 2
 Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <2@local.machine.example>
 
@@ -22,7 +22,7 @@ Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ulla
 
 From: Martin <martin@mail.com>
 To: john <john@mail.com>
-Sujet: Message 3
+Subject: Message 3
 Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <3@local.machine.example>
 

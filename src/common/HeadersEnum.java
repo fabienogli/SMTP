@@ -3,7 +3,7 @@ package common;
 public enum HeadersEnum {
     FROM("From"),
     DATE("Date"),
-    SUJET("Sujet"),
+    SUJET("Subject"),
     TO("To"),
     ID("Message-ID"),
     CRLF("\n.\n");

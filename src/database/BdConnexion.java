@@ -154,17 +154,11 @@ public class BdConnexion {
             }
         } else if (header.equals(HeadersEnum.DATE.getString())) {
             System.out.println(value);
-            DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
-                try {
-                    mail.setDate(format.parse(value));
-                } catch (ParseException e) {
-                    try {
-                        mail.setDate(format.parse(format.format(new Date())));
-                    } catch (ParseException e1) {
-                        e1.printStackTrace();
-                    }
-                    e.printStackTrace();
-                }
+            //DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
+                    //System.out.println("affiche 1 :"+format.parse(value).toString());
+                    mail.setDate(value);
+                    //System.out.println("affiche 2:"+mail.getDate());
+
         } else if (header.equals(HeadersEnum.SUJET.getString())) {
             mail.setSujet(value);
         } else if (header.equals(HeadersEnum.ID.getString())) {
