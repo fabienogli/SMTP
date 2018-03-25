@@ -1,4 +1,5 @@
 import Interface.Client;
+import Interface.WrongLoginException;
 import database.BdConnexion;
 import pop3.ClientPop3;
 import smtp.ClientSmtp;
@@ -111,6 +112,8 @@ public class testConnexion {
         } catch (NullPointerException e) {
             e.printStackTrace();
             superClient.quit();
+        } catch (WrongLoginException e) {
+            e.printStackTrace();
         }
     }
 

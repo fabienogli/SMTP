@@ -105,16 +105,17 @@ public class Client {
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
-        utilisateur.setName();
         this.smtp.setUtilisateur(utilisateur);
         this.pop3.setUtilisateur(utilisateur);
+        utilisateur.setName();
     }
 
-    public void authentification() {
+    public void authentification() throws WrongLoginException {
         boolean authApop = this.pop3.authentificationApop();
         this.smtp.authentification();
-        this.getReceivedMessages();
-        //@Todo controle authentification
+        if (authApop && this.smtp.isAuthentified()) {
+            throw new WrongLoginException("Authentification échoué");
+        }
     }
 
     public boolean isAuthentified() {
