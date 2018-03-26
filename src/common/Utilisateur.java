@@ -20,11 +20,13 @@ public class Utilisateur {
 
     public Utilisateur(String email) {
         this.email = email;
+        this.nom = email.split("@")[0];
     }
 
     public Utilisateur(String email, String mdp) {
         this.email = email;
         this.mdp = mdp;
+        this.nom = email.split("@")[0];
     }
 
     public String getNom() {
@@ -72,9 +74,9 @@ public class Utilisateur {
         Utilisateur user = BdConnexion.getUtilisateur(this);
         if (user == null)
         {
-            this.setNom("unknown");
+            this.nom = email.split("@")[0];
         }
-        if (user.equals(this)) {
+        else if (user.equals(this)) {
             this.setNom(user.getNom());
         }
     }
