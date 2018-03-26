@@ -1,6 +1,6 @@
 USER,PASS,MAIL
-foo,bar,foo@mail.com
-root,toor,root@mail.com
-john,doe,john@mail.com
-martin,matin,martin@mail.com
-mark,mark,mark@smtp.fr
+foo,bar,foo@mark.fr
+root,toor,root@mark.fr
+john,doe,john@mark.fr
+martin,matin,martin@mark.fr
+mark,mark,mark@mark.fr

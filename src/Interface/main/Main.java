@@ -1,13 +1,10 @@
 package Interface.main;
 
 import Interface.Client;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
+import javafx.scene.control.*;
 import smtp.ClientSmtp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
 
 
 public class Main {
@@ -34,6 +31,9 @@ public class Main {
     private Button receivedModeButton;
 
     @FXML
+    private Label label;
+
+    @FXML
     public void initialize() {
         emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         subjectColumn.setCellValueFactory(cellData -> cellData.getValue().subjectProperty());
@@ -49,11 +49,13 @@ public class Main {
             });
             return row ;
         });
+
     }
 
     public void setApp(App app) {
         this.app = app;
         mails.setItems(this.app.getMails());
+        label.setText(this.app.getClient().getUtilisateur().getEmail());
     }
 
     @FXML
