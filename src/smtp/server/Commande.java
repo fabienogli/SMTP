@@ -143,6 +143,7 @@ public class Commande {
         if (requete.contains(SmtpCodes.RCPT_TO.toString()) && getMailAddress(requete) != null) {
             Utilisateur destinataire = BdConnexion.getUtilisateur(new Utilisateur(getMailAddress(requete)));
             if (destinataire == null) {
+                connexion.resetRecipientToMail();
                 return SmtpCodes.USER_UNKNOWN.toString();
             }
             connexion.addRecipentToMail(destinataire);

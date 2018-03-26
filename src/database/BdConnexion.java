@@ -87,11 +87,11 @@ public class BdConnexion {
         return null;
     }
 
-    public static List<Message> getSentMessages(Utilisateur utilisateur) {
+    private static List<Message> getMessages(Utilisateur utilisateur, String type) {
         List<Message> mails = new ArrayList<Message>();
         StringBuilder rawMessages = new StringBuilder();
         try {
-            FileReader fileReader = new FileReader(cheminDatabase + "sent/" + utilisateur.getNom() + "_messages");
+            FileReader fileReader = new FileReader(cheminDatabase + type + utilisateur.getNom() + "_messages");
             BufferedReader db = new BufferedReader(fileReader);
             String line;
             while ((line = db.readLine()) != null) {
@@ -103,9 +103,21 @@ public class BdConnexion {
         }
         String[] rawMessagesInArray = rawMessages.toString().split("\n.\n\n");
         for (String rawMessage : rawMessagesInArray) {
+            System.out.println(rawMessage.split(": ")[0]);
+            if (!rawMessage.split(": ")[0].equals(HeadersEnum.FROM.getString())) {
+                continue;
+            }
             mails.add(parseMail(rawMessage));
         }
         return mails;
+    }
+
+    public static List<Message> getSentMessages(Utilisateur utilisateur) {
+        return getMessages(utilisateur, "sent/");
+    }
+
+    public static List<Message> getReceiveedMessages(Utilisateur utilisateur) {
+        return getMessages(utilisateur, "received/");
     }
 
     public static Message parseMail(String rawMail) {
@@ -187,9 +199,8 @@ public class BdConnexion {
             fw = new FileWriter(cheminDatabase + typeBoite + "/" + utilisateur.getNom() + "_messages", true);
             bw = new BufferedWriter(fw);
             out = new PrintWriter(bw);
-            out.println(); //On saute deux lignes
             out.println();
-            out.println(content);
+            out.print(content);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

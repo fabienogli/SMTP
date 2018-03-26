@@ -1,6 +1,7 @@
 package pop3.server;
 
 import codes.Pop3Codes;
+import common.HeadersEnum;
 import common.Message;
 import common.MessageBox;
 import common.Utilisateur;
@@ -236,25 +237,9 @@ public class Commande {
 
     protected static MessageBox addMail(String user) {
         MessageBox mailBox = new MessageBox();
-        List<Message> mails = new ArrayList<Message>();
-        StringBuilder rawMessages = new StringBuilder();
-        try {
-            FileReader fileReader = new FileReader(cheminDatabase + "received/" + user + "_messages");
-            BufferedReader db = new BufferedReader(fileReader);
-            String line;
-            while ((line = db.readLine()) != null) {
-                rawMessages.append(line);
-                rawMessages.append("\n");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("dans addMail");
-        System.out.println(rawMessages);
-        String[] rawMessagesInArray = rawMessages.toString().split("\n.\n\n");
-        for (String rawMessage : rawMessagesInArray) {
-            mails.add(BdConnexion.parseMail(rawMessage));
-        }
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setNom(user);
+        List<Message> mails = BdConnexion.getReceiveedMessages(utilisateur);
         mailBox.setMessages(mails);
         return mailBox;
     }

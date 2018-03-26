@@ -112,9 +112,10 @@ public class testConnexion {
         } catch (NullPointerException e) {
             e.printStackTrace();
             superClient.quit();
-        } catch (WrongLoginException e) {
-            e.printStackTrace();
         }
+//        catch (WrongLoginException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void testBdConnexion() {

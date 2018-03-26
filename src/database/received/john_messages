@@ -35,10 +35,80 @@ From: foo <foo@mail.com>
 To: john <john@mail.com>
 Subject: doe
 Date: Mon, 26 Mar 2018 00:36:06 +0200
-Date: null
 Message-ID: <<288746014490933342347801491088242379574@smtp.fabienMarkFlorian.fr>@local.machine.example>
 
 eoeoeoe
 
 .
 
+From: foo <foo@mail.com>
+To: john <john@mail.com>
+Subject:  test final
+Date:  Mon, 26 Mar 2018 08:23:54 +0200
+Message-ID: <<306607380316936032930022844321916717425@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+corps final
+
+.
+From: root <root@mail.com>
+To: foo <foo@mail.com>;john <john@mail.com>
+Subject:  test123
+Date:  Mon, 26 Mar 2018 08:29:59 +0200
+Message-ID: <<186637378401400647817755746911900028428@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+tes123
+
+.
+
+From: foo <foo@mail.com>
+To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
+Subject:  test final avec plusieurs destinataires dont un erroné
+Date:  Mon, 26 Mar 2018 08:34:56 +0200
+Message-ID: <<8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+test final avec plusieurs destinataires dont un erroné
+Le corps du mail
+
+.
+
+From: foo <foo@mail.com>
+To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
+Subject:  test final avec plusieurs destinataires dont un erroné
+Date:  Mon, 26 Mar 2018 08:34:56 +0200
+Message-ID: <<8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+test final avec plusieurs destinataires dont un erroné
+Le corps du mail
+
+.
+
+From: foo <foo@mail.com>
+To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
+Subject:  test final avec plusieurs destinataires dont un erroné
+Date:  Mon, 26 Mar 2018 08:34:56 +0200
+Message-ID: <<8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+test final avec plusieurs destinataires dont un erroné
+Le corps du mail
+
+.
+
+From: foo <foo@mail.com>
+To: root <root@mail.com>;john <john@mail.com>;root <root@mail.com>
+Subject:  destinataire erroné
+Date:  Mon, 26 Mar 2018 08:51:38 +0200
+Message-ID: <<68052294590682185786753956667569285201@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+destinataire erroné
+
+.
+
+From: foo <foo@mail.com>
+To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
+Subject:  HOLA
+Date:  Mon, 26 Mar 2018 09:17:46 +0200
+Message-ID: <<110157463463153103090517727596881031301@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+El pueblo unido jama sera vencido
+
+.

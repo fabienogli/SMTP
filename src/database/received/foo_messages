@@ -41,3 +41,32 @@ hey
 
 .
 
+From: john <john@mail.com>
+To: foo <foo@mail.com>
+Subject:  test final
+Date:  Mon, 26 Mar 2018 08:26:34 +0200
+Message-ID: <<117231211559615578661841778318737209760@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+test
+
+.
+
+From: john <john@mail.com>
+To: foo <foo@mail.com>
+Subject:  test
+Date:  Mon, 26 Mar 2018 08:28:30 +0200
+Message-ID: <<289889991741292040331425556885684043973@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+t123
+
+.
+
+From: root <root@mail.com>
+To: foo <foo@mail.com>;john <john@mail.com>
+Subject:  test123
+Date:  Mon, 26 Mar 2018 08:29:59 +0200
+Message-ID: <<186637378401400647817755746911900028428@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+tes123
+
+.

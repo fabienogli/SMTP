@@ -15,6 +15,7 @@ import database.NoNameDnsException;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 
 public class Connexion implements Runnable {
@@ -177,6 +178,10 @@ public class Connexion implements Runnable {
 
     public void addRecipentToMail(Utilisateur utilisateur) {
         this.mailToSend.addDestinataire(utilisateur);
+    }
+
+    public void resetRecipientToMail() {
+        this.mailToSend.setDestinataires(new ArrayList<Utilisateur>());
     }
 
     public MessageBox getMailBox() {
