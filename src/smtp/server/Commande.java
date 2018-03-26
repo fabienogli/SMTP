@@ -127,8 +127,8 @@ public class Commande {
         }
         String email = t_mail[1].split(">")[0];
         Utilisateur utilisateur = new Utilisateur(email);
-        Utilisateur client = BdConnexion.getUtilisateur(utilisateur);
-        connexion.setClient(client);
+        utilisateur.setName();
+        connexion.setClient(utilisateur);
         if (email.equals(connexion.getClient().getEmail())) {
             connexion.setCurrentstate(StateEnum.SENDER_APPROVED);
             return SmtpCodes.OK.toString();

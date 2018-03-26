@@ -70,8 +70,9 @@ public class Utilisateur {
 
     public void setName() {
         Utilisateur user = BdConnexion.getUtilisateur(this);
-        if (user == null) {
-            return;
+        if (user == null)
+        {
+            this.setNom("unknown");
         }
         if (user.equals(this)) {
             this.setNom(user.getNom());
