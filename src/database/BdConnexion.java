@@ -170,7 +170,7 @@ public class BdConnexion {
         } else if (header.equals(HeadersEnum.SUJET.getString())) {
             mail.setSujet(value);
         } else if (header.equals(HeadersEnum.ID.getString())) {
-            String id = "idMessage";
+            String id = "id_message";
             try {
                 id = value.split("<")[1].split("@")[0];
             } catch (NullPointerException e) {

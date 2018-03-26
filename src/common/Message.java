@@ -187,7 +187,7 @@ public class Message {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return "<" + stamp + "@" + ServerSMTP.name + ">";
+        return stamp;
 
     }
 }
