@@ -47,7 +47,13 @@ public class Commande {
     public static String senderApproved(String requete, Connexion connexion) {
         quit(requete, connexion);
         if (requete.contains(SmtpCodes.RCPT_TO.toString()) && getMailAddress(requete) != null) {
-            Utilisateur destinataire = BdConnexion.getUtilisateur(new Utilisateur(getMailAddress(requete)));
+            Utilisateur user = new Utilisateur(getMailAddress(requete));
+            Utilisateur destinataire;
+            if (! connexion.getClient().domainName().equals(user.domainName())) {
+                destinataire = user;
+            } else {
+                destinataire  = BdConnexion.getUtilisateur(user);
+            }
             if (destinataire == null) {
                 return SmtpCodes.USER_UNKNOWN.toString();
             }
@@ -72,10 +78,10 @@ public class Commande {
         }
         Message message = parseRawMail(rawMail, connexion.getMailToSend());
         for(Utilisateur utilisateur: message.getDestinataires()){
-            if(!utilisateur.domainName().equals("mail.com")){
+            if(!utilisateur.domainName().equals("fabien.fr")){
                 try {
-                    //ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())),2025);
-                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
+                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())),2026);
+//                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
                     smtp.start();
                     smtp.authentification();
                     smtp.sendMail(message);
@@ -141,7 +147,13 @@ public class Commande {
             return SmtpCodes.OK.toString();
         }
         if (requete.contains(SmtpCodes.RCPT_TO.toString()) && getMailAddress(requete) != null) {
-            Utilisateur destinataire = BdConnexion.getUtilisateur(new Utilisateur(getMailAddress(requete)));
+            Utilisateur user = new Utilisateur(getMailAddress(requete));
+            Utilisateur destinataire;
+            if (! connexion.getClient().domainName().equals(user.domainName())) {
+                destinataire = user;
+            } else {
+                destinataire  = BdConnexion.getUtilisateur(user);
+            }
             if (destinataire == null) {
                 connexion.resetRecipientToMail();
                 return SmtpCodes.USER_UNKNOWN.toString();
