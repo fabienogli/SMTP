@@ -104,7 +104,7 @@ public class Dns {
             BufferedReader db = new BufferedReader(fileReader);
             String chaine;
             while ((chaine = db.readLine()) != null) {
-              if(chaine.split(";")[0] == address){
+              if(chaine.split(";")[0].equals(address)){
                   db.close();
                   return chaine.split(";")[1];
               }
