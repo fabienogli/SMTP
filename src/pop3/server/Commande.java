@@ -77,6 +77,9 @@ public class Commande {
 
     public static String list(Connexion connexion) {
         StringBuilder result = new StringBuilder();
+
+        connexion.setMailBox(addMail(connexion.getUSER()));
+
         if (connexion.getMailBox().getNumberMessages() == 0) {
             result.append("+OK ").append(" no message");
         } else if (connexion.getMailBox().getNumberMessages() == 1) {
@@ -127,6 +130,8 @@ public class Commande {
     }
 
     public static String retrieve(int num, Connexion connexion) {
+        connexion.setMailBox(addMail(connexion.getUSER()));
+
         StringBuilder mailSb = new StringBuilder();
         if (num <= 0 || num > connexion.getMailBox().getNumberMessages()) {
             System.out.println(connexion.getMailBox().getNumberMessages());

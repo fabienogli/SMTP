@@ -7,3 +7,14 @@ Message-ID: <<28847103563267341845757647918444312721@smtp.fabienMarkFlorian.fr>@
 hello
 
 .
+
+From: foo <foo@mail.com>
+To: martin <martin@mail.com>
+Subject:  test
+Date:  Mon, 26 Mar 2018 08:17:20 +0200
+Message-ID: <<2309892230944933976434474613133700598@smtp.fabienMarkFlorian.fr>@local.machine.example>
+
+test
+
+.
+
