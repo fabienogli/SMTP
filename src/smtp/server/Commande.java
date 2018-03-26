@@ -49,7 +49,7 @@ public class Commande {
         if (requete.contains(SmtpCodes.RCPT_TO.toString()) && getMailAddress(requete) != null) {
             Utilisateur user = new Utilisateur(getMailAddress(requete));
             Utilisateur destinataire;
-            if (! connexion.getClient().domainName().equals(user.domainName())) {
+            if (!connexion.getClient().domainName().equals(user.domainName())) {
                 destinataire = user;
             } else {
                 destinataire  = BdConnexion.getUtilisateur(user);
@@ -78,8 +78,9 @@ public class Commande {
         }
         Message message = parseRawMail(rawMail, connexion.getMailToSend());
         for(Utilisateur utilisateur: message.getDestinataires()){
-            if(!utilisateur.domainName().equals("fabien.fr")){
+            if(!utilisateur.domainName().equals("mark.fr")){
                 try {
+                    System.out.println("envoi à un autre serveur");
                     ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())),2026);
 //                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
                     smtp.start();

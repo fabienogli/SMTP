@@ -152,7 +152,7 @@ public class Message {
                 .append(ServerSMTP.name)
                 .append(">\r\n\n")
                 .append(this.getCorps())
-                .append("\r\n.\n");
+                .append("\r\n.");
 
         return generateMessage.toString();
     }

@@ -11,7 +11,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WritingPage {
 
@@ -30,6 +33,8 @@ public class WritingPage {
     @FXML
     private Button sendButton;
 
+    private final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private App app;
     private Stage stage;
 
@@ -51,33 +56,47 @@ public class WritingPage {
         message.setSujet(this.subjectTextField.getText());
         message.setCorps(this.corpsTextArea.getText());
         String recipients = this.recipientTextField.getText();
+        ArrayList<String> error = validateRecipients(recipients);
+        if (error.size()==0) {
+            for (String recipient : recipients.split(";")) {
 
-        for (String recipient : recipients.split(";")) {
-            message.addDestinataire(new Utilisateur(recipient));
-        }
-        if (recipients.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Aucun destinataire");
-            alert.setContentText("Veuillez saisir au moins un destinataire !");
-            alert.showAndWait();
-        } else if (client.sendMail(message).contains("1")) {
-            String[] reponse = client.sendMail(message).split(";");
+                message.addDestinataire(new Utilisateur(recipient));
+
+            }
+            if (recipients.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Aucun destinataire");
+                alert.setContentText("Veuillez saisir au moins un destinataire !");
+                alert.showAndWait();
+            } else if (client.sendMail(message).contains("1")) {
+                String[] reponse = client.sendMail(message).split(";");
+                StringBuilder sb = new StringBuilder();
+                for (int i = 1; i <= reponse.length - 1; i++) {
+                    sb.append(reponse[i]).append("\n");
+                }
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Adresse erronée");
+                alert.setHeaderText("Voir ci-dessous la liste :");
+                alert.setContentText(sb.toString());
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Message envoyé");
+                alert.setContentText("Le message a été envoyé avec succès !");
+                alert.showAndWait();
+                this.stage.close();
+            }
+        }else {
             StringBuilder sb = new StringBuilder();
-            for (int i = 1; i <= reponse.length - 1; i++) {
-                sb.append(reponse[i]).append("\n");
+            for (String anError : error) {
+                sb.append(anError).append("\n");
             }
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Adresse erronée");
-            alert.setHeaderText("Voir ci-dessous la liste :");
-            alert.setContentText(sb.toString());
+            alert.setTitle("Mauvais format d'email");
+            alert.setContentText("Veuillez saisir ce(s) adresse(s) !"+"\n"+sb.toString());
             alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Message envoyé");
-            alert.setContentText("Le message a été envoyé avec succès !");
-            alert.showAndWait();
-            this.stage.close();
         }
+
 
     }
 
@@ -91,7 +110,7 @@ public class WritingPage {
         this.senderTextField.setEditable(false);
         List<Utilisateur> destinataires = message.getDestinataires();
         String tmp = "";
-        for (int i = 0; i < destinataires.size(); i ++ ) {
+        for (int i = 0; i < destinataires.size(); i++) {
             tmp += destinataires.get(i).getNom() + " <" + destinataires.get(i).getEmail() + ">";
             if (i != destinataires.size() - 1) {
                 tmp += ";";
@@ -103,5 +122,20 @@ public class WritingPage {
         this.subjectTextField.setEditable(false);
         this.corpsTextArea.setText(message.getCorps());
         this.corpsTextArea.setEditable(false);
+    }
+
+    public boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
+    }
+
+    public ArrayList validateRecipients(String recipients) {
+        ArrayList list = new ArrayList<String>();
+        for (String recipient : recipients.split(";")) {
+            if (!validate(recipient)) {
+               list.add(recipient);
+            }
+        }
+        return list;
     }
 }

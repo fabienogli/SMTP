@@ -186,7 +186,7 @@ public class BdConnexion {
 
         for (Utilisateur utilisateur : message.getDestinataires()) {
             // la deuxieme condition sera a modifer sur chacun de nos serveur
-            if (utilisateur.domainName().equals("mail.com") || utilisateur.domainName().equals("smtp.fr")) {
+            if (utilisateur.domainName().equals("mark.fr")) {
                 writeToFile(utilisateur, message.toString(), "received");
             }
         }
@@ -201,6 +201,7 @@ public class BdConnexion {
             fw = new FileWriter(cheminDatabase + typeBoite + "/" + utilisateur.getNom() + "_messages", true);
             bw = new BufferedWriter(fw);
             out = new PrintWriter(bw);
+            out.println();
             out.println();
             out.print(content);
         } catch (IOException e) {

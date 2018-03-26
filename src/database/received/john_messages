@@ -1,134 +1,50 @@
-From: foo <foo@mail.com>
-To: john <john@mail.com>
+From: root <root@mail.com>
+To: foo <foo@mail.com>
 Subject: Message 1
 Date: Fri, 21 Nov 1997 09:55:06 -0600
 Message-ID: <1@local.machine.example>
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Lom ipsum dolor sit amet, consectetuer adipiscing elit.
 Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
 aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
 .
 
-From: root <root@mail.com>
-To: john <john@mail.com>
-Subject: Message 2
-Date: Fri, 21 Nov 1997 09:55:06 -0600
-Message-ID: <2@local.machine.example>
+From: foo <foo@mark.fr>
+To: john <john@mark.fr>
+Subject:  hey
+Date:  Mon, 26 Mar 2018 14:16:36 +0200
+Message-ID: <244312137790746744959762334193016698421@smtp.fabienMarkFlorian.fr>
 
-Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
-Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
-.
-
-From: Martin <martin@mail.com>
-To: john <john@mail.com>
-Subject: Message 3
-Date: Fri, 21 Nov 1997 09:55:06 -0600
-Message-ID: <3@local.machine.example>
-
-Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus,
-sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
-Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.
-.
-
-From: foo <foo@mail.com>
-To: john <john@mail.com>
-Subject: doe
-Date: Mon, 26 Mar 2018 00:36:06 +0200
-Message-ID: <288746014490933342347801491088242379574@smtp.fabienMarkFlorian.fr>
-
-eoeoeoe
+hey
 
 .
 
-From: foo <foo@mail.com>
-To: john <john@mail.com>
-Subject:  test final
-Date:  Mon, 26 Mar 2018 08:23:54 +0200
-Message-ID: <306607380316936032930022844321916717425@smtp.fabienMarkFlorian.fr>
+From: foo <foo@mark.fr>
+To: john <john@mark.fr>
+Subject:  john
+Date:  Mon, 26 Mar 2018 14:28:01 +0200
+Message-ID: <146501809638348732284122918315648523735@smtp.fabienMarkFlorian.fr>
 
-corps final
-
-.
-From: root <root@mail.com>
-To: foo <foo@mail.com>;john <john@mail.com>
-Subject:  test123
-Date:  Mon, 26 Mar 2018 08:29:59 +0200
-Message-ID: <186637378401400647817755746911900028428@smtp.fabienMarkFlorian.fr>
-
-tes123
+john
 
 .
 
-From: foo <foo@mail.com>
-To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
-Subject:  test final avec plusieurs destinataires dont un erroné
-Date:  Mon, 26 Mar 2018 08:34:56 +0200
-Message-ID: <8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>
+From: foo <foo@mark.fr>
+To: john <john@mark.fr>
+Subject:  alors
+Date:  Mon, 26 Mar 2018 14:31:06 +0200
+Message-ID: <5386008128147453220976332928722662508@smtp.fabienMarkFlorian.fr>
 
-test final avec plusieurs destinataires dont un erroné
-Le corps du mail
-
-.
-
-From: foo <foo@mail.com>
-To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
-Subject:  test final avec plusieurs destinataires dont un erroné
-Date:  Mon, 26 Mar 2018 08:34:56 +0200
-Message-ID: <8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>
-
-test final avec plusieurs destinataires dont un erroné
-Le corps du mail
+alors
 
 .
 
-From: foo <foo@mail.com>
-To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
-Subject:  test final avec plusieurs destinataires dont un erroné
-Date:  Mon, 26 Mar 2018 08:34:56 +0200
-Message-ID: <8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>
+From: martin <martin@mark.fr>
+To: foo <foo@mark.fr>;john <john@mark.fr>
+Subject:  foo3
+Date:  Mon, 26 Mar 2018 14:34:14 +0200
+Message-ID: <110826670901652978376325108184258609930@smtp.fabienMarkFlorian.fr>
 
-test final avec plusieurs destinataires dont un erroné
-Le corps du mail
-
-.
-
-From: foo <foo@mail.com>
-To: root <root@mail.com>;john <john@mail.com>;root <root@mail.com>
-Subject:  destinataire erroné
-Date:  Mon, 26 Mar 2018 08:51:38 +0200
-Message-ID: <68052294590682185786753956667569285201@smtp.fabienMarkFlorian.fr>
-
-destinataire erroné
-
-.
-
-From: foo <foo@mail.com>
-To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
-Subject:  HOLA
-Date:  Mon, 26 Mar 2018 09:17:46 +0200
-Message-ID: <110157463463153103090517727596881031301@smtp.fabienMarkFlorian.fr>
-
-El pueblo unido jama sera vencido
-
-.
-
-From: foo <foo@mail.com>
-To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
-Subject:  final
-Date:  Mon, 26 Mar 2018 09:50:14 +0200
-Message-ID: <221677835273305382812443066080588978289@smtp.fabienMarkFlorian.fr>
-
-final countdown
-
-.
-
-From: foo <foo@mail.com>
-To: martin <martin@mail.com>;john <john@mail.com>;root <root@mail.com>;martin <martin@mail.com>
-Subject:  mark
-Date:  Mon, 26 Mar 2018 10:19:49 +0200
-Message-ID: <3135015643360727742658644085278412335@smtp.fabienMarkFlorian.fr>
-
-maaar
+foo3
 
 .
