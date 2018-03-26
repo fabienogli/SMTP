@@ -167,25 +167,48 @@ public class ClientSmtp {
         return "2";
     }
 
+    public String sendMailDistant(Message message, Utilisateur utilisateur) {
+        write(SmtpCodes.MAIL_FROM.toString() + "<" + message.getAuteur().getEmail() + ">");
+        String response = read();
+        if (!response.equals(SmtpCodes.OK.toString())) {
+            System.out.println(response);
+        }
+        StringBuilder sb = new StringBuilder();
+        boolean receiverErrors = false;
+
+
+        write(SmtpCodes.RCPT_TO.toString() + "<" + utilisateur.getEmail() + ">");
+        response = read();
+        if (!response.equals(SmtpCodes.OK.toString())) {
+            receiverErrors = true;
+            System.out.println(response);
+            sb.append(utilisateur.getEmail());
+        }
+        if (receiverErrors) return "1;" + sb.toString();
+        write(SmtpCodes.DATA.toString());
+        response = read();
+        if (!response.equals(SmtpCodes.MESSAGE.toString())) {
+            System.out.println(response);
+        }
+        write(parseMailForSmtp(message));
+        response = read();
+        if (!response.equals(SmtpCodes.OK.toString())) {
+            System.out.println(response);
+        }
+        System.out.println("Message écrit avec succes");
+
+        //On reset le client
+        write(SmtpCodes.RESET.toString());
+        response = read();
+        if (!response.equals(SmtpCodes.OK.toString())) {
+            System.out.println(response);
+        }
+        return "2";
+    }
+
     private String parseMailForSmtp(Message message) {
         StringBuilder stringBuilder = new StringBuilder();
         message.setDate(generateDate());
-        /*stringBuilder
-                .append(HeadersEnum.FROM.toString())
-                .append(message.getAuteur().getNom())
-                .append(" <")
-                .append(message.getAuteur().getEmail())
-                .append(">\n")
-                .append(HeadersEnum.TO.toString());
-        for (int i = 0; i < message.getDestinataires().size(); i++) {
-            stringBuilder
-                    .append("<")
-                    .append(message.getDestinataires().get(i).getEmail())
-                    .append(">");
-            if (i != message.getDestinataires().size() - 1) {
-                stringBuilder.append(";");
-            }
-        }*/
         stringBuilder
                 .append(HeadersEnum.SUJET.toString())
                 .append(message.getSujet())

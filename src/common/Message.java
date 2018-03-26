@@ -19,6 +19,16 @@ public class Message {
 
     private String id;
 
+
+    public List<Utilisateur> getDestinatairesDistants() {
+        return destinatairesDistants;
+    }
+
+    public void setDestinatairesDistants(List<Utilisateur> destinatairesDistants) {
+        this.destinatairesDistants = destinatairesDistants;
+    }
+
+    private List<Utilisateur> destinatairesDistants;
     private List<Utilisateur> destinataires;
     private Utilisateur auteur;
     private String date;
