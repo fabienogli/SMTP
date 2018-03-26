@@ -4,6 +4,8 @@
 
 package common;
 
+import smtp.server.ServerSMTP;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -146,7 +148,9 @@ public class Message {
                 .append(HeadersEnum.ID.toString())
                 .append("<")
                 .append(this.getId())
-                .append("@local.machine.example>\r\n\n")
+                .append("@")
+                .append(ServerSMTP.name)
+                .append(">\r\n\n")
                 .append(this.getCorps())
                 .append("\r\n.\n");
 
@@ -183,7 +187,7 @@ public class Message {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return "<" + stamp + "@smtp.fabienMarkFlorian.fr" + ">";
+        return "<" + stamp + "@" + ServerSMTP.name + ">";
 
     }
 }

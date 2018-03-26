@@ -2,7 +2,7 @@ From: foo <foo@mail.com>
 To: martin <martin@mail.com>
 Subject: hello
 Date: Fri, 21 Nov 1997 09:55:06 -0600
-Message-ID: <<28847103563267341845757647918444312721@smtp.fabienMarkFlorian.fr>@local.machine.example>
+Message-ID: <28847103563267341845757647918444312721@smtp.fabienMarkFlorian.fr>
 
 hello
 
@@ -12,7 +12,7 @@ From: foo <foo@mail.com>
 To: martin <martin@mail.com>
 Subject:  test
 Date:  Mon, 26 Mar 2018 08:17:20 +0200
-Message-ID: <<2309892230944933976434474613133700598@smtp.fabienMarkFlorian.fr>@local.machine.example>
+Message-ID: <2309892230944933976434474613133700598@smtp.fabienMarkFlorian.fr>
 
 test
 
@@ -22,7 +22,7 @@ From: foo <foo@mail.com>
 To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
 Subject:  test final avec plusieurs destinataires dont un erroné
 Date:  Mon, 26 Mar 2018 08:34:56 +0200
-Message-ID: <<8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>@local.machine.example>
+Message-ID: <8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>
 
 test final avec plusieurs destinataires dont un erroné
 Le corps du mail
@@ -33,7 +33,7 @@ From: foo <foo@mail.com>
 To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
 Subject:  test final avec plusieurs destinataires dont un erroné
 Date:  Mon, 26 Mar 2018 08:34:56 +0200
-Message-ID: <<8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>@local.machine.example>
+Message-ID: <8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>
 
 test final avec plusieurs destinataires dont un erroné
 Le corps du mail
@@ -44,7 +44,7 @@ From: foo <foo@mail.com>
 To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>;root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
 Subject:  test final avec plusieurs destinataires dont un erroné
 Date:  Mon, 26 Mar 2018 08:34:56 +0200
-Message-ID: <<8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>@local.machine.example>
+Message-ID: <8887103461489716829274372139501362111@smtp.fabienMarkFlorian.fr>
 
 test final avec plusieurs destinataires dont un erroné
 Le corps du mail
@@ -55,8 +55,18 @@ From: foo <foo@mail.com>
 To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
 Subject:  HOLA
 Date:  Mon, 26 Mar 2018 09:17:46 +0200
-Message-ID: <<110157463463153103090517727596881031301@smtp.fabienMarkFlorian.fr>@local.machine.example>
+Message-ID: <110157463463153103090517727596881031301@smtp.fabienMarkFlorian.fr>
 
 El pueblo unido jama sera vencido
+
+.
+
+From: foo <foo@mail.com>
+To: root <root@mail.com>;john <john@mail.com>;martin <martin@mail.com>
+Subject:  final
+Date:  Mon, 26 Mar 2018 09:50:14 +0200
+Message-ID: <221677835273305382812443066080588978289@smtp.fabienMarkFlorian.fr>
+
+final countdown
 
 .

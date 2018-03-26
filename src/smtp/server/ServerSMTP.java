@@ -19,6 +19,7 @@ import java.util.Scanner;
 public class ServerSMTP implements Runnable{
     private SSLServerSocket sslServerSocket ;
     private Dns dns;
+    public static String name = "smtp.fabienMarkFlorian.fr";
 
     public ServerSMTP(){
         int portEcoute = 2026;

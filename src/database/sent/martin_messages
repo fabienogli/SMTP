@@ -39,7 +39,7 @@ From: martin <martin@mail.com>
 To: foo <foo@mail.com>
 Subject:  essai
 Date:  Mon, 26 Mar 2018 01
-Message-ID: <<40461103488214658875902091316042795382@smtp.fabienMarkFlorian.fr>@local.machine.example>
+Message-ID: <40461103488214658875902091316042795382@smtp.fabienMarkFlorian.fr>
 
 essai
 
@@ -49,7 +49,7 @@ From: martin <martin@mail.com>
 To: foo <foo@mail.com>
 Subject:  hey
 Date:  Mon, 26 Mar 2018 08:18:03 +0200
-Message-ID: <<83836891630899641595626225473798292207@smtp.fabienMarkFlorian.fr>@local.machine.example>
+Message-ID: <83836891630899641595626225473798292207@smtp.fabienMarkFlorian.fr>
 
 hey
 

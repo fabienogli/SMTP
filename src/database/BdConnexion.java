@@ -166,15 +166,17 @@ public class BdConnexion {
             }
         } else if (header.equals(HeadersEnum.DATE.getString())) {
             System.out.println(value);
-            //DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
-                    //System.out.println("affiche 1 :"+format.parse(value).toString());
-                    mail.setDate(value);
-                    //System.out.println("affiche 2:"+mail.getDate());
-
+            mail.setDate(value);
         } else if (header.equals(HeadersEnum.SUJET.getString())) {
             mail.setSujet(value);
         } else if (header.equals(HeadersEnum.ID.getString())) {
-            mail.setId(value.split("<")[0].split("@")[0]);
+            String id = "idMessage";
+            try {
+                id = value.split("<")[1].split("@")[0];
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+            mail.setId(id);
         }
         System.out.println("sortie de parse Header");
     }
@@ -182,9 +184,9 @@ public class BdConnexion {
     public static void registerMail(Message message) {
         writeToFile(message.getAuteur(), message.toString(), "sent");
 
-        for (Utilisateur utilisateur: message.getDestinataires()) {
+        for (Utilisateur utilisateur : message.getDestinataires()) {
             // la deuxieme condition sera a modifer sur chacun de nos serveur
-            if(utilisateur.domainName().equals("mail.com") || utilisateur.domainName().equals("smtp.fr")){
+            if (utilisateur.domainName().equals("mail.com") || utilisateur.domainName().equals("smtp.fr")) {
                 writeToFile(utilisateur, message.toString(), "received");
             }
         }

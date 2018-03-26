@@ -15,8 +15,9 @@ public class testConnexion {
 //        testMail();
 //        testPop3();
 //        testSmtp();
-        testSuperClient();
+//        testSuperClient();
 //        testBdConnexion();
+        testGetReceivedMessage();
     }
 
     private static void initializeClient() {
@@ -138,6 +139,12 @@ public class testConnexion {
                 "Date: Sun, 25 Mar 2018 23:36:16 +0200\n" +
                 "\n" +
                 "teste 123 ";
+    }
+
+    public static void testGetReceivedMessage() {
+        Utilisateur foo = new Utilisateur("foo@mail.com", "bar");
+        foo.setName();
+        System.out.println(BdConnexion.getReceiveedMessages(foo));
     }
 
 }
