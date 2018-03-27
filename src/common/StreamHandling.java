@@ -18,8 +18,8 @@ public class StreamHandling {
             outToClient.write(message + "\n");
             outToClient.flush();
         }
-
     }
+
     public static void writeMutlipleLines(String message, OutputStream outputStream) {
         PrintWriter outToClient = new PrintWriter(outputStream);
         outToClient.write(message);

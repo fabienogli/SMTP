@@ -137,7 +137,6 @@ public class ClientPop3 {
 
 
     public void write(String data) {
-        data += "\r\n";
         try {
             StreamHandling.write(data, this.clientSocket.getOutputStream());
         } catch (IOException e) {

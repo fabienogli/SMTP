@@ -156,6 +156,8 @@ public class BdConnexion {
     private static void parseHeader(Message mail, String line) {
         System.out.println("dans parse header");
         System.out.println(line);
+        System.out.println("header"+line.split(": ")[0]);
+        System.out.println("value"+line.split(": ")[1]);
         String header = line.split(": ")[0];
         String value = line.split(": ")[1];
         if (header.equals(HeadersEnum.FROM.getString())) {

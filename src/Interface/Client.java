@@ -75,6 +75,8 @@ public class Client {
         this.receivedLinkMails = new HashMap<>();
 
         String[] list = this.pop3.list().split("\n");
+        System.out.println("reception list ok");
+        System.out.println("nbmessages="+list.length);
         for(int i = 1; i <= list.length-2; i++) {
             System.out.println(i);
             Message message = BdConnexion.parseMail(this.pop3.retr(i));

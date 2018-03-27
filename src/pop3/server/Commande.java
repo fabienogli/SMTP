@@ -152,7 +152,7 @@ public class Commande {
                     .append(mail.size())
                     .append(" octets")
                     .append("\n")
-                    .append(mail.toString());
+                    .append(mail.toString()).append("\n.");
         }
         System.out.println(mailSb.toString());
         return mailSb.toString();

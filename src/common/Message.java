@@ -28,9 +28,9 @@ public class Message {
         this.destinatairesDistants = destinatairesDistants;
     }
 
-    private List<Utilisateur> destinatairesDistants=new ArrayList<>();
-    private List<Utilisateur> destinataires;
-    private Utilisateur auteur;
+    private List<Utilisateur> destinatairesDistants = new ArrayList<>();
+    private List<Utilisateur> destinataires = new ArrayList<>();
+    private Utilisateur auteur = new Utilisateur();
     private String date;
     private String sujet;
     private String corps;
@@ -39,7 +39,7 @@ public class Message {
 
     public Message(String id) {
         this.id = id;
-        this.destinataires = new ArrayList<Utilisateur>();
+        //this.destinataires = new ArrayList<Utilisateur>();
         /*DateFormat format = new SimpleDateFormat("EEE, dd MMM YYYY HH:mm:ss Z", Locale.US);
         try {
             Date today = Calendar.getInstance().getTime();
@@ -137,14 +137,16 @@ public class Message {
                 .append(this.getAuteur().getEmail())
                 .append(">\r\n")
                 .append(HeadersEnum.TO.toString());
-        for (int i = 0; i < this.getDestinataires().size(); i++) {
-            generateMessage
-                    .append(this.destinataires.get(i).getNom())
-                    .append(" <")
-                    .append(this.destinataires.get(i).getEmail())
-                    .append(">");
-            if (i != this.destinataires.size() - 1) {
-                generateMessage.append(";");
+        if (this.getDestinataires().size() > 0) {
+            for (int i = 0; i < this.getDestinataires().size(); i++) {
+                generateMessage
+                        .append(this.destinataires.get(i).getNom())
+                        .append(" <")
+                        .append(this.destinataires.get(i).getEmail())
+                        .append(">");
+                if (i != this.destinataires.size() - 1) {
+                    generateMessage.append(";");
+                }
             }
         }
         generateMessage
@@ -162,7 +164,7 @@ public class Message {
                 .append(ServerSMTP.name)
                 .append(">\r\n\n")
                 .append(this.getCorps());
-               // .append("\r\n.");
+        // .append("\r\n.");
 
         return generateMessage.toString();
     }

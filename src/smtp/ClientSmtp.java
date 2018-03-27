@@ -96,6 +96,7 @@ public class ClientSmtp {
             e.printStackTrace();
         }
     }
+
     private void write(String message) {
         try {
             StreamHandling.write(message, this.clientSocket.getOutputStream());
