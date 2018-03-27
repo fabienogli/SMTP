@@ -1,0 +1,9 @@
+From: foo <foo@mail.com>
+To: martin <martin@mail.com>
+Subject: hello
+Date: Fri, 21 Nov 1997 09:55:06 -0600
+Message-ID: <28847103563267341845757647918444312721@smtp.fabienMarkFlorian.fr>
+
+hello
+
+.
