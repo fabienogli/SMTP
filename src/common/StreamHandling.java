@@ -12,12 +12,13 @@ public class StreamHandling {
         if(resultTable.length>1){
             for(int i=0;i<resultTable.length;i++){
                 outToClient.write(resultTable[i] + "\n");
-                outToClient.flush();
+               // outToClient.flush();
             }
         }else{
             outToClient.write(message + "\n");
-            outToClient.flush();
+            //outToClient.flush();
         }
+        outToClient.flush();
         System.out.println("fin envoie " + message);
     }
 
@@ -71,7 +72,7 @@ public class StreamHandling {
            while(!(s=fromClient.readLine()).equals(".")){
                result.append(s).append("\n");
            }
-           //result.append(".");
+           result.append(".");
            System.out.println("lignes recues="+result.toString());
 
        } catch (IOException e) {
