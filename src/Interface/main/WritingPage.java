@@ -81,7 +81,7 @@ public class WritingPage {
                     for (int i = 1; i <= reponse.length - 1; i++) {
                         sb.append(reponse[i]).append("\n");
                     }
-                    if(result.size()!= 0){
+                    if (result.size() != 0) {
                         for (int i = 1; i <= result.size() - 1; i++) {
                             sb.append(result.get(i).getEmail()).append("\n");
                         }
@@ -91,7 +91,7 @@ public class WritingPage {
                     alert.setHeaderText("Voir ci-dessous la liste :");
                     alert.setContentText(sb.toString());
                     alert.showAndWait();
-                } else if(result.size()!= 0){
+                } else if (result.size() != 0) {
                     StringBuilder sb = new StringBuilder();
                     for (int i = 1; i <= result.size() - 1; i++) {
                         sb.append(result.get(i).getEmail()).append("\n");
@@ -102,8 +102,7 @@ public class WritingPage {
                     alert.setContentText(sb.toString());
                     alert.showAndWait();
                     this.stage.close();
-                }
-                else {
+                } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Message envoyé");
                     alert.setContentText("Le message a été envoyé avec succès !");
@@ -164,21 +163,23 @@ public class WritingPage {
         return list;
     }
 
-    private ArrayList<Utilisateur> sendToOtherDomain(Message message){
+    private ArrayList<Utilisateur> sendToOtherDomain(Message message) {
         ArrayList<Utilisateur> destinatairesErronees = new ArrayList<>();
-        for(Utilisateur utilisateur: message.getDestinatairesDistants()) {
-            try {
-                System.out.println("envoi à un autre serveur");
-                ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())), 2026);
+        if (!message.getDestinatairesDistants().isEmpty()) {
+            for (Utilisateur utilisateur : message.getDestinatairesDistants()) {
+                try {
+                    System.out.println("envoi à un autre serveur");
+                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())), 2026);
 //                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
-                smtp.start();
-                smtp.authentification();
-                if (smtp.sendMailDistant(message,utilisateur).contains("1")) {
-                    destinatairesErronees.add(utilisateur);
+                    smtp.start();
+                    smtp.authentification();
+                    if (smtp.sendMailDistant(message, utilisateur).contains("1")) {
+                        destinatairesErronees.add(utilisateur);
+                    }
+                    smtp.quit();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                smtp.quit();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return destinatairesErronees;
