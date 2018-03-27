@@ -18,6 +18,7 @@ public class StreamHandling {
             outToClient.write(message + "\n");
             outToClient.flush();
         }
+        System.out.println("fin envoie " + message);
     }
 
     public static void writeMutlipleLines(String message, OutputStream outputStream) {
@@ -66,11 +67,13 @@ public class StreamHandling {
        String s;
        try {
            BufferedReader fromClient = new BufferedReader(new InputStreamReader(inputStream));
-           do{
-               s = fromClient.readLine();
+
+           while(!(s=fromClient.readLine()).equals(".")){
                result.append(s).append("\n");
            }
-           while (!s.equals("."));
+           //result.append(".");
+           System.out.println("lignes recues="+result.toString());
+
        } catch (IOException e) {
            e.printStackTrace();
        }
