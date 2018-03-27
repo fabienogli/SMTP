@@ -6,7 +6,7 @@ public enum HeadersEnum {
     SUJET("Subject"),
     TO("To"),
     ID("Message-ID"),
-    CRLF("\n.\n");
+    CRLF("\n.");
 
     private String string;
 

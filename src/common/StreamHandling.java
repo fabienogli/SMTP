@@ -6,11 +6,29 @@ public class StreamHandling {
 
     public static void write(String message, OutputStream outputStream) {
         PrintWriter outToClient = new PrintWriter(outputStream);
-        outToClient.write(message);
+        //outToClient.write(message);
         System.out.println("envoie " + message);
+        String[] resultTable=message.split("\n");
+        if(resultTable.length>1){
+            for(int i=0;i<resultTable.length;i++){
+                outToClient.write(resultTable[i] + "\n");
+                outToClient.flush();
+            }
+        }else{
+            outToClient.write(message + "\n");
+            outToClient.flush();
+        }
+
+    }
+    public static void writeMutlipleLines(String message, OutputStream outputStream) {
+        PrintWriter outToClient = new PrintWriter(outputStream);
+        outToClient.write(message);
+        System.out.println("le serveur envoie" + message);
+        outToClient.println();
         outToClient.println();
         outToClient.flush();
     }
+
 
     public static String read(InputStream inputStream) {
         String result = "";
@@ -24,7 +42,7 @@ public class StreamHandling {
         return result;
     }
 
-    public static String readMultipleLines(InputStream inputStream) {
+   /* public static String readMultipleLines(InputStream inputStream) {
         StringBuilder data = new StringBuilder();
         try {
             BufferedReader fromServer = new BufferedReader(new InputStreamReader(inputStream));
@@ -42,5 +60,20 @@ public class StreamHandling {
         }
         System.out.println("Plusieurs ligne, reception " + data.toString());
         return data.toString();
-    }
+    }*/
+   public static  String readMultipleLines(InputStream inputStream) {
+       StringBuilder result = new StringBuilder();
+       String s;
+       try {
+           BufferedReader fromClient = new BufferedReader(new InputStreamReader(inputStream));
+           do{
+               s = fromClient.readLine();
+               result.append(s).append("\n");
+           }
+           while (!s.equals("."));
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+       return result.toString();
+   }
 }

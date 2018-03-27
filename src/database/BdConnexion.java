@@ -91,7 +91,7 @@ public class BdConnexion {
         List<Message> mails = new ArrayList<Message>();
         StringBuilder rawMessages = new StringBuilder();
         try {
-            FileReader fileReader = new FileReader(cheminDatabase + type + utilisateur.getNom() + "_messages");
+            FileReader fileReader = new FileReader(cheminDatabase + type + utilisateur.getNom() + "_messages.txt");
             BufferedReader db = new BufferedReader(fileReader);
             String line;
             while ((line = db.readLine()) != null) {
@@ -198,10 +198,10 @@ public class BdConnexion {
         PrintWriter out = null;
 
         try {
-            fw = new FileWriter(cheminDatabase + typeBoite + "/" + utilisateur.getNom() + "_messages", true);
+            fw = new FileWriter(cheminDatabase + typeBoite + "/" + utilisateur.getNom() + "_messages.txt", true);
             bw = new BufferedWriter(fw);
             out = new PrintWriter(bw);
-            out.println();
+            //out.println();
             out.println();
             out.print(content);
         } catch (IOException e) {

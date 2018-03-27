@@ -75,9 +75,9 @@ public class Client {
         this.receivedLinkMails = new HashMap<>();
 
         String[] list = this.pop3.list().split("\n");
-        for(int i = 1; i < list.length; i++) {
+        for(int i = 1; i <= list.length-2; i++) {
             System.out.println(i);
-            Message message = BdConnexion.parseMail(this.pop3.retr(Character.getNumericValue(list[i].charAt(0))));
+            Message message = BdConnexion.parseMail(this.pop3.retr(i));
             System.out.println("fin retrair");
             if (message == null) {
                 continue;

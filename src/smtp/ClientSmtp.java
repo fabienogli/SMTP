@@ -89,6 +89,13 @@ public class ClientSmtp {
         }
     }
 
+    private void writeMultipleLines(String message) {
+        try {
+            StreamHandling.writeMutlipleLines(message, this.clientSocket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void write(String message) {
         try {
             StreamHandling.write(message, this.clientSocket.getOutputStream());
@@ -151,7 +158,7 @@ public class ClientSmtp {
         if (!response.equals(SmtpCodes.MESSAGE.toString())) {
             System.out.println(response);
         }
-        write(parseMailForSmtp(message));
+        writeMultipleLines(parseMailForSmtp(message));
         response = read();
         if (!response.equals(SmtpCodes.OK.toString())) {
             System.out.println(response);
@@ -219,7 +226,7 @@ public class ClientSmtp {
         stringBuilder
                 .append("\n\n")
                 .append(message.getCorps())
-                .append(HeadersEnum.CRLF.toString());
+                .append("\n.");
         return stringBuilder.toString();
     }
 

@@ -28,7 +28,7 @@ public class Message {
         this.destinatairesDistants = destinatairesDistants;
     }
 
-    private List<Utilisateur> destinatairesDistants;
+    private List<Utilisateur> destinatairesDistants=new ArrayList<>();
     private List<Utilisateur> destinataires;
     private Utilisateur auteur;
     private String date;
@@ -161,8 +161,8 @@ public class Message {
                 .append("@")
                 .append(ServerSMTP.name)
                 .append(">\r\n\n")
-                .append(this.getCorps())
-                .append("\r\n.");
+                .append(this.getCorps());
+               // .append("\r\n.");
 
         return generateMessage.toString();
     }
