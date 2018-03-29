@@ -192,6 +192,12 @@ public class BdConnexion {
                 writeToFile(utilisateur, message.toString(), "received");
             }
         }
+        for (Utilisateur utilisateur : message.getDestinataires()) {
+            // la deuxieme condition sera a modifer sur chacun de nos serveur
+            if (utilisateur.domainName().equals("test.fr")) {
+                writeToFile(utilisateur, message.toString(), "received");
+            }
+        }
     }
 
     private static void writeToFile(Utilisateur utilisateur, String content, String typeBoite) {

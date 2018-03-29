@@ -1,3 +1,4 @@
 fabien.fr;192.168.43.210
 mark.fr;192.168.43.74
 florian.fr;192.168.43.145
+test.fr;localhost

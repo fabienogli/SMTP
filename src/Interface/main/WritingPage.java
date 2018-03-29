@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import smtp.ClientSmtp;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -75,29 +76,30 @@ public class WritingPage {
                 alert.showAndWait();
             } else {
                 ArrayList<Utilisateur> result = sendToOtherDomain(message);
-                if (client.sendMail(message).contains("1")) {
-                    String[] reponse = client.sendMail(message).split(";");
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 1; i <= reponse.length - 1; i++) {
-                        sb.append(reponse[i]).append("\n");
-                    }
-                    if (result.size() != 0) {
-                        for (int i = 1; i <= result.size() - 1; i++) {
-                            sb.append(result.get(i).getEmail()).append("\n");
+                if (!message.getDestinataires().isEmpty() && client.sendMail(message).contains("1")) {
+                        String[] reponse = client.sendMail(message).split(";");
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 1; i <= reponse.length - 1; i++) {
+                            sb.append(reponse[i]).append("\n");
                         }
-                    }
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Destinataires inexistants");
-                    alert.setHeaderText("Voir ci-dessous la liste :");
-                    alert.setContentText(sb.toString());
-                    alert.showAndWait();
+                        if (result.size() != 0) {
+                            for (int i = 0; i <= result.size() - 1; i++) {
+                                sb.append(result.get(i).getEmail()).append("\n");
+                            }
+                        }
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Destinataires inexistants");
+                        alert.setHeaderText("Voir ci-dessous la liste :");
+                        alert.setContentText(sb.toString());
+                        alert.showAndWait();
+
                 } else if (result.size() != 0) {
                     StringBuilder sb = new StringBuilder();
-                    for (int i = 1; i <= result.size() - 1; i++) {
+                    for (int i = 0; i <= result.size()-1; i++) {
                         sb.append(result.get(i).getEmail()).append("\n");
                     }
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Destinataires inexistants");
+                    alert.setTitle("Destinataires distants non atteints");
                     alert.setHeaderText("Voir ci-dessous la liste :");
                     alert.setContentText(sb.toString());
                     alert.showAndWait();
@@ -120,8 +122,6 @@ public class WritingPage {
             alert.setContentText("Veuillez saisir ce(s) adresse(s) !" + "\n" + sb.toString());
             alert.showAndWait();
         }
-
-
     }
 
     public void setStage(Stage stage) {
@@ -169,10 +169,17 @@ public class WritingPage {
             for (Utilisateur utilisateur : message.getDestinatairesDistants()) {
                 try {
                     System.out.println("envoi à un autre serveur");
-                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())), 2026);
-//                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
-                    smtp.start();
-                    smtp.authentification();
+                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())), 2025);
+//                  ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
+                    try {
+                        smtp.start();
+                        smtp.authentification();
+
+                    }catch (ConnectException e){
+                        destinatairesErronees.add(utilisateur);
+                        return destinatairesErronees;
+                    }
+
                     if (smtp.sendMailDistant(message, utilisateur).contains("1")) {
                         destinatairesErronees.add(utilisateur);
                     }

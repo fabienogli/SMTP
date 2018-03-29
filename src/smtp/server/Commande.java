@@ -49,12 +49,12 @@ public class Commande {
         quit(requete, connexion);
         if (requete.contains(SmtpCodes.RCPT_TO.toString()) && getMailAddress(requete) != null) {
             Utilisateur user = new Utilisateur(getMailAddress(requete));
-            Utilisateur destinataire;
-            if (!connexion.getClient().domainName().equals(user.domainName())) {
+            Utilisateur destinataire = BdConnexion.getUtilisateur(user);
+            /*if (!connexion.getClient().domainName().equals(user.domainName())) {
                 destinataire = user;
-            } else {
-                destinataire  = BdConnexion.getUtilisateur(user);
-            }
+            } else {*/
+                //destinataire  = BdConnexion.getUtilisateur(user);
+           // }
             if (destinataire == null) {
                 return SmtpCodes.USER_UNKNOWN.toString();
             }
@@ -78,7 +78,7 @@ public class Commande {
             return SmtpCodes.OK.toString();
         }
         Message message = parseRawMail(rawMail, connexion.getMailToSend());
-        for(Utilisateur utilisateur: message.getDestinataires()){
+        /*for(Utilisateur utilisateur: message.getDestinataires()){
             if(!utilisateur.domainName().equals("mark.fr")){
                 try {
                     System.out.println("envoi à un autre serveur");
@@ -92,7 +92,7 @@ public class Commande {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
 
         BdConnexion.registerMail(message);
         connexion.setCurrentstate(StateEnum.READY_TO_DELIVER);
