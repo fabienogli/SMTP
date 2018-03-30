@@ -107,7 +107,7 @@ public class WritingPage {
                     alert.showAndWait();
                     this.stage.close();
                 } else {
-                    writeToFile(message.getAuteur(), message.toString(), "sent");
+                    writeToFile(message.getAuteur(), message.toString()+"\n", "sent");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Message envoyé");
                     alert.setContentText("Le message a été envoyé avec succès !");
@@ -185,7 +185,7 @@ public class WritingPage {
 
                     if (smtp.sendMailDistant(message, utilisateur).contains("1")) {
                         destinatairesErronees.add(utilisateur);
-                    }else writeToFile(message.getAuteur(), message.toString(), "sent");
+                    }
                     smtp.quit();
                 } catch (IOException e) {
                     e.printStackTrace();
