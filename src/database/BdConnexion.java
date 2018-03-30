@@ -184,8 +184,6 @@ public class BdConnexion {
     }
 
     public static void registerMail(Message message) {
-        writeToFile(message.getAuteur(), message.toString(), "sent");
-
         for (Utilisateur utilisateur : message.getDestinataires()) {
             // la deuxieme condition sera a modifer sur chacun de nos serveur
             if (utilisateur.domainName().equals("mark.fr")) {
@@ -200,7 +198,7 @@ public class BdConnexion {
         }
     }
 
-    private static void writeToFile(Utilisateur utilisateur, String content, String typeBoite) {
+    public static void writeToFile(Utilisateur utilisateur, String content, String typeBoite) {
         BufferedWriter bw = null;
         FileWriter fw = null;
         PrintWriter out = null;

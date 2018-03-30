@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static database.BdConnexion.writeToFile;
+
 public class WritingPage {
 
     @FXML
@@ -105,6 +107,7 @@ public class WritingPage {
                     alert.showAndWait();
                     this.stage.close();
                 } else {
+                    writeToFile(message.getAuteur(), message.toString(), "sent");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Message envoyé");
                     alert.setContentText("Le message a été envoyé avec succès !");
@@ -169,7 +172,7 @@ public class WritingPage {
             for (Utilisateur utilisateur : message.getDestinatairesDistants()) {
                 try {
                     System.out.println("envoi à un autre serveur");
-                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())), 2025);
+                    ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName(Dns.getHost(utilisateur.domainName())), 2026);
 //                  ClientSmtp smtp = new ClientSmtp(java.net.InetAddress.getByName("localhost"),2025);
                     try {
                         smtp.start();
@@ -182,7 +185,7 @@ public class WritingPage {
 
                     if (smtp.sendMailDistant(message, utilisateur).contains("1")) {
                         destinatairesErronees.add(utilisateur);
-                    }
+                    }else writeToFile(message.getAuteur(), message.toString(), "sent");
                     smtp.quit();
                 } catch (IOException e) {
                     e.printStackTrace();
